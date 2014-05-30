@@ -1,0 +1,60 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+	<a href="#" wicket:id="personEditLink">Edit Person</a>
+	
+	<div wicket:id="fragmentsJoin"></div>
+
+	<wicket:fragment wicket:id="view">
+		<table>
+			<tr>
+				<th colspan="2">Person</th>
+			</tr>
+			<tr>
+				<td>First Name:</td>
+				<td wicket:id="firstName">[First Name]</td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td wicket:id="lastName">[Last Name]</td>
+			</tr>
+			<tr>
+				<td>Gender:</td>
+				<td wicket:id="gender">[Gender]</td>
+			</tr>
+			<tr>
+				<td>Age:</td>
+				<td wicket:id="age">[Age]</td>
+			</tr>
+		</table>
+	</wicket:fragment>
+
+	<wicket:fragment wicket:id="edit">
+		<form wicket:id="editPersonForm">
+			<table>
+				<tr>
+					<th colspan="2">Edit person</th>
+				</tr>
+				<tr>
+					<td>First Name:</td>
+					<td><input type="text" wicket:id="firstName" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Last Name:</td>
+					<td><input type="text" wicket:id="lastName" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td><input type="text" wicket:id="gender" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Age:</td>
+					<td><input type="text" wicket:id="age" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" wicket:id="submit" /></td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+	</wicket:fragment>
+	
+</wicket:panel>
