@@ -3,8 +3,8 @@ package de.alpharogroup.swap;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Fragment;
@@ -22,16 +22,16 @@ public class PersonPanel extends Panel {
 	/** The view fragment. */
 	private Fragment edit;
 	
+	private final String swapFragmentId = "fragmentsJoin";
+	
 	public PersonPanel(String id, IModel<PersonModel> model) {
 		super(id, model);
 		setDefaultModel(new CompoundPropertyModel<PersonModel>(model));
 		setOutputMarkupPlaceholderTag(true);
-		String swapFragmentId = "fragmentsJoin";
 		add(view = newFragmentViewPerson(swapFragmentId));
-		edit = newFragmentEditPerson(swapFragmentId);
+		edit = newFragmentEditPerson(swapFragmentId);		
 		add(new AjaxFallbackLink<Object>("personEditLink") {
 			private static final long serialVersionUID = 1L;
-
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				swapFragments();
@@ -88,11 +88,11 @@ public class PersonPanel extends Panel {
 		form.add(new TextField<String>("firstName"));
 		form.add(new TextField<String>("lastName"));
 		form.add(new TextField<String>("gender"));
-		form.add(new TextField<String>("age"));
-		form.add(new Button("submit") {
-			private static final long serialVersionUID = 1L;
-			@Override
-			public void onSubmit() {
+		form.add(new TextField<String>("age"));		
+		form.add(new AjaxFallbackButton("submit", form) {
+			private static final long serialVersionUID = 1L;			
+			public void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
+				target.add(edit);
 				swapFragments();
 			}
 		});
