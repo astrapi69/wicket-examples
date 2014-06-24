@@ -28,9 +28,9 @@ public class PersonPanel extends Panel {
 		super(id, model);
 		setDefaultModel(new CompoundPropertyModel<PersonModel>(model));
 		setOutputMarkupPlaceholderTag(true);
-		add(view = newFragmentViewPerson(swapFragmentId));
-		edit = newFragmentEditPerson(swapFragmentId);		
-		add(new AjaxFallbackLink<Object>("personEditLink") {
+		add(view = newFragmentView(swapFragmentId));
+		edit = newFragmentEdit(swapFragmentId);		
+		add(new AjaxFallbackLink<Object>("editLink") {
 			private static final long serialVersionUID = 1L;
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -51,31 +51,31 @@ public class PersonPanel extends Panel {
 	}
 
 	/**
-	 * Creates the fragment view person.
+	 * Creates the fragment to view person.
 	 *
 	 * @return the fragment
 	 */
-	protected Fragment newFragmentViewPerson(final String id) {
-		Fragment viewPerson = new Fragment(id, "view", this, getDefaultModel());
-		viewPerson.add(new Label("firstName"));
-		viewPerson.add(new Label("lastName"));
-		viewPerson.add(new Label("gender"));
-		viewPerson.add(new Label("age"));
-		viewPerson.setOutputMarkupPlaceholderTag(true);
-		return viewPerson;
+	protected Fragment newFragmentView(final String id) {
+		Fragment viewFragment = new Fragment(id, "view", this, getDefaultModel());
+		viewFragment.add(new Label("firstName"));
+		viewFragment.add(new Label("lastName"));
+		viewFragment.add(new Label("gender"));
+		viewFragment.add(new Label("age"));
+		viewFragment.setOutputMarkupPlaceholderTag(true);
+		return viewFragment;
 	}
 
 	/**
-	 * Creates the fragment edit person.
+	 * Creates the fragment to edit person.
 	 *
 	 * @return the fragment
 	 */
-	protected Fragment newFragmentEditPerson(final String id) {
-		Fragment editPerson = new Fragment(id, "edit", this,
+	protected Fragment newFragmentEdit(final String id) {
+		Fragment editFragment = new Fragment(id, "edit", this,
 				getDefaultModel());
-		editPerson.setOutputMarkupPlaceholderTag(true);
-		editPerson.add(newPersonForm());
-		return editPerson;
+		editFragment.setOutputMarkupPlaceholderTag(true);
+		editFragment.add(newForm());
+		return editFragment;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class PersonPanel extends Panel {
 	 *
 	 * @return the component
 	 */
-	protected Component newPersonForm() {
+	protected Component newForm() {
 		Form<PersonModel> form = new Form<PersonModel>("editPersonForm");
 		form.add(new TextField<String>("firstName"));
 		form.add(new TextField<String>("lastName"));
