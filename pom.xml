@@ -24,5 +24,7 @@
   	<modules>
 		<module>swap.fragments</module>
     <module>atmosphere-chat</module>
-  </modules>
+    <module>js-intagration</module>
+    <module>js-integration</module>
+  	</modules>
 </project>
