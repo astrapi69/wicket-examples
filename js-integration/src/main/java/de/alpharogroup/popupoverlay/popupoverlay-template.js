@@ -1,4 +1,3 @@
-    $(document).ready(function() {
-      $('#${componentId}').popup();
-
-    });
+$(document).ready(function() {
+	$('#${componentId}').popup();
+});
