@@ -1,5 +1,6 @@
 package de.alpharogroup;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -29,5 +30,9 @@ public class WicketApplication extends WebApplication
 		super.init();
 
 		// add your configuration here
+	}
+	
+	public static WicketApplication get() {
+		return (WicketApplication) Application.get();
 	}
 }
