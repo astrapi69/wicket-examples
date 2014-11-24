@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>de.alpharogroup</groupId>
-    <artifactId>wicket-examples</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>js-integration</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.alpharogroup</groupId>
+		<artifactId>wicket-examples</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>js-integration</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<!-- TODO project name -->
@@ -22,7 +23,8 @@
 	<properties>
 		<!-- LOMBOK version -->
 		<lombok.version>1.14.8</lombok.version>
-		<wicket.version>7.0.0-M4</wicket.version>
+		<wiquery-core.version>6.9.1</wiquery-core.version>
+		<wicket.version>6.18.0</wicket.version>
 		<jetty9.version>9.2.3.v20140905</jetty9.version>
 		<log4j.version>2.0.2</log4j.version>
 		<junit.version>4.11</junit.version>
@@ -46,7 +48,23 @@
 		<!-- OPTIONAL DEPENDENCY <dependency> <groupId>org.apache.wicket</groupId> 
 			<artifactId>wicket-extensions</artifactId> <version>${wicket.version}</version> 
 			</dependency> -->
-
+		<dependency>
+			<groupId>com.googlecode.wicket-jquery-ui</groupId>
+			<artifactId>wicket-jquery-ui</artifactId>
+			<version>6.17.0</version> <!-- or 1.5.11 -->
+		</dependency>
+		<!-- WIQUERY DEPENDENCIES -->
+		<dependency>
+			<groupId>org.odlabs.wiquery</groupId>
+			<artifactId>wiquery-core</artifactId>
+			<version>${wiquery-core.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
