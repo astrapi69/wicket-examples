@@ -54,10 +54,11 @@
 				<li>profit!</li>
 			</ol>
 			<p>
-				Please mention the correct Wicket version: <div wicket:id="version">
-
-				</div>.
+				Please mention the correct Wicket version: <wicket:container wicket:id="version">1.5-SNAPSHOT</wicket:container>.
 			</p>
+			
+			  <!-- Add an optional button to open the popup -->
+  			<button  wicket:id="openButton">Open popup</button>
 			
 			<div wicket:id="overlayReference">
 			    	...popup content...
