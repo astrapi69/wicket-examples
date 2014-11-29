@@ -38,7 +38,7 @@ public class StartWicketAlertJsBehaviorExample
 		http_config.setOutputBufferSize(32768);
 
 		ServerConnector http = new ServerConnector(server, new HttpConnectionFactory(http_config));
-		http.setPort(8080);
+		http.setPort(8181);
 		http.setIdleTimeout(1000 * 60 * 60);
 
 		server.addConnector(http);

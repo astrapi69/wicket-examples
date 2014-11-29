@@ -14,8 +14,6 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
 import org.apache.wicket.util.template.TextTemplate;
 
-import de.alpharogroup.js.behaviors.simple.alert.WicketAlertJsBehavior;
-
 public class PopupoverlayBehavior  extends Behavior {
 	/**
 	 * The serialVersionUID.
@@ -52,6 +50,5 @@ public class PopupoverlayBehavior  extends Behavior {
 		response.render(JavaScriptHeaderItem.forReference(pluginReference));
 		response.render(OnLoadHeaderItem.forScript(generateJS(wicketAlertTemplate)));
 	}
-
 
 }
