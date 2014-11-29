@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Builder;
 
 @Getter
 @Setter
@@ -16,7 +15,6 @@ import lombok.experimental.Builder;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class PopupoverlaySettings implements Serializable {
 
 	/**
@@ -201,5 +199,42 @@ public class PopupoverlaySettings implements Serializable {
 	 * });
 	 */
 	private String tooltipanchor = null;
+
+	/**
+	 * Type: function 
+	 * Description: Callback function which will execute before
+	 * the popup is opened. Default is null.
+	 */
+	private String beforeopen = null;
+
+	/**
+	 * Type: function 
+	 * Description: Callback function which will execute when the
+	 * popup starts to open. Default is null.
+	 */
+	private String onopen = null;
+
+	/**
+	 * Type: function 
+	 * Description: Callback function which will execute when the
+	 * popup starts to close. Default is null.
+	 */
+	private String onclose = null;
+
+	/**
+	 * Type: function 
+	 * Description: Callback function which will execute after
+	 * the opening CSS transition is over, only if transition actually occurs
+	 * and if supported by the browser. Default is null.
+	 */
+	private String opentransitionend = null;
+
+	/**
+	 * Type: function 
+	 * Description: Callback function which will execute after
+	 * the closing CSS transition is over, only if transition actually occurs
+	 * and if supported by the browser. Default is null.
+	 */
+	private String closetransitionend = null;
 
 }

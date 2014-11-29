@@ -21,10 +21,8 @@ public class PopupoverlayPanel extends Panel {
 		Button openButton = new Button("openButton");
 		add(openButton);
 		
-		overlayReference = newOverlayReference("overlayReference");
-		overlayReference.setOutputMarkupId(true);
-		add(overlayReference);
-		overlayReference.add(new PopupoverlayBehavior(overlayReference));		
+		add(overlayReference = newOverlayReference("overlayReference"));
+		
 		// add class attributte with the markup id from the overlay with the suffix '_open'
 		// that indicates that the overlay shell open...
 		openButton.add(new AttributeModifier("class", overlayReference.getMarkupId()+ "_open"));
@@ -38,7 +36,11 @@ public class PopupoverlayPanel extends Panel {
 	
 	protected WebMarkupContainer newOverlayReference(String id) {
 		WebMarkupContainer or = new WebMarkupContainer(id);
-		or.add(new PopupoverlayBehavior(or));
+		PopupoverlaySettings settings = new PopupoverlaySettings();
+		settings.setOnopen("function() {"
+				+ "    alert('Popup just opened!');"
+				+ "  }");
+		or.add(new PopupoverlayBehavior(settings));
 		or.setOutputMarkupId(true);
 		return or;
 	}
