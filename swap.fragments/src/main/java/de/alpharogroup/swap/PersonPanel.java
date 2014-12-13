@@ -13,15 +13,13 @@ import org.apache.wicket.model.IModel;
 public class PersonPanel extends SwapFragmentPanel<PersonModel> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private final String swapFragmentId = "fragmentsJoin";
-	
+		
 	public PersonPanel(String id, IModel<PersonModel> model) {
 		super(id, model);
 		setDefaultModel(new CompoundPropertyModel<PersonModel>(model));
 		setOutputMarkupPlaceholderTag(true);
-		add(view = newFragmentView(swapFragmentId));
-		edit = newFragmentEdit(swapFragmentId);			
+		add(view = newFragmentView(FRAGMENT_ID));
+		edit = newFragmentEdit(FRAGMENT_ID);			
 	}
 
 	/**

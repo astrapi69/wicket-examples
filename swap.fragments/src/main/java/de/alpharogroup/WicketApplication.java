@@ -3,7 +3,7 @@ package de.alpharogroup;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import de.alpharogroup.swap.PersonPage;
+import de.alpharogroup.swap.panel.SwapPersonPanelPage;
 
 /**
  * Application object for your web application.
@@ -19,7 +19,7 @@ public class WicketApplication extends WebApplication
 	@Override
 	public Class<? extends WebPage> getHomePage()
 	{
-		return PersonPage.class;
+		return SwapPersonPanelPage.class;
 	}
 
 	/**
