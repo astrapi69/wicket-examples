@@ -18,11 +18,21 @@ public class WicketAlertJsBehavior  extends Behavior
 		"wicket-alert.js");
 	
 
+	
+	
 	protected String generateJS(final TextTemplate textTemplate) {
 		final Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("message", "Hello from wicket behavior.");		
 		textTemplate.interpolate(variables);
 		return textTemplate.asString();
+	}
+	private Component component;
+	@Override
+	public void bind(final Component component)
+	{
+		super.bind(component);
+		this.component = component;
+		this.component.setOutputMarkupId(true);
 	}
 
 	/** 
