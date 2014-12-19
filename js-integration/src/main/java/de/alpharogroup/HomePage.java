@@ -1,15 +1,12 @@
 package de.alpharogroup;
 
-import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.js.behaviors.simple.alert.WicketAlertJsBehavior;
-import de.alpharogroup.popupoverlay.PopupoverlayBehavior;
 import de.alpharogroup.popupoverlay.PopupoverlayPanel;
+import de.alpharogroup.timeline.TimelineJsPanel;
 
 public class HomePage extends WebPage {
 	private static final long serialVersionUID = 1L;
@@ -25,6 +22,8 @@ public class HomePage extends WebPage {
 		
 		PopupoverlayPanel popupoverlayPanel = new PopupoverlayPanel("overlayPanel", null);
 		add(popupoverlayPanel);
+		
+		add(new TimelineJsPanel("timelineJsPanel"));
 		
      
 		

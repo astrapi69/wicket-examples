@@ -37,9 +37,10 @@ public class PopupoverlayPanel extends Panel {
 	protected WebMarkupContainer newOverlayReference(String id) {
 		WebMarkupContainer or = new WebMarkupContainer(id);
 		PopupoverlaySettings settings = new PopupoverlaySettings();
-		settings.setOnopen("function() {"
-				+ "    alert('Popup just opened!');"
-				+ "  }");
+		settings.setBlur(false);
+//		settings.setOnopen("function() {"
+//				+ "    alert('Popup just opened!');"
+//				+ "  }");
 		or.add(new PopupoverlayBehavior(settings));
 		or.setOutputMarkupId(true);
 		return or;
