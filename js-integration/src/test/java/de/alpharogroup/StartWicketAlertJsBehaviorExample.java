@@ -34,11 +34,11 @@ public class StartWicketAlertJsBehaviorExample
 
 		HttpConfiguration http_config = new HttpConfiguration();
 		http_config.setSecureScheme("https");
-		http_config.setSecurePort(8443);
+		http_config.setSecurePort(WicketApplication.HTTPS_PORT);
 		http_config.setOutputBufferSize(32768);
 
 		ServerConnector http = new ServerConnector(server, new HttpConnectionFactory(http_config));
-		http.setPort(8181);
+		http.setPort(WicketApplication.HTTP_PORT);
 		http.setIdleTimeout(1000 * 60 * 60);
 
 		server.addConnector(http);
@@ -63,7 +63,7 @@ public class StartWicketAlertJsBehaviorExample
 
 			ServerConnector https = new ServerConnector(server, new SslConnectionFactory(
 				sslContextFactory, "http/1.1"), new HttpConnectionFactory(https_config));
-			https.setPort(8443);
+			https.setPort(WicketApplication.HTTPS_PORT);
 			https.setIdleTimeout(500000);
 
 			server.addConnector(https);
