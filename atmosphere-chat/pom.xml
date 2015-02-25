@@ -21,8 +21,8 @@
 	</parent>
 	<artifactId>atmosphere-chat</artifactId>
 	<packaging>war</packaging>
-	<!-- TODO project name -->
-	<name>quickstart</name>
+
+	<name>${project.artifactId}</name>
 	<!-- <organization> <name>company name</name> <url>company url</url> </organization> -->
 	<licenses>
 		<license>

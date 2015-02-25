@@ -1,30 +1,316 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-   Licensed to the Apache Software Foundation (ASF) under one or more
-   contributor license agreements.  See the NOTICE file distributed with
-   this work for additional information regarding copyright ownership.
-   The ASF licenses this file to You under the Apache License, Version 2.0
-   (the "License"); you may not use this file except in compliance with
-   the License.  You may obtain a copy of the License at
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.alpharogroup</groupId>
+	<artifactId>wicket-examples</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-        http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
---><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.alpharogroup</groupId>
-  <artifactId>wicket-examples</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-  	<modules>
+	<modules>
 		<module>swap.fragments</module>
-    <module>atmosphere-chat</module>
-    <module>js-intagration</module>
-    <module>js-integration</module>
-  	</modules>
+		<module>atmosphere-chat</module>
+		<module>rest-annotations</module>
+		<module>js-integration</module>
+	</modules>
+
+	<developers>
+
+		<developer>
+			<id>astrapi69</id>
+			<name>Asterios Raptis</name>
+			<email>astrapi69 at users.sf.net</email>
+			<timezone>Berlin</timezone>
+			<roles>
+				<role>Project manager</role>
+				<role>Developer</role>
+			</roles>
+		</developer>
+
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<properties>
+		<!-- PROJECT encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- LOMBOK version -->
+		<lombok.version>1.16.0</lombok.version>
+		<!-- WICKET version -->
+		<wicket.version>6.18.0</wicket.version>
+		<!-- WICKET EXTENSION LIBRARIES versions -->
+		<wicketstuff.version>6.18.0</wicketstuff.version>
+		<wiquery-core.version>6.13.0</wiquery-core.version>
+		<wicket-modelfactory.version>0.9.4</wicket-modelfactory.version>
+		<wicket-source.version>6.0.0.8</wicket-source.version>
+		<!-- LOGGING versions -->
+		<slf4j.version>1.6.4</slf4j.version>
+		<log4j.version>2.1</log4j.version>
+		<!-- UNIT TEST versions -->
+		<testng.version>6.8.8</testng.version>
+		<junit.version>4.12</junit.version>
+		<jetty.version>8.1.16.v20140903</jetty.version>
+		<jetty9.version>9.2.8.v20150217</jetty9.version>
+		<!-- JAULP versions -->
+		<jaulp.core.version>3.10.0</jaulp.core.version>
+		<jaulp.collections.version>${jaulp.core.version}</jaulp.collections.version>
+		<jaulp.design.patterns.version>${jaulp.core.version}</jaulp.design.patterns.version>
+		<jaulp.email.version>${jaulp.core.version}</jaulp.email.version>
+		<jaulp.file.version>${jaulp.core.version}</jaulp.file.version>
+		<jaulp.generic.tree.version>${jaulp.core.version}</jaulp.generic.tree.version>
+		<jaulp.lang.version>${jaulp.core.version}</jaulp.lang.version>
+		<jaulp.net.version>${jaulp.core.version}</jaulp.net.version>
+		<jaulp.random.version>${jaulp.core.version}</jaulp.random.version>
+		<jaulp.security.version>${jaulp.core.version}</jaulp.security.version>
+		<jaulp.swing.version>${jaulp.core.version}</jaulp.swing.version>
+		<jaulp.test.objects.version>${jaulp.core.version}</jaulp.test.objects.version>
+		<jaulp.time.version>${jaulp.core.version}</jaulp.time.version>
+		<jaulp.xml.version>${jaulp.core.version}</jaulp.xml.version>
+		<mystic.crypt.version>${jaulp.core.version}</mystic.crypt.version>
+		<!-- EXTERNAL LIBRARIES versions -->
+		<recaptcha4j.version>0.0.7</recaptcha4j.version>
+		<joda-time.version>2.7</joda-time.version>
+		<!-- APACHE COMMONS LIBRARIES versions -->
+		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<guava.version>18.0</guava.version>
+		<commons-lang3.version>3.3.1</commons-lang3.version>
+		<!-- MAVEN PLUGIN versions -->
+		<maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+		<maven-compiler-plugin.source.version>1.7</maven-compiler-plugin.source.version>
+		<maven-compiler-plugin.target.version>1.7</maven-compiler-plugin.target.version>
+		<maven-compiler-plugin.compilerVersion>1.7</maven-compiler-plugin.compilerVersion>
+		<maven-compiler-plugin.encoding>UTF-8</maven-compiler-plugin.encoding>
+		<maven-compiler-plugin.optimize>true</maven-compiler-plugin.optimize>
+		<maven-compiler-plugin.showWarnings>true</maven-compiler-plugin.showWarnings>
+		<maven-compiler-plugin.debug>true</maven-compiler-plugin.debug>
+		<maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
+		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
+		<wtp.version>2.0</wtp.version>
+		<maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
+		<maven-source-plugin.version>2.4</maven-source-plugin.version>
+		<maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.3</nexus-staging-maven-plugin.version>
+		<maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
+		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+		<license-maven-plugin.version>2.8</license-maven-plugin.version>
+		<maven-war-plugin.version>2.6</maven-war-plugin.version>
+		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+		<tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+		<tomcat.version>7.0.54</tomcat.version>
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<!-- LOMBOK DEPENDENCIES -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<!-- JUNIT DEPENDENCY FOR TESTING -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<!-- WICKET DEPENDENCIES -->
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-core</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-datetime</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-extensions</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-spring</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-velocity</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+			<!-- WICKETSTUFF DEPENDENCIES -->
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-annotation</artifactId>
+				<version>${wicketstuff.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.wicket</groupId>
+						<artifactId>wicket</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- WIQUERY DEPENDENCIES -->
+			<dependency>
+				<groupId>org.odlabs.wiquery</groupId>
+				<artifactId>wiquery-core</artifactId>
+				<version>${wiquery-core.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.wicket</groupId>
+						<artifactId>wicket</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- WICKET-MODELFACTORY DEPENDENCIES -->
+			<dependency>
+				<groupId>org.wicketeer</groupId>
+				<artifactId>wicket-modelfactory</artifactId>
+				<version>${wicket-modelfactory.version}</version>
+			</dependency>
+			<!-- WICKET-SOURCE DEPENDENCIES -->
+			<dependency>
+				<groupId>net.ftlines.wicket-source</groupId>
+				<artifactId>wicket-source</artifactId>
+				<version>${wicket-source.version}</version>
+			</dependency>
+			<!-- JAULP DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.collections</artifactId>
+				<version>${jaulp.collections.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.lang</artifactId>
+				<version>${jaulp.lang.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.random</artifactId>
+				<version>${jaulp.random.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.security</artifactId>
+				<version>${jaulp.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.xml</artifactId>
+				<version>${jaulp.xml.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.test.objects</artifactId>
+				<version>${jaulp.test.objects.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.file</artifactId>
+				<version>${jaulp.file.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.time</artifactId>
+				<version>${jaulp.time.version}</version>
+			</dependency>
+			<!-- LOGGING DEPENDENCIES -->
+			<!-- LOGGING DEPENDENCIES - LOG4J -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng.version}</version>
+			</dependency>
+			<!-- JETTY DEPENDENCIES FOR TESTING -->
+			<dependency>
+				<groupId>org.eclipse.jetty.aggregate</groupId>
+				<artifactId>jetty-all-server</artifactId>
+				<version>${jetty.version}</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- LOMBOK DEPENDENCIES -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<!-- WICKET DEPENDENCIES -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-core</artifactId>
+		</dependency>
+		<!-- LOGGING DEPENDENCIES -->
+		<!-- LOGGING DEPENDENCIES - LOG4J -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+		<!-- UNIT DEPENDENCY FOR TESTING -->
+		<!-- TESTNG DEPENDENCY FOR TESTING -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- JUNIT DEPENDENCY FOR TESTING -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
 </project>
