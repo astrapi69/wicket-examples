@@ -199,6 +199,12 @@
 				<artifactId>wicket-source</artifactId>
 				<version>${wicket-source.version}</version>
 			</dependency>
+			<!-- JAULP WICKET DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp.wicket.components</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
 			<!-- JAULP DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>

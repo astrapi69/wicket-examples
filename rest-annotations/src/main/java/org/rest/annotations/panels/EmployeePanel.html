@@ -1,0 +1,37 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">	
+		<form wicket:id="editPersonForm">
+			<table>
+				<tr>
+					<th colspan="2">Add employee</th>
+				</tr>
+				<tr>
+					<td>Id:</td>
+					<td><input type="text" wicket:id="id" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" wicket:id="person.name" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Nickname:</td>
+					<td><input type="text" wicket:id=person.nickname value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td><input type="text" wicket:id=person.gender value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>About:</td>
+					<td><input type="text" wicket:id="person.about" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td>Married:</td>
+					<td><input type="text" wicket:id="person.married" value="" size="20" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" wicket:id="submit" /></td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+</wicket:panel>
