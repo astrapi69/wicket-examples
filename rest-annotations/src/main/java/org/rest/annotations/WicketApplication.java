@@ -33,6 +33,10 @@ public class WicketApplication extends WebApplication
 
 
 		mountResource("/employeesmanager", new ResourceReference("restReference") {
+			/**
+			 * The serialVersionUID
+			 */
+			private static final long serialVersionUID = 1L;
 			EmployeeResource resource = new EmployeeResource();
 			@Override
 			public IResource getResource() {
