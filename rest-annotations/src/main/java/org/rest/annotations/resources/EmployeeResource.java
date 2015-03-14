@@ -100,9 +100,18 @@ public class EmployeeResource extends AbstractRestResource<JsonWebSerialDeserial
 		System.err.println("an error occured...");
 		return Employee.builder().build();
 	}
-	
 
-
+	// http://localhost:8080/employeesmanager/create
+	/**
+	 * Create an employee from the given employee object.
+	 * For instance if the host is localhost the the url POST call would be:
+	 * http://localhost:8080/employeesmanager/create
+	 * and you have to put 
+	 *
+	 * @param id
+	 *            the id
+	 * @return the employee
+	 */
     @MethodMapping(value = "/create", httpMethod = HttpMethod.POST)
     public Employee create(
             @ValidatorKey("employeeValidator")
@@ -125,6 +134,18 @@ public class EmployeeResource extends AbstractRestResource<JsonWebSerialDeserial
 			{
 				employees.remove(employee);
 				employees.add(employeeToUpdate);
+			}
+		}
+    }    
+
+    @MethodMapping(value = "/delete/{id}", httpMethod = HttpMethod.DELETE)
+    public void delete(String id) {
+    	System.out.println(extractUrlFromRequest());
+    	for (Employee employee : employees)
+		{
+			if (employee.getId().equals(id))
+			{
+				employees.remove(employee);
 			}
 		}
     }
