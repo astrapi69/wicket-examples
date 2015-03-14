@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script type="text/javascript" src="urlRequestParameters-1.3.js"></script>
+
+<script type="text/javascript">
+	// Demo for get all the params:
+	var allParams = $.getRequestParameters();
+	for (i=0;i<allParams.length;i++){
+		var param = allParams[i];
+		alert('Key:'+param+'\nVaule:'+allParams[param]);
+	}
+	// Demo for get the parameter with the key 'aKey':
+	if(0 < allParams.length ){
+		alert($.getRequestParameter('aKey'));
+	}
+	
+	// Demo to make from the associative array a query string.
+	var queryString = $.createQueryStringFromParameters(allParams);
+	if(queryString !=""){
+		alert(queryString);
+	}
+
+</script>
+ 
+</meta>
+</head>
+<body>
+
+	<br>
+  <br>	<br>
+  <br>	<br>
+  <br>
+  <h1><span id="car">Call this page with request parameters!!!</span></h1>
+  <br>	<br>
+  <h2><span>Example:/ParametersDemo.html?aKey=aValue&anotherKey=anotherValue</span></h2>
+  <br>	<br>
+  <h2><span>For easy use append this in the address bar from your browser(without the quotes):'?aKey=aValue&anotherKey=anotherValue'</span></h2>
+  
+  <br>
+  <br>
+  </script>
+
+  
+
+
+</body>
+</html>
