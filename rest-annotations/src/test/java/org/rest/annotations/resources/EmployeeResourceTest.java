@@ -142,6 +142,10 @@ public class EmployeeResourceTest
 		asyncHttpClient.close();
 		Employee actual = JsonTransformer.toObject(responseString, Employee.class);
 		assertTrue(expected.equals(actual));
+		// clean up...
+		HttpDelete delete = new HttpDelete("http://localhost:8080/employeesmanager/delete/26");
+		
+		client.execute(delete);
 	}
 
 	@Test
