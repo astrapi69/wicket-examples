@@ -106,7 +106,7 @@ public class EmployeeResource extends AbstractRestResource<JsonWebSerialDeserial
 	 * Create an employee from the given employee object.
 	 * For instance if the host is localhost the the url POST call would be:
 	 * http://localhost:8080/employeesmanager/create
-	 * and you have to put 
+	 * and you have to put in the post data a json string for create the employee.
 	 *
 	 * @param id
 	 *            the id
