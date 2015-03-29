@@ -14,6 +14,7 @@ import net.sourceforge.jaulp.xml.json.JsonTransformer;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -22,6 +23,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
 import org.jaulp.test.objects.Employee;
 import org.jaulp.test.objects.Gender;
 import org.jaulp.test.objects.Person;
@@ -183,7 +185,8 @@ public class EmployeeResourceTest
 		assertTrue(expected.equals(actual));
 
 		HttpDelete delete = new HttpDelete("http://localhost:8080/employeesmanager/delete/26");
-
+		Header authorizationHeader = new BasicHeader("Authorization", "Basic " + encoding);
+		delete.addHeader(authorizationHeader);
 		response = client.execute(delete);
 
 
