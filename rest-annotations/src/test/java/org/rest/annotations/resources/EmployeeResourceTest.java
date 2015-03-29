@@ -12,6 +12,7 @@ import java.util.concurrent.Future;
 
 import net.sourceforge.jaulp.xml.json.JsonTransformer;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -90,50 +91,60 @@ public class EmployeeResourceTest
 
 	@Test
 	public void testCreate() throws ClientProtocolException, IOException
-	{		
+	{
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost post = new HttpPost("http://localhost:8080/employeesmanager/create");
 		String jsonString = "{\"id\":\"26\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		Employee expected = JsonTransformer.toObject(jsonString, Employee.class);
-		
+		// Add authorization base64...
+		Base64 b = new Base64();
+		String encoding = b.encodeAsString(new String("wicket:wicket").getBytes());
+		post.addHeader("Authorization", "Basic " + encoding);
+
+
 		StringEntity input = new StringEntity(jsonString);
 		input.setContentType("application/json");
 		post.setEntity(input);
 		HttpResponse response = client.execute(post);
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity()
 			.getContent()));
-		String json = IOUtils.toString(rd); 
+		String json = IOUtils.toString(rd);
 		Employee actual = JsonTransformer.toObject(json, Employee.class);
 		assertTrue(expected.equals(actual));
-		
+
 		HttpDelete delete = new HttpDelete("http://localhost:8080/employeesmanager/delete/26");
-		
+
 		client.execute(delete);
 	}
 
 	@Test
-	public void testUpdate() throws ClientProtocolException, IOException, InterruptedException, ExecutionException
+	public void testUpdate() throws ClientProtocolException, IOException, InterruptedException,
+		ExecutionException
 	{
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost post = new HttpPost("http://localhost:8080/employeesmanager/create");
 		String jsonString = "{\"id\":\"26\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
-		
-		
+
+		// Add authorization base64...
+		Base64 b = new Base64();
+		String encoding = b.encodeAsString(new String("wicket:wicket").getBytes());
+		post.addHeader("Authorization", "Basic " + encoding);
+
 		StringEntity input = new StringEntity(jsonString);
 		input.setContentType("application/json");
 		post.setEntity(input);
 		client.execute(post);
-		
+
 		client = HttpClientBuilder.create().build();
 		HttpPut put = new HttpPut("http://localhost:8080/employeesmanager/update");
-		
+
 		jsonString = "{\"id\":\"26\",\"person\":{\"married\":false,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		Employee expected = JsonTransformer.toObject(jsonString, Employee.class);
 		input = new StringEntity(jsonString);
 		input.setContentType("application/json");
 		put.setEntity(input);
 		client.execute(put);
-		// 
+		//
 		AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 		Future<Response> f = asyncHttpClient.prepareGet(
 			"http://localhost:8080/employeesmanager/read/26").execute();
@@ -144,7 +155,7 @@ public class EmployeeResourceTest
 		assertTrue(expected.equals(actual));
 		// clean up...
 		HttpDelete delete = new HttpDelete("http://localhost:8080/employeesmanager/delete/26");
-		
+
 		client.execute(delete);
 	}
 
@@ -155,21 +166,26 @@ public class EmployeeResourceTest
 		HttpPost post = new HttpPost("http://localhost:8080/employeesmanager/create");
 		String jsonString = "{\"id\":\"26\",\"person\":{\"married\":true,\"nickname\":\"beast\",\"name\":\"Anna\",\"about\":\"Ha ha ha...\",\"gender\":\"FEMALE\"}}";
 		Employee expected = JsonTransformer.toObject(jsonString, Employee.class);
-		
+
+		// Add authorization base64...
+		Base64 b = new Base64();
+		String encoding = b.encodeAsString(new String("wicket:wicket").getBytes());
+		post.addHeader("Authorization", "Basic " + encoding);
+
 		StringEntity input = new StringEntity(jsonString);
 		input.setContentType("application/json");
 		post.setEntity(input);
 		HttpResponse response = client.execute(post);
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity()
 			.getContent()));
-		String json = IOUtils.toString(rd); 
+		String json = IOUtils.toString(rd);
 		Employee actual = JsonTransformer.toObject(json, Employee.class);
 		assertTrue(expected.equals(actual));
-		
+
 		HttpDelete delete = new HttpDelete("http://localhost:8080/employeesmanager/delete/26");
-		
-		response = client.execute(delete); 
-		
+
+		response = client.execute(delete);
+
 
 	}
 

@@ -3,9 +3,11 @@ package org.rest.annotations.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.authroles.authorization.strategies.role.IRoleCheckingStrategy;
 import org.jaulp.test.objects.Employee;
 import org.jaulp.test.objects.Gender;
 import org.jaulp.test.objects.Person;
+import org.wicketstuff.rest.annotations.AuthorizeInvocation;
 import org.wicketstuff.rest.annotations.MethodMapping;
 import org.wicketstuff.rest.annotations.parameters.RequestBody;
 import org.wicketstuff.rest.annotations.parameters.ValidatorKey;
@@ -48,20 +50,9 @@ public class EmployeeResource extends AbstractRestResource<JsonWebSerialDeserial
 	/**
 	 * Instantiates a new employee resource.
 	 */
-	public EmployeeResource()
+	public EmployeeResource(IRoleCheckingStrategy roleCheckingStrategy)
 	{
-		super(new JsonWebSerialDeserial(new JacksonObjectSerialDeserial()));
-	}
-
-	/**
-	 * Instantiates a new employee resource.
-	 *
-	 * @param serialDeserial
-	 *            the serial deserial
-	 */
-	public EmployeeResource(JsonWebSerialDeserial serialDeserial)
-	{
-		super(serialDeserial);
+		super(new JsonWebSerialDeserial(new JacksonObjectSerialDeserial()), roleCheckingStrategy);
 	}
 
 	/**
@@ -113,6 +104,7 @@ public class EmployeeResource extends AbstractRestResource<JsonWebSerialDeserial
 	 * @return the employee
 	 */
     @MethodMapping(value = "/create", httpMethod = HttpMethod.POST)
+	@AuthorizeInvocation(value={"FOO", "BAR"})
     public Employee create(
             @ValidatorKey("employeeValidator")
             @RequestBody Employee employee) {

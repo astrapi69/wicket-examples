@@ -5,6 +5,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.resource.IResource;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.rest.annotations.resources.EmployeeResource;
+import org.rest.annotations.security.HttpBasicAuthRoleCheckingStrategy;
 
 /**
  * Application object for your web application.
@@ -30,6 +31,8 @@ public class WicketApplication extends WebApplication
 	public void init()
 	{
 		super.init();
+		final HttpBasicAuthRoleCheckingStrategy roleCheckingStrategy = 
+			new HttpBasicAuthRoleCheckingStrategy("wicket", "wicket");
 
 
 		mountResource("/employeesmanager", new ResourceReference("restReference") {
@@ -37,7 +40,7 @@ public class WicketApplication extends WebApplication
 			 * The serialVersionUID
 			 */
 			private static final long serialVersionUID = 1L;
-			EmployeeResource resource = new EmployeeResource();
+			EmployeeResource resource = new EmployeeResource(roleCheckingStrategy);
 			@Override
 			public IResource getResource() {
 				return resource;
