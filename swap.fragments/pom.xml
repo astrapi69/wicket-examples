@@ -25,7 +25,7 @@
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 		<!-- TODO project name  -->
-	<name>quickstart</name>
+	<name>${project.artifactId}</name>
 	<description></description>
 	<!--
 		<organization>
@@ -41,7 +41,7 @@
 		</license>
 	</licenses>
 	<properties>
-		<wicket.version>6.15.0</wicket.version>
+		<wicket.version>6.18.0</wicket.version>
 		<jetty.version>7.6.13.v20130916</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->

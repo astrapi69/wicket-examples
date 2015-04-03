@@ -8,9 +8,7 @@
 	by applicable law or agreed to in writing, software distributed under the 
 	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
 	OF ANY KIND, either express or implied. See the License for the specific 
-	language governing permissions and limitations under the License. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	language governing permissions and limitations under the License. --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.alpharogroup</groupId>
 	<artifactId>wicket-examples</artifactId>
@@ -22,7 +20,8 @@
 		<module>atmosphere-chat</module>
 		<module>rest-annotations</module>
 		<module>js-integration</module>
-	</modules>
+    <module>wicket-ssl</module>
+  </modules>
 
 	<developers>
 
@@ -66,7 +65,7 @@
 		<testng.version>6.8.8</testng.version>
 		<junit.version>4.12</junit.version>
 		<jetty.version>8.1.16.v20140903</jetty.version>
-		<jetty9.version>9.2.8.v20150217</jetty9.version>
+		<jetty9.version>9.2.10.v20150310</jetty9.version>
 		<!-- JAULP versions -->
 		<jaulp.core.version>3.10.0</jaulp.core.version>
 		<jaulp.collections.version>${jaulp.core.version}</jaulp.collections.version>
