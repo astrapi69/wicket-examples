@@ -64,7 +64,6 @@
 		<!-- UNIT TEST versions -->
 		<testng.version>6.8.8</testng.version>
 		<junit.version>4.12</junit.version>
-		<jetty.version>8.1.16.v20140903</jetty.version>
 		<jetty9.version>9.2.10.v20150310</jetty9.version>
 		<!-- JAULP versions -->
 		<jaulp.core.version>3.10.0</jaulp.core.version>
