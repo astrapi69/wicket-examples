@@ -19,11 +19,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
-		<wtp.version>none</wtp.version>
-	</properties>
+
 	<dependencies>
 		<!-- WICKET DEPENDENCIES -->
 
@@ -51,38 +47,12 @@
 			<artifactId>wiquery-core</artifactId>
 		</dependency>
 
-		<!-- JETTY DEPENDENCIES FOR TESTING -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>${jetty9.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>${jetty9.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-util</artifactId>
-			<version>${jetty9.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jmx</artifactId>
-			<version>${jetty9.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
+
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<resources>
-			<resource>
-				<filtering>false</filtering>
-				<directory>src/main/resources</directory>
-			</resource>
+
 			<resource>
 				<filtering>false</filtering>
 				<directory>src/main/java</directory>
@@ -93,12 +63,20 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
-		</resources>
-		<testResources>
-			<testResource>
+
+			<resource>
 				<filtering>false</filtering>
-				<directory>src/test/resources</directory>
-			</testResource>
+				<directory>src/main/resources</directory>
+			</resource>
+
+			<resource>
+				<directory>src/main/webapp</directory>
+			</resource>
+
+		</resources>
+
+		<testResources>
+
 			<testResource>
 				<filtering>false</filtering>
 				<directory>src/test/java</directory>
@@ -109,57 +87,60 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</testResource>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/resources</directory>
+			</testResource>
+
 		</testResources>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<inherited>true</inherited>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<wtpversion>${wtp.version}</wtpversion>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
+
 			<plugin>
 				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>UTF-8</encoding>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
 			</plugin>
+
 			<plugin>
+				<inherited>true</inherited>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty9.version}</version>
-				<configuration>
-					<systemProperties>
-						<systemProperty>
-							<name>maven.project.build.directory.test-classes</name>
-							<value>${project.build.directory}/test-classes</value>
-						</systemProperty>
-					</systemProperties>
-					<jettyXml>${project.basedir}/src/test/jetty/jetty.xml,${project.basedir}/src/test/jetty/jetty-ssl.xml,${project.basedir}/src/test/jetty/jetty-http.xml,${project.basedir}/src/test/jetty/jetty-https.xml</jettyXml>
-				</configuration>
 			</plugin>
+
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
+				<inherited>true</inherited>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<inherited>true</inherited>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
+			</plugin>
+			<!-- exclude this artifact from deploy -->
+			<plugin>
+				<inherited>false</inherited>
+				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
-					<downloadSources>true</downloadSources>
-					<wtpversion>${wtp.version}</wtpversion>
+					<skip>true</skip>
 				</configuration>
 			</plugin>
+
 		</plugins>
+
 	</build>
 
-	<repositories>
-		<repository>
-			<id>Apache Nexus</id>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+
 </project>

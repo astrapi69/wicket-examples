@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.protocol.ws.api.WicketWebSocketJQueryResourceReference;
 import org.apache.wicket.request.Url;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.request.resource.UrlResourceReference;

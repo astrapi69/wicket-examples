@@ -9,4 +9,9 @@ import org.wicketstuff.annotation.mount.MountPath;
 public class MountedHttpsPage extends WebPage
 {
 
+	/**
+	 * The serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

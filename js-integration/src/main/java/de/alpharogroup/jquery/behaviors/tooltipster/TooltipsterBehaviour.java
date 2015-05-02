@@ -2,7 +2,6 @@ package de.alpharogroup.jquery.behaviors.tooltipster;
 
 import java.util.HashMap;
 
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.head.IHeaderResponse;

@@ -1,7 +1,5 @@
 package de.alpharogroup.googlecharts.timeline;
 
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.panel.Panel;
 
 public class TimelinePanel extends Panel {
