@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.authroles.authorization.strategies.role.IRoleCheckingStrategy;
-import org.jaulp.test.objects.Employee;
-import org.jaulp.test.objects.Gender;
-import org.jaulp.test.objects.Person;
+import de.alpharogroup.test.objects.Employee;
+import de.alpharogroup.test.objects.Gender;
+import de.alpharogroup.test.objects.Person;
 import org.wicketstuff.rest.annotations.AuthorizeInvocation;
 import org.wicketstuff.rest.annotations.MethodMapping;
 import org.wicketstuff.rest.annotations.parameters.RequestBody;

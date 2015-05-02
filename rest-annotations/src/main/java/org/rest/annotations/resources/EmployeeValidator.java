@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.IValidator;
-import org.jaulp.test.objects.Employee;
+import de.alpharogroup.test.objects.Employee;
 import org.wicketstuff.rest.utils.wicket.validator.RestValidationError;
 
 public class EmployeeValidator implements IValidator<Employee>

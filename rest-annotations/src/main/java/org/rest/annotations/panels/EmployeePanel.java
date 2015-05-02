@@ -23,7 +23,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.jaulp.test.objects.Employee;
+import de.alpharogroup.test.objects.Employee;
 
 public class EmployeePanel extends Panel
 {

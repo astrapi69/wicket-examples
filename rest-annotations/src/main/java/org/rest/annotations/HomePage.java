@@ -3,7 +3,7 @@ package org.rest.annotations;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jaulp.test.objects.Employee;
+import de.alpharogroup.test.objects.Employee;
 import org.rest.annotations.panels.EmployeePanel;
 
 public class HomePage extends WebPage {

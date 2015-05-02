@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import net.sourceforge.jaulp.xml.json.JsonTransformer;
+import de.alpharogroup.xml.json.JsonTransformer;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
@@ -24,9 +24,9 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
-import org.jaulp.test.objects.Employee;
-import org.jaulp.test.objects.Gender;
-import org.jaulp.test.objects.Person;
+import de.alpharogroup.test.objects.Employee;
+import de.alpharogroup.test.objects.Gender;
+import de.alpharogroup.test.objects.Person;
 import org.junit.Test;
 
 import com.ning.http.client.AsyncHttpClient;
