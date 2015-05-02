@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>de.alpharogroup</groupId>
-		<artifactId>wicket-examples</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
-	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>wicket-examples</artifactId>
+		<groupId>de.alpharogroup</groupId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
+	
 	<artifactId>swap.fragments</artifactId>
+	
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
 	<!-- TODO project name -->
 	<name>${project.artifactId}</name>
 	<description></description>
@@ -22,14 +24,6 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
-	<properties>
-		<wicket.version>6.18.0</wicket.version>
-		<jetty.version>7.6.13.v20130916</jetty.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
-		<wtp.version>2.0</wtp.version>
-	</properties>
 	
 	<dependencies>
 		<!-- WICKET DEPENDENCIES -->
@@ -53,13 +47,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- JETTY DEPENDENCIES FOR TESTING -->
-		<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-all-server</artifactId>
-			<version>${jetty.version}</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<build>

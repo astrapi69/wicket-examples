@@ -9,6 +9,7 @@
 		<groupId>de.alpharogroup</groupId>
 		<version>1.0.1-SNAPSHOT</version>
 	</parent>
+	
 	<artifactId>atmosphere-chat</artifactId>
 	<packaging>war</packaging>
 
