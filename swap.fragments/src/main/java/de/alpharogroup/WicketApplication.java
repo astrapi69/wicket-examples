@@ -13,6 +13,8 @@ import de.alpharogroup.swap.panel.SwapPersonPanelPage;
  */
 public class WicketApplication extends WebApplication
 {
+	public static final int DEFAULT_HTTP_PORT = 9090;
+	public static final int DEFAULT_HTTPS_PORT = 9443;
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
 	 */
