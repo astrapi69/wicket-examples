@@ -53,7 +53,7 @@
 		<!-- PROJECT encoding -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- LOMBOK version -->
-		<lombok.version>1.16.2</lombok.version>
+		<lombok.version>1.16.4</lombok.version>
 		<!-- WICKET version -->
 		<wicket.version>6.18.0</wicket.version>
 		<!-- WICKET EXTENSION LIBRARIES versions -->
