@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.wicket.protocol.http.ContextParamWebApplicationFactory;
 import org.apache.wicket.protocol.http.WicketFilter;
 import org.apache.wicket.util.time.Duration;
+import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
@@ -14,6 +15,7 @@ import de.alpharogroup.jetty9.runner.config.FilterHolderConfiguration;
 import de.alpharogroup.jetty9.runner.config.Jetty9RunConfiguration;
 import de.alpharogroup.jetty9.runner.config.ServletContextHandlerConfiguration;
 import de.alpharogroup.jetty9.runner.config.ServletHolderConfiguration;
+import de.alpharogroup.jetty9.runner.factories.ServletContextHandlerFactory;
 
 public class Start {
     public static void main(String[] args) throws Exception {
@@ -27,7 +29,7 @@ public class Start {
 			"webapp");
 		String filterPath = "/*";
 
-		ServletContextHandler servletContextHandler = Jetty9Runner
+		ServletContextHandler servletContextHandler = ServletContextHandlerFactory
 			.getNewServletContextHandler(ServletContextHandlerConfiguration
 				.builder()
 				.filterHolderConfiguration(
@@ -35,18 +37,28 @@ public class Start {
 						.builder()
 						.filterClass(WicketFilter.class)
 						.filterPath(filterPath)
-						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
+						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
 						.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
 							WicketApplication.class.getName()).build())
 				.servletHolderConfiguration(
 					ServletHolderConfiguration.builder().servletClass(DefaultServlet.class)
 						.pathSpec(filterPath).build()).contextPath("/").webapp(webapp)
 				.maxInactiveInterval(sessionTimeout).filterPath(filterPath).build());
+		
+		final Jetty9RunConfiguration config = newJetty9RunConfiguration(servletContextHandler);
 
-		Jetty9Runner.run(Jetty9RunConfiguration.builder()
+		Server server = new Server();
+		Jetty9Runner.runServletContextHandler(server, config);
+	}
+
+	private static Jetty9RunConfiguration newJetty9RunConfiguration(final ServletContextHandler servletContextHandler)
+	{
+		final Jetty9RunConfiguration config = Jetty9RunConfiguration.builder()
 			.servletContextHandler(servletContextHandler)
 			.httpPort(WicketApplication.DEFAULT_HTTP_PORT)
-			.httpsPort(WicketApplication.DEFAULT_HTTPS_PORT).keyStorePassword("wicket")
-			.keyStorePathResource("/keystore").build());
-    }
+			.httpsPort(WicketApplication.DEFAULT_HTTPS_PORT)
+			.keyStorePassword("wicket")
+			.keyStorePathResource("/keystore").build();
+		return config;
+	}
 }
