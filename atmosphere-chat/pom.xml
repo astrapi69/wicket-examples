@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>wicket-examples</artifactId>
 		<groupId>de.alpharogroup</groupId>
-		<version>1.0.1-SNAPSHOT</version>
+		<artifactId>wicket-examples</artifactId>
+		<version>1.1.0</version>
 	</parent>
 	
 	<artifactId>atmosphere-chat</artifactId>
@@ -39,14 +39,14 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
@@ -141,5 +141,4 @@
 		</plugins>
 
 	</build>
-		
 </project>

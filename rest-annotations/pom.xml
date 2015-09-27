@@ -15,9 +15,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>wicket-examples</artifactId>
 		<groupId>de.alpharogroup</groupId>
-		<version>1.0.1-SNAPSHOT</version>
+		<artifactId>wicket-examples</artifactId>
+		<version>1.1.0</version>
 	</parent>
 
 	<artifactId>rest-annotations</artifactId>
