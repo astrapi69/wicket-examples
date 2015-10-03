@@ -35,7 +35,7 @@
 	<properties>
 		<!-- WICKET version -->
 		<wicket.version>6.20.0</wicket.version>
-		<jaulp.wicket.version>6.20.1</jaulp.wicket.version>	
+		<jaulp.wicket.version>6.20.2</jaulp.wicket.version>	
 	</properties>
 
 	<dependencyManagement>
