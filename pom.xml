@@ -29,6 +29,7 @@
 		<module>jaulp.wicket.base.examples</module>
 		<module>jaulp.wicket.dropdownchoices.examples</module>
 		<module>wicket.xslt.examples</module>
+		<module>wicket-channel-chat-examples</module>
 	</modules>
 	
 	<properties>
