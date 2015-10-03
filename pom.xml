@@ -34,9 +34,7 @@
 	<properties>
 		<!-- WICKET version -->
 		<wicket.version>6.20.0</wicket.version>
-		<jaulp.wicket.version>6.20.1</jaulp.wicket.version>
-	
-	
+		<jaulp.wicket.version>6.20.1</jaulp.wicket.version>	
 	</properties>
 
 	<dependencyManagement>
@@ -154,12 +152,12 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- JAULP DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jaulp.file</artifactId>
 		</dependency>
-
+		
 	</dependencies>
 
 </project>
