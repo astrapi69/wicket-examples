@@ -19,6 +19,21 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-datetime</artifactId>
+		</dependency>
+		<!-- WICKETSTUFF -->
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-annotation</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jaulp.wicket.annotated.header.contributors</artifactId>
 		</dependency>
@@ -56,21 +71,6 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>auth-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-extensions</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-datetime</artifactId>
-		</dependency>
-		<!-- WICKETSTUFF -->
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-annotation</artifactId>
 		</dependency>
 		<!-- WICKET-SOURCE DEPENDENCIES -->
 		<dependency>
