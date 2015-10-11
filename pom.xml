@@ -37,11 +37,18 @@
 		<!-- WICKET version -->
 		<wicket.version>6.20.0</wicket.version>
 		<jaulp.wicket.version>6.20.2</jaulp.wicket.version>
+		<authorization.strategy.api.version>6.20.0</authorization.strategy.api.version>
 	</properties>
 
 	<dependencyManagement>
 
 		<dependencies>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>authorization.strategy.api</artifactId>
+				<version>${authorization.strategy.api.version}</version>
+			</dependency>
 
 			<!-- JAULP WICKET DEPENDENCIES -->
 			<dependency>
