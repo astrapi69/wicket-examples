@@ -15,8 +15,6 @@
  */
 package de.alpharogroup.wicket.dropdownchoices.panel.localised;
 
-import static org.wicketeer.modelfactory.ModelFactory.from;
-import static org.wicketeer.modelfactory.ModelFactory.model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +25,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.PropertyModel;
 
 import de.alpharogroup.wicket.components.i18n.dropdownchoice.LocalisedDropDownChoice;
 import de.alpharogroup.wicket.components.i18n.dropdownchoice.renderers.LocalisedChoiceRenderer;
@@ -66,7 +65,8 @@ public class LocalisedDropDownChoicePanel extends Panel
 		final List<String> values = Arrays.asList("1", "2");
 
 		final LocalisedDropDownChoice<String> ddc1 = new LocalisedDropDownChoice<String>("options",
-			model(from(optionModel).getValue()), values, new LocalisedChoiceRenderer(
+			new PropertyModel<>(optionModel, "value")
+		, values, new LocalisedChoiceRenderer(
 				"option.value", this, this.getClass()));
 
 		selectOptionForm.add(ddc1);

@@ -15,10 +15,6 @@
  */
 package de.alpharogroup.wicket.base.components.viewmode.examples;
 
-
-import static org.wicketeer.modelfactory.ModelFactory.from;
-import static org.wicketeer.modelfactory.ModelFactory.model;
-
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Button;
@@ -26,6 +22,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.test.objects.Gender;
@@ -58,12 +55,13 @@ public class ViewOrEditPage extends BasePage
 		final Form<Person> form = new Form<Person>("form", cpm);
 
 		add(form);
-		final EditableTextField nameTextField = new EditableTextField("name", model(from(person)
-			.getName()), Model.of("Name"));
+		final EditableTextField nameTextField = new EditableTextField("name", new PropertyModel<>(
+			person, "name"), Model.of("Name"));
 		form.add(nameTextField);
 
 		final EditableTextArea about = new EditableTextArea("about",
-			model(from(person).getAbout()), Model.of("About"));
+ new PropertyModel<>(person,
+			"about"), Model.of("About"));
 		form.add(about);
 
 

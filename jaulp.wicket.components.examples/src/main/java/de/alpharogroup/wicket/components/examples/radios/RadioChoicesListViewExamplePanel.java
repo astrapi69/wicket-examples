@@ -32,7 +32,7 @@ import de.alpharogroup.test.objects.Company;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.form.RadioChoicesListView;
-import de.alpharogroup.wicket.components.radio.RadioGroupModel;
+import de.alpharogroup.wicket.components.radio.RadioGroupModelBean;
 
 public class RadioChoicesListViewExamplePanel extends BasePanel<Company>
 {
@@ -44,7 +44,7 @@ public class RadioChoicesListViewExamplePanel extends BasePanel<Company>
 		// Radio buttons have to be part of a Form component.
 		final Form<?> form = new Form<>("form");
 		add(form);
-		final RadioGroupModel<Company> radioGroupModel = new RadioGroupModel<>();
+		final RadioGroupModelBean<Company> radioGroupModel = new RadioGroupModelBean<>();
 		setModel(model);
 		// create list...
 		final List<Company> comps = Arrays.asList(Company.builder().name("Ferrari").build(),

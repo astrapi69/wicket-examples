@@ -32,7 +32,7 @@ import de.alpharogroup.test.objects.Company;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.radio.AjaxRadioPanel;
-import de.alpharogroup.wicket.components.radio.RadioGroupModel;
+import de.alpharogroup.wicket.components.radio.RadioGroupModelBean;
 
 public class AjaxRadioExamplePanel extends BasePanel<List<Company>>
 {
@@ -51,7 +51,7 @@ public class AjaxRadioExamplePanel extends BasePanel<List<Company>>
 		final List<Company> items = Arrays.asList(Company.builder().name("Ferrari").build(),
 			Company.builder().name("Lamborgini").build(), Company.builder().name("Mazerati")
 				.build(), Company.builder().name("Porsche").build());
-		final RadioGroupModel<Company> radioGroupModel = new RadioGroupModel<>();
+		final RadioGroupModelBean<Company> radioGroupModel = new RadioGroupModelBean<>();
 		setModel(model);
 		radioGroupModel.setLabelPropertyExpression("name");
 		// we can set the selected radio from the start or leave it blank...
