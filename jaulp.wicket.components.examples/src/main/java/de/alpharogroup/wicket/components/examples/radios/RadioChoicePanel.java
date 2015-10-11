@@ -15,13 +15,8 @@
  */
 package de.alpharogroup.wicket.components.examples.radios;
 
-import static org.wicketeer.modelfactory.ModelFactory.from;
-import static org.wicketeer.modelfactory.ModelFactory.model;
-
 import java.util.Arrays;
 import java.util.List;
-
-import lombok.Getter;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -31,10 +26,12 @@ import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.PropertyModel;
 
 import de.alpharogroup.test.objects.enums.Brands;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.factory.ComponentFactory;
+import lombok.Getter;
 
 public class RadioChoicePanel extends Panel
 {
@@ -83,7 +80,8 @@ public class RadioChoicePanel extends Panel
 
 		};
 		final RadioChoice<Brands> brandingType = ComponentFactory.newRadioChoice("branding",
-			model(from(this).getSelected()), TYPES, renderer);
+			new PropertyModel<>(this, "selected")
+			, TYPES, renderer);
 		// dont add a <br> after every radio...
 		brandingType.setSuffix("");
 		brandingType.setOutputMarkupId(true);

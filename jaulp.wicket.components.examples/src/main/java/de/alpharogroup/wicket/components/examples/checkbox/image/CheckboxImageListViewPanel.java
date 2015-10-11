@@ -15,9 +15,6 @@
  */
 package de.alpharogroup.wicket.components.examples.checkbox.image;
 
-import static org.wicketeer.modelfactory.ModelFactory.from;
-import static org.wicketeer.modelfactory.ModelFactory.model;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +24,7 @@ import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
 import de.alpharogroup.io.annotations.ImportResource;
@@ -84,7 +82,7 @@ public class CheckboxImageListViewPanel extends ApplicationBasePanel<List<ImageC
 			{
 				final ImageCheckboxModelBean wrapper = item.getModelObject();
 				final CheckBox checkbox = new CheckBox("checkbox",
-					model(from(wrapper).getChecked()));
+					new PropertyModel<>(wrapper, "checked"));
 				checkbox.setOutputMarkupId(true);
 				checkbox.add(new AttributeAppender("name", Model.of("cb")));
 				item.add(checkbox);

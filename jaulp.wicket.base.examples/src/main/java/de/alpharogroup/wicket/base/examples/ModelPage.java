@@ -15,15 +15,12 @@
  */
 package de.alpharogroup.wicket.base.examples;
 
-
-import static org.wicketeer.modelfactory.ModelFactory.from;
-import static org.wicketeer.modelfactory.ModelFactory.model;
-
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -46,7 +43,7 @@ public class ModelPage extends GenericBasePage<Person>
 		// set nickname null...
 		getModelObject().setNickname(null);
 		// Set PropertyModel to an Object that is null...
-		nicknameModel = model(from(getModel()).getNickname());
+		nicknameModel = new PropertyModel<>(getModel(), "nickname");
 		add(new MenubarPanel("menubarPanel"));
 		final String nickname = nicknameModel.getObject();
 		System.out.println("nickname is:" + nickname);

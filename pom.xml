@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">	
-	
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>mvn-wicket-parent</artifactId>
+		<artifactId>wicket-application</artifactId>
 		<version>6.0.0</version>
 		<relativePath></relativePath>
 	</parent>
@@ -20,7 +20,7 @@
 		<module>atmosphere-chat</module>
 		<module>rest-annotations</module>
 		<module>js-integration</module>
-		<module>wicket-ssl</module>		
+		<module>wicket-ssl</module>
 		<module>jaulp.wicket.annotated.header.contributors.examples</module>
 		<module>jaulp.wicket.behaviors.examples</module>
 		<module>jaulp.wicket.components.examples</module>
@@ -30,18 +30,19 @@
 		<module>jaulp.wicket.dropdownchoices.examples</module>
 		<module>wicket.xslt.examples</module>
 		<module>wicket-channel-chat-examples</module>
+		<module>component.authorization.strategy.example</module>
 	</modules>
-	
+
 	<properties>
 		<!-- WICKET version -->
 		<wicket.version>6.20.0</wicket.version>
-		<jaulp.wicket.version>6.20.2</jaulp.wicket.version>	
+		<jaulp.wicket.version>6.20.2</jaulp.wicket.version>
 	</properties>
 
 	<dependencyManagement>
 
-		<dependencies>			
-			
+		<dependencies>
+
 			<!-- JAULP WICKET DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
@@ -83,7 +84,7 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jaulp.wicket.dropdownchoices</artifactId>
 				<version>${jaulp.wicket.version}</version>
-			</dependency>			
+			</dependency>
 
 		</dependencies>
 
@@ -158,7 +159,7 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jaulp.file</artifactId>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

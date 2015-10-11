@@ -15,9 +15,6 @@
  */
 package de.alpharogroup.wicket.components.examples.checkbox;
 
-import static org.wicketeer.modelfactory.ModelFactory.from;
-import static org.wicketeer.modelfactory.ModelFactory.model;
-
 import java.util.Arrays;
 
 import org.apache.wicket.Component;
@@ -28,6 +25,7 @@ import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.util.ListModel;
 
 import de.alpharogroup.test.objects.Company;
@@ -56,8 +54,8 @@ public class CheckChoicesListViewPanel extends Panel
 		// Tell CheckChoicesListView what properties to use for label
 		final ChoiceRenderer<Company> renderer = new ChoiceRenderer<Company>("name");
 
-		final CheckGroup<Company> checkGroup = new CheckGroup<Company>("group", model(from(
-			checkboxModel).getSelectedItems()));
+		final CheckGroup<Company> checkGroup = new CheckGroup<Company>("group",
+			new PropertyModel<>(checkboxModel, "selectedItems"));
 		checkGroup.add(new AjaxFormChoiceComponentUpdatingBehavior()
 		{
 			private static final long serialVersionUID = 1L;
