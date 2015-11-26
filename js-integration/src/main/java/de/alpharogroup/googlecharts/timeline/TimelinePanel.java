@@ -4,6 +4,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 public class TimelinePanel extends Panel {
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
 	public TimelinePanel(String id) {
 		super(id);
 		setOutputMarkupId(true);

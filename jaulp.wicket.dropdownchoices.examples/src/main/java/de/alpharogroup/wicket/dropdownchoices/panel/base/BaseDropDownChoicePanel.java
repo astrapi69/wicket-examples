@@ -67,7 +67,6 @@ public class BaseDropDownChoicePanel extends Panel
 				return object.getDigraph();
 			}
 
-			@SuppressWarnings("unused")
 			public Country getObject(final String id,
 				final IModel<? extends List<? extends Country>> choices)
 			{
