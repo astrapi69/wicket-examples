@@ -17,7 +17,7 @@ package de.alpharogroup.wicket.components.examples.resource.loading;
 
 import org.apache.wicket.markup.html.basic.Label;
 
-import de.alpharogroup.locale.ResourceBundleKey;
+import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 

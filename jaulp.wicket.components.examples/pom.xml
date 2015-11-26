@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.0.0</version>
+		<version>7.1.0</version>
 	</parent>
 	<artifactId>jaulp.wicket.components.examples</artifactId>
 	<packaging>war</packaging>
@@ -65,7 +65,7 @@
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jaulp.test.objects</artifactId>
+			<artifactId>test-objects</artifactId>
 		</dependency>
 
 		<dependency>

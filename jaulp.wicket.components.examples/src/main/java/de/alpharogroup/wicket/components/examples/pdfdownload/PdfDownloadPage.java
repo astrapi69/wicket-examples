@@ -20,13 +20,11 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import de.alpharogroup.wicket.components.download.DownloadModelBean;
 import de.alpharogroup.wicket.components.download.DownloadPanel;
-import de.alpharogroup.wicket.components.examples.application.WicketApplication;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 
 
@@ -49,12 +47,6 @@ public class PdfDownloadPage extends PubliclyBasePage<Object>
 			Model.of(downloadModelBean))
 		{
 			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected WebApplication getWebApplication()
-			{
-				return WicketApplication.get();
-			}
 
 			@Override
 			protected AjaxLink<Void> newDownloadLink(final String id,

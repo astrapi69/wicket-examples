@@ -21,8 +21,8 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import de.alpharogroup.locale.LocaleUtils;
-import de.alpharogroup.locale.ResourceBundleKey;
+import de.alpharogroup.resourcebundle.locale.LocaleExtensions;
+import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 import de.alpharogroup.wicket.base.util.url.WicketUrlExtensions;
@@ -59,7 +59,7 @@ public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkBean>
 	{
 		final IModel<GooglePlusShareModelBean> model = new GooglePlusShareModelBean.Builder()
 			.scriptSrc("https://apis.google.com/js/platform.js")
-			.locale(LocaleUtils.getLocaleFileSuffix(Session.get().getLocale(), false, false, false))
+			.locale(LocaleExtensions.getLocaleFileSuffix(Session.get().getLocale(), false, false, false))
 			.cssClass("g-plusone").dataAnnotation("inline").dataWith("300")
 			.dataHref(WicketUrlExtensions.absoluteUrlFor(this.getPage().getClass(), false)).build()
 			.toModel();

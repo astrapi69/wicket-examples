@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-application</artifactId>
-		<version>7.0.0</version>
+		<version>7.2.0</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>wicket-examples</artifactId>
-	<version>7.0.0</version>
+	<version>7.1.0</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -35,9 +35,9 @@
 
 	<properties>
 		<!-- WICKET version -->
-		<wicket.version>7.0.0</wicket.version>
+		<wicket.version>7.1.0</wicket.version>
 		<!-- JAULP-WICKET version -->
-		<jaulp.wicket.version>7.0.0</jaulp.wicket.version>
+		<jaulp.wicket.version>7.1.0</jaulp.wicket.version>
 		<authorization.strategy.api.version>7.0.0</authorization.strategy.api.version>
 	</properties>
 
@@ -165,7 +165,7 @@
 		<!-- JAULP DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>jaulp.file</artifactId>
+			<artifactId>file-worker</artifactId>
 		</dependency>
 
 	</dependencies>

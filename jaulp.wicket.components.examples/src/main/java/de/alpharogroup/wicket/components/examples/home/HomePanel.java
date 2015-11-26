@@ -17,7 +17,7 @@ package de.alpharogroup.wicket.components.examples.home;
 
 import org.apache.wicket.model.Model;
 
-import de.alpharogroup.locale.ResourceBundleKey;
+import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.behaviors.JQueryJsAppenderBehavior;
 import de.alpharogroup.wicket.behaviors.datetime.CurrentDatetimeBehavior;

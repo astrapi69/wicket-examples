@@ -20,7 +20,7 @@ import java.io.Serializable;
 import com.google.common.collect.ImmutableList;
 
 import de.alpharogroup.collections.ListExtensions;
-import de.alpharogroup.locale.ResourceBundleKey;
+import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.components.examples.application.WicketApplication;
 import de.alpharogroup.wicket.components.i18n.list.ContentListModelBean;
 import de.alpharogroup.wicket.components.i18n.list.HeaderContentListModelBean;

@@ -31,7 +31,7 @@ import org.odlabs.wiquery.core.effects.EffectBehavior;
 import org.odlabs.wiquery.core.effects.EffectSpeed;
 import org.odlabs.wiquery.core.effects.fading.FadeTo;
 
-import de.alpharogroup.locale.ResourceBundleKey;
+import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 import de.alpharogroup.wicket.behaviors.BuildableChainableStatement;
 import de.alpharogroup.wicket.behaviors.JavascriptAppenderBehavior;
