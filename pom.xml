@@ -134,6 +134,10 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket-jetty9-runner</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>jetty-runner-config</artifactId>
+		</dependency>
 		<!-- LOGGING DEPENDENCIES -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

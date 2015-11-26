@@ -22,7 +22,7 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 
 import de.alpharogroup.io.annotations.ImportResource;
 import de.alpharogroup.io.annotations.ImportResources;
-import de.alpharogroup.locale.Locales;
+import de.alpharogroup.resourcebundle.locale.Locales;
 import de.alpharogroup.wicket.components.buttons.LocaleImageButton;
 import de.alpharogroup.wicket.components.examples.basepage.ApplicationBasePanel;
 

@@ -37,7 +37,7 @@ import de.alpharogroup.jetty9.runner.config.ServletContextHandlerConfiguration;
 import de.alpharogroup.jetty9.runner.config.ServletHolderConfiguration;
 import de.alpharogroup.jetty9.runner.factories.DeploymentManagerFactory;
 import de.alpharogroup.jetty9.runner.factories.ServletContextHandlerFactory;
-import de.alpharogroup.jetty9.runner.log.LoggerExtensions;
+import de.alpharogroup.log.LoggerExtensions;
 import de.alpharogroup.wicket.components.examples.application.WicketApplication;
 import lombok.experimental.ExtensionMethod;
 
