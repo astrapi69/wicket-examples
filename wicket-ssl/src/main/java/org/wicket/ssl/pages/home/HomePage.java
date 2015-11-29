@@ -15,25 +15,36 @@
  */
 package org.wicket.ssl.pages.home;
 
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.PackageResourceReference;
 import org.wicket.ssl.pages.http.NormalHttpPage;
 import org.wicket.ssl.pages.https.NormalSecuredHttpsPage;
 import org.wicket.ssl.pages.mountedHttps.MountedHttpsPage;
 
+import css.WebResources;
+
 /**
  * Homepage
  */
-public class HomePage extends WebPage
-{
+public class HomePage extends WebPage {
+
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+		PackageResourceReference cssFile = new PackageResourceReference(WebResources.class, "main-foobar.css");
+		CssHeaderItem cssItem = CssHeaderItem.forReference(cssFile);
+		response.render(cssItem);
+	}
 
 	private static final long serialVersionUID = 1L;
 
 	// TODO Add any page properties or variables here
 
-	public HomePage()
-	{
+	public HomePage() {
 		super();
 
 		initLayout();
@@ -45,48 +56,39 @@ public class HomePage extends WebPage
 	 * @param parameters
 	 *            Page parameters
 	 */
-	public HomePage(final PageParameters parameters)
-	{
+	public HomePage(final PageParameters parameters) {
 		super(parameters);
 
 		initLayout();
 
-
 	}
 
-	private void initLayout()
-	{
+	private void initLayout() {
 
-		add(new Link<Void>("normalHttpLink")
-		{
+		add(new Link<Void>("normalHttpLink") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick()
-			{
-				 setResponsePage(NormalHttpPage.class);
+			public void onClick() {
+				setResponsePage(NormalHttpPage.class);
 			}
 		});
 
-		add(new Link<Void>("normalSecureHttpsLink")
-		{
+		add(new Link<Void>("normalSecureHttpsLink") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick()
-			{
+			public void onClick() {
 				setResponsePage(NormalSecuredHttpsPage.class);
 			}
 		});
 
-		add(new Link<Void>("mountedPathSecureHttpsLink")
-		{
+		add(new Link<Void>("mountedPathSecureHttpsLink") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick()
-			{
-				 setResponsePage(MountedHttpsPage.class);
+			public void onClick() {
+				setResponsePage(MountedHttpsPage.class);
 			}
 		});
 

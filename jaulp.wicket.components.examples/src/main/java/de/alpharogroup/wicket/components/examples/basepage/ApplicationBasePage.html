@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:wicket="http://wicket.apache.org">
+<html wicket:id="html" xmlns:wicket="http://wicket.apache.org">
 <head>
 <meta charset="utf-8">
 <!-- This adds responsive design to the page! -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta wicket:id="viewport">
+<meta wicket:id="ie-edge">
 <title wicket:id="title">[title comes here]</title>
 <meta wicket:id="keywords" content="" name="keywords" />
 <meta wicket:id="description" content="" name="description" />
 </head>
-<body>
+<body style="padding-top: 60px">
 	<wicket:child />
-	<wicket:container wicket:id="footer-container"></wicket:container>
+	<wicket:container wicket:id="footer-container"></wicket:container>	
+    <pre style="display:none" wicket:id="code-internal"></pre>
 </body>
 </html>

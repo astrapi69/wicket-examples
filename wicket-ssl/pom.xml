@@ -9,7 +9,6 @@
 		<artifactId>wicket-examples</artifactId>
 		<version>7.1.0</version>
 	</parent>
-	
 	<artifactId>wicket-ssl</artifactId>
 	<packaging>war</packaging>
 	<!-- TODO project name -->
@@ -26,13 +25,19 @@
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-annotation</artifactId>
 		</dependency>
+		<!-- LESS-CSS DEPENDENCIES -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>simple-tmpl-less</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 
 	</dependencies>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<resources>
-		
+
 			<resource>
 				<filtering>false</filtering>
 				<directory>src/main/resources</directory>

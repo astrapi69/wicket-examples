@@ -32,6 +32,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuBook
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuDivider;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuHeader;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
+import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.ImmutableNavbarComponent;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarButton;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents;
@@ -193,69 +194,67 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 			@Override
 			protected List<AbstractLink> newSubMenuButtons(final String buttonMarkupId)
 			{
-				final List<AbstractLink> subMenu = new ArrayList<AbstractLink>();
-				subMenu.add(new MenuBookmarkablePageLink<AddressPage>(AddressPage.class, swapModel)
+				final List<AbstractLink> subMenu = new ArrayList<>();
+				subMenu.add(new MenuBookmarkablePageLink<Void>(AddressPage.class, swapModel)
 					.setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<PersonPage>(PersonPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(PersonPage.class,
 					swapPersonModel).setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<BeanEditorExamplePage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					BeanEditorExamplePage.class, beanEditorExampleModel)
 					.setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<AnimationPage>(AnimationPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(AnimationPage.class,
 					animationExampleModel).setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<GoogleChartsExamplePage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					GoogleChartsExamplePage.class, googlechartsExampleModel)
 					.setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<ReplaceWithPage>(ReplaceWithPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(ReplaceWithPage.class,
 					replaceWithPanelModel).setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<PopupoverlayPage>(PopupoverlayPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(PopupoverlayPage.class,
 					popupoverlayPanelModel).setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<EditableAjaxTabbedPage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					EditableAjaxTabbedPage.class, tabsModel).setIconType(GlyphIconType.picture));
-				subMenu.add(new MenuBookmarkablePageLink<SigninPage>(SigninPage.class, signInModel)
+				subMenu.add(new MenuBookmarkablePageLink<Void>(SigninPage.class, signInModel)
 					.setIconType(GlyphIconType.lock));
-				subMenu.add(new MenuBookmarkablePageLink<SignupPage>(SignupPage.class, signUpModel)
+				subMenu.add(new MenuBookmarkablePageLink<Void>(SignupPage.class, signUpModel)
 					.setIconType(GlyphIconType.zoomin));
-				subMenu.add(new MenuBookmarkablePageLink<PdfDownloadPage>(PdfDownloadPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(PdfDownloadPage.class,
 					downloadFileModel).setIconType(GlyphIconType.download));
-				subMenu.add(new MenuBookmarkablePageLink<ReCaptchaPage>(ReCaptchaPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(ReCaptchaPage.class,
 					recaptchaModel).setIconType(GlyphIconType.check));
-				subMenu.add(new MenuBookmarkablePageLink<SslReCaptchaPage>(SslReCaptchaPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(SslReCaptchaPage.class,
 					sslRecaptchaModel).setIconType(GlyphIconType.bullhorn));
-				subMenu.add(new MenuBookmarkablePageLink<WicketUrlPage>(WicketUrlPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(WicketUrlPage.class,
 					wicketUrlsModel).setIconType(GlyphIconType.file));
-				subMenu.add(new MenuBookmarkablePageLink<AlertsPage>(AlertsPage.class, alertsModel)
+				subMenu.add(new MenuBookmarkablePageLink<Void>(AlertsPage.class, alertsModel)
 					.setIconType(GlyphIconType.bell));
-				subMenu.add(new MenuBookmarkablePageLink<LabeledComponentsPage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					LabeledComponentsPage.class, labeledModel).setIconType(GlyphIconType.leaf));
-				subMenu.add(new MenuBookmarkablePageLink<ButtonsPage>(ButtonsPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(ButtonsPage.class,
 					buttonsModel).setIconType(GlyphIconType.book));
-				subMenu.add(new MenuBookmarkablePageLink<CheckboxesPage>(CheckboxesPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(CheckboxesPage.class,
 					checkboxesModel).setIconType(GlyphIconType.book));
-				subMenu.add(new MenuBookmarkablePageLink<RadioComponentsExamplePage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					RadioComponentsExamplePage.class, radiosModel).setIconType(GlyphIconType.book));
-				subMenu.add(new MenuBookmarkablePageLink<DeregistrationPage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					DeregistrationPage.class, deregistrationModel).setIconType(GlyphIconType.book));
-				subMenu.add(new MenuBookmarkablePageLink<NotificationExamplesPage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					NotificationExamplesPage.class, toastrExampleModel)
 					.setIconType(GlyphIconType.barcode));
-				subMenu.add(new MenuBookmarkablePageLink<SocialNetworksExamplePage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					SocialNetworksExamplePage.class, socialNetExampleModel)
 					.setIconType(GlyphIconType.eyeopen));
-				subMenu.add(new MenuBookmarkablePageLink<ResourceLoadingExamplesPage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					ResourceLoadingExamplesPage.class, resourceLoadingExampleModel)
 					.setIconType(GlyphIconType.pencil));
-				subMenu.add(new MenuBookmarkablePageLink<TooltipsExamplePage>(
+				subMenu.add(new MenuBookmarkablePageLink<Void>(
 					TooltipsExamplePage.class, tooltipsExampleModel)
 					.setIconType(GlyphIconType.bancircle));
-				subMenu.add(new MenuBookmarkablePageLink<ExceptionPage>(ExceptionPage.class,
+				subMenu.add(new MenuBookmarkablePageLink<Void>(ExceptionPage.class,
 					exceptionModel).setIconType(GlyphIconType.fire));
 
 				return subMenu;
 			}
-		}.setIconType(GlyphIconType.folderopen)
-		// .setInverted(true)
-		;
+		}.setIconType(GlyphIconType.folderopen);
 	}
 
 	protected Component newLegalDropDownButton()
@@ -301,17 +300,23 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 	{
 		final Navbar navbar = new Navbar(markupId);
 
-		navbar.setPosition(Navbar.Position.TOP);
+        navbar.setPosition(Navbar.Position.TOP);
+        navbar.setInverted(true);
+        
 		final IModel<String> brandNameModel = ResourceModelFactory.newResourceModel(
 			"global.slogan.mainhead.label", this);
 		final IModel<String> overviewModel = ResourceModelFactory.newResourceModel(
 			"global.menu.overview.label", this);
 		// show brand name
 		navbar.setBrandName(brandNameModel);
+		
 		navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
-			new NavbarButton<HomePage>(HomePage.class, overviewModel)
-				.setIconType(GlyphIconType.home), newFeaturesDropDownButton(),
-			newLegalDropDownButton(), newNavbarDropDownButton()));
+			new NavbarButton<Void>(HomePage.class, overviewModel).setIconType(GlyphIconType.home), 
+			newLegalDropDownButton(), 
+			newNavbarDropDownButton())
+				);
+
+        navbar.addComponents(new ImmutableNavbarComponent(newFeaturesDropDownButton(), Navbar.ComponentPosition.RIGHT));
 
 		return navbar;
 	}

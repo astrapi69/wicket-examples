@@ -39,7 +39,11 @@ import org.odlabs.wiquery.core.javascript.JsUtils;
 
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.BootstrapBaseBehavior;
+import de.agilecoders.wicket.core.markup.html.bootstrap.block.Code;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
+import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
+import de.agilecoders.wicket.core.markup.html.bootstrap.html.IeEdgeMetaTag;
+import de.agilecoders.wicket.core.markup.html.bootstrap.html.OptimizedMobileViewportMetaTag;
 import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.alpharogroup.io.annotations.ImportResource;
 import de.alpharogroup.io.annotations.ImportResources;
@@ -184,13 +188,18 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 */
 	private void initializeComponents()
 	{
+
+        add(new HtmlTag("html"));
+        add(new OptimizedMobileViewportMetaTag("viewport"));
+
+        add(new IeEdgeMetaTag("ie-edge"));
 		add(new FaviconBehavior());
 		add(new BootstrapBaseBehavior());
 		final HeaderResponseContainer headerResponseContainer = new HeaderResponseContainer(
 			WicketBootstrap3Application.FOOTER_FILTER_NAME,
 			WicketBootstrap3Application.FOOTER_FILTER_NAME);
 		add(headerResponseContainer);
-
+        add(new Code("code-internal"));
 		final int sessionTimeout = WicketSession.get().getSessionTimeout();
 		if (0 < sessionTimeout)
 		{
@@ -379,10 +388,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 		response.render(JavaScriptHeaderItem.forReference(javaScriptSettings.getJQueryReference()));
 		Bootstrap.renderHead(response);
 		HeaderResponseExtensions.renderHeaderResponse(response, ApplicationBasePage.class);
-		// PackageResourceReference gaqResourceReference = new PackageResourceReference(
-		// ApplicationBasePage.class, "gaq.js");
-		//
-		// response.render(JavaScriptHeaderItem.forReference(gaqResourceReference));
 		response.render(JavaScriptHeaderItem.forReference(BootstrapSessionTimeoutResourceReference
 			.get()));
 	}
