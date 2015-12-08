@@ -58,6 +58,7 @@ import de.alpharogroup.wicket.components.examples.googlecharts.GoogleChartsExamp
 import de.alpharogroup.wicket.components.examples.home.HomePage;
 import de.alpharogroup.wicket.components.examples.imprint.ImprintPage;
 import de.alpharogroup.wicket.components.examples.labeled.LabeledComponentsPage;
+import de.alpharogroup.wicket.components.examples.navbar.NavbarExamplePanel;
 import de.alpharogroup.wicket.components.examples.notifications.NotificationExamplesPage;
 import de.alpharogroup.wicket.components.examples.pdfdownload.PdfDownloadPage;
 import de.alpharogroup.wicket.components.examples.popupoverlay.PopupoverlayPage;
@@ -129,6 +130,7 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 	{
 		add(getNavbarPanel());
 		add(feedback = newFeedbackPanel("feedback"));
+		add(new NavbarExamplePanel("newnav", Model.of("")));
 		add(getContainerPanel());
 		add(newFooterPanel("footer"));
 	}
@@ -302,17 +304,17 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 
         navbar.setPosition(Navbar.Position.TOP);
         navbar.setInverted(true);
-        
+
 		final IModel<String> brandNameModel = ResourceModelFactory.newResourceModel(
 			"global.slogan.mainhead.label", this);
 		final IModel<String> overviewModel = ResourceModelFactory.newResourceModel(
 			"global.menu.overview.label", this);
 		// show brand name
 		navbar.setBrandName(brandNameModel);
-		
+
 		navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
-			new NavbarButton<Void>(HomePage.class, overviewModel).setIconType(GlyphIconType.home), 
-			newLegalDropDownButton(), 
+			new NavbarButton<Void>(HomePage.class, overviewModel).setIconType(GlyphIconType.home),
+			newLegalDropDownButton(),
 			newNavbarDropDownButton())
 				);
 

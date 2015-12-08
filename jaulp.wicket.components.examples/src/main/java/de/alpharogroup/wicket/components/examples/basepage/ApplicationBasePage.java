@@ -200,6 +200,10 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 			WicketBootstrap3Application.FOOTER_FILTER_NAME);
 		add(headerResponseContainer);
         add(new Code("code-internal"));
+		// newSessionTimeoutBehavior();
+	}
+
+	protected void newSessionTimeoutBehavior() {
 		final int sessionTimeout = WicketSession.get().getSessionTimeout();
 		if (0 < sessionTimeout)
 		{
