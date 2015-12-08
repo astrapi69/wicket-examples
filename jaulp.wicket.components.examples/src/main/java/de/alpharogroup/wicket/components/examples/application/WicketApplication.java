@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import net.ftlines.wicketsource.WicketSource;
-
 import org.apache.log4j.Logger;
 import org.apache.wicket.Application;
 import org.apache.wicket.IApplicationListener;
@@ -37,6 +35,7 @@ import de.alpharogroup.wicket.base.application.plugins.ApplicationDebugSettingsP
 import de.alpharogroup.wicket.base.util.application.ApplicationExtensions;
 import de.alpharogroup.wicket.bootstrap3.application.WicketBootstrap3Application;
 import de.alpharogroup.wicket.components.examples.home.HomePage;
+import net.ftlines.wicketsource.WicketSource;
 
 /**
  * Application object for your web application. If you want to run this application without
@@ -267,6 +266,8 @@ public class WicketApplication extends WicketBootstrap3Application
 				// been destroyed...
 			}
 		});
+
+		this.getMarkupSettings().setStripWicketTags(true);
 	}
 
 	/**
