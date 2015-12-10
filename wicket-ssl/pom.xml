@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>simple-tmpl-less</artifactId>
-			<version>1.0.2</version>
+			<version>1.1.0</version>
 		</dependency>
 
 	</dependencies>

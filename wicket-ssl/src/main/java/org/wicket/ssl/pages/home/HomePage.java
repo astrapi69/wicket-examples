@@ -25,7 +25,7 @@ import org.wicket.ssl.pages.http.NormalHttpPage;
 import org.wicket.ssl.pages.https.NormalSecuredHttpsPage;
 import org.wicket.ssl.pages.mountedHttps.MountedHttpsPage;
 
-import css.WebResources;
+import de.alpharogroup.web.css.WebResources;
 
 /**
  * Homepage
