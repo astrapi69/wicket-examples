@@ -85,15 +85,22 @@ public class StartComponentExamples
 		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
 			.getNewServletContextHandler(
 				ServletContextHandlerConfiguration.builder().parent(contexts)
-					.filterHolderConfiguration(FilterHolderConfiguration.builder()
-						.filterClass(WicketFilter.class).filterPath(filterPath)
+					.filterHolderConfiguration(
+						FilterHolderConfiguration.builder()
+						.filterClass(WicketFilter.class)
+						.filterPath(filterPath)
 						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
 						.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
 							WicketApplication.class.getName())
 						.build())
-				.servletHolderConfiguration(ServletHolderConfiguration.builder()
-					.servletClass(DefaultServlet.class).pathSpec(filterPath).build())
-				.contextPath("/").webapp(webapp).maxInactiveInterval(sessionTimeout)
+				.servletHolderConfiguration(
+					ServletHolderConfiguration.builder()
+					.servletClass(DefaultServlet.class)
+					.pathSpec(filterPath)
+					.build())
+				.contextPath("/")
+				.webapp(webapp)
+				.maxInactiveInterval(sessionTimeout)
 				.filterPath(filterPath).build());
 
 		final DeploymentManager deployer = DeploymentManagerFactory.newDeploymentManager(contexts,
