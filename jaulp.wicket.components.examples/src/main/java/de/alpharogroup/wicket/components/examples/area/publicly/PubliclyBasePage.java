@@ -101,7 +101,6 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 	public PubliclyBasePage(final IModel<T> model)
 	{
 		super(model);
-		initializeComponents();
 	}
 
 	/**
@@ -113,22 +112,33 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 	public PubliclyBasePage(final PageParameters parameters)
 	{
 		super(parameters);
-		initializeComponents();
 	}
 
 	/**
-	 * Gets the Navbar panel.
+	 * Factory method for creating a new {@link Component} for the navigation menu. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link Component} for the navigation menu.
 	 *
-	 * @return 's the Navbar panel.
+	 * @param id
+	 *            the id
+	 * @param model
+	 *            the model
+	 * @return the new {@link Component} for the navigation menu.
 	 */
-	public Component getNavbarPanel()
+	protected Component newNavbarPanel(final String id, final IModel<T> model) {
+		return newNavbar(id);
+	}
+
+	@Override
+	protected void onInitialize()
 	{
-		return newNavbar(NAVBAR_PANEL_ID);
+		super.onInitialize();
+		initializeComponents();
 	}
 
 	private void initializeComponents()
 	{
-		add(getNavbarPanel());
+		add(newNavbarPanel(NAVBAR_PANEL_ID, getModel()));
 		add(feedback = newFeedbackPanel(FEEDBACK_PANEL_ID, getModel()));
 		add(new NavbarExamplePanel("newnav", Model.of("")));
 		add(newContainerPanel(CONTAINER_PANEL_ID, getModel()));

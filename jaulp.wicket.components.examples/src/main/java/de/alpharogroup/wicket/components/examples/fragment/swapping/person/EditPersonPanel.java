@@ -18,10 +18,14 @@ package de.alpharogroup.wicket.components.examples.fragment.swapping.person;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+
+import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
+import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 
 public class EditPersonPanel extends Panel
 {
@@ -48,7 +52,7 @@ public class EditPersonPanel extends Panel
 
 	protected Component newSubmitButton(final String id, final Form<?> form)
 	{
-		return new AjaxButton(id, form)
+		final AjaxButton button = new AjaxButton(id, form)
 		{
 			private static final long serialVersionUID = 1L;
 
@@ -57,7 +61,14 @@ public class EditPersonPanel extends Panel
 			{
 				EditPersonPanel.this.onSubmit(target, form);
 			}
-		}.setOutputMarkupId(true);
+		};
+		button.setOutputMarkupId(true);
+		button.add(new AttributeAppender("value",
+			ResourceModelFactory.newResourceModel(
+				ResourceBundleKey.builder()
+				.key("global.form.save.button.label")
+				.defaultValue("Save").build())));
+		return button;
 	}
 
 	protected void onSubmit(final AjaxRequestTarget target, final Form<?> form)

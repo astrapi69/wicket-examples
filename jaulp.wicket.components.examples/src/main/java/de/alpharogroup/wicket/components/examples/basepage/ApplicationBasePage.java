@@ -134,6 +134,34 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		initializeComponents();
+	}
+
+	/**
+	 * Initialize components.
+	 */
+	private void initializeComponents()
+	{
+
+        add(new HtmlTag("html"));
+        add(new OptimizedMobileViewportMetaTag("viewport"));
+        add(new IeEdgeMetaTag("ie-edge"));
+		add(new FaviconBehavior());
+		add(new BootstrapBaseBehavior());
+		final HeaderResponseContainer headerResponseContainer = new HeaderResponseContainer(
+			WicketBootstrap3Application.FOOTER_FILTER_NAME,
+			WicketBootstrap3Application.FOOTER_FILTER_NAME);
+		add(headerResponseContainer);
+        add(new Code("code-internal"));
+	}
+
+	/**
 	 * Change theme.
 	 *
 	 * @param themeParameter
@@ -166,11 +194,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 */
 	public abstract Component newContainerPanel(final String id, final IModel<T> model);
 
-
-//	protected Component newContainerPanel(final String id, final IModel<T> model) {
-//		return newContainerPanel();
-//	}
-
 	/**
 	 * Gets the feedback.
 	 *
@@ -189,26 +212,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	public WicketApplication getWicketApplication()
 	{
 		return WicketApplication.get();
-	}
-
-	/**
-	 * Initialize components.
-	 */
-	private void initializeComponents()
-	{
-
-        add(new HtmlTag("html"));
-        add(new OptimizedMobileViewportMetaTag("viewport"));
-
-        add(new IeEdgeMetaTag("ie-edge"));
-		add(new FaviconBehavior());
-		add(new BootstrapBaseBehavior());
-		final HeaderResponseContainer headerResponseContainer = new HeaderResponseContainer(
-			WicketBootstrap3Application.FOOTER_FILTER_NAME,
-			WicketBootstrap3Application.FOOTER_FILTER_NAME);
-		add(headerResponseContainer);
-        add(new Code("code-internal"));
-		// newSessionTimeoutBehavior();
 	}
 
 	protected void newSessionTimeoutBehavior() {
@@ -239,6 +242,8 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 *
 	 * @param id
 	 *            the id
+	 * @param model
+	 *            the model
 	 * @return the new {@link FeedbackPanel}
 	 */
 	protected FeedbackPanel newFeedbackPanel(final String id, final IModel<T> model)
@@ -381,13 +386,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	{
 		super.onConfigure();
 		configureTheme(getPageParameters());
-	}
-
-	@Override
-	protected void onInitialize()
-	{
-		super.onInitialize();
-		initializeComponents();
 	}
 
 	/**
