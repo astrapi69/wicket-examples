@@ -41,15 +41,13 @@ public class BeanEditorExamplePage extends PubliclyBasePage<Customer>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Customer> model)
 	{
-		IModel<Customer> model = getModel();
 		if (model == null)
 		{
-			final Customer customer = new Customer();
-			model = Model.of(customer);
+			return new BeanEditorExamplePanel(id, Model.of(new Customer()));
 		}
-		return new BeanEditorExamplePanel(CONTAINER_PANEL_ID, model);
+		return new BeanEditorExamplePanel(id, model);
 	}
 
 

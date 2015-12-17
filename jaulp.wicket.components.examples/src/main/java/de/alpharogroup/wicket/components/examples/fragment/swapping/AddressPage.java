@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.fragment.swapping;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -24,7 +25,7 @@ import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage
 
 
 @MountPath("public/swap")
-public class AddressPage extends PubliclyBasePage<Object>
+public class AddressPage extends PubliclyBasePage<HomeAddress>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -34,8 +35,11 @@ public class AddressPage extends PubliclyBasePage<Object>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<HomeAddress> model)
 	{
-		return new AddressPanel(CONTAINER_PANEL_ID, Model.of(new HomeAddress()));
+		if(model == null) {
+			return new AddressPanel(id, Model.of(new HomeAddress()));
+		}
+		return new AddressPanel(id, model);
 	}
 }

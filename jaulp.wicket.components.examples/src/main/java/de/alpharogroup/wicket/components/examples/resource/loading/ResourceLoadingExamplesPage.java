@@ -17,6 +17,7 @@ package de.alpharogroup.wicket.components.examples.resource.loading;
 
 import org.apache.log4j.Logger;
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
@@ -43,8 +44,8 @@ public class ResourceLoadingExamplesPage extends PubliclyBasePage<ResourceLoadin
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<ResourceLoadingBean> model)
 	{
-		return new ResourceLoadingExamplesPanel(CONTAINER_PANEL_ID);
+		return new ResourceLoadingExamplesPanel(id);
 	}
 }

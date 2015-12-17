@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.tooltips;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
@@ -32,8 +33,8 @@ public class TooltipsExamplePage extends PubliclyBasePage<Object>
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
-		return new TooltipsExamplePanel(CONTAINER_PANEL_ID, Model.of(""));
+		return new TooltipsExamplePanel(id, Model.of(""));
 	}
 }

@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.sign.up;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -28,8 +29,11 @@ public class SignupPage extends PubliclyBasePage<BaseUsernameSignUpModel>
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
-		return new SignupExamplesPanel(CONTAINER_PANEL_ID, Model.of(new BaseUsernameSignUpModel()));
+		if(model == null) {
+			return new SignupExamplesPanel(id, Model.of(new BaseUsernameSignUpModel()));
+		}
+		return new SignupExamplesPanel(id, model);
 	}
 }

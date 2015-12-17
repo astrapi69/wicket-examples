@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.animate;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -37,9 +38,9 @@ public class AnimationPage extends PubliclyBasePage<Object>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
-		return new AnimationPanel(CONTAINER_PANEL_ID, getDefaultModel());
+		return new AnimationPanel(id, model);
 	}
 
 }

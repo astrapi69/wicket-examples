@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.labeled;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
@@ -26,8 +27,8 @@ public class LabeledComponentsPage extends PubliclyBasePage<Object>
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
-		return new LabeledComponentsPanel(CONTAINER_PANEL_ID);
+		return new LabeledComponentsPanel(id);
 	}
 }

@@ -41,10 +41,10 @@ public class PopupoverlayPage extends PubliclyBasePage<PersonBean>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<PersonBean> model)
 	{
 		final PopupoverlayPanel<PersonBean> popupoverlayPanel = new PopupoverlayPanel<PersonBean>(
-			CONTAINER_PANEL_ID, Model.of(new PersonBean()))
+			id, Model.of(new PersonBean()))
 		{
 			/**
 			 * The serialVersionUID.
@@ -54,7 +54,7 @@ public class PopupoverlayPage extends PubliclyBasePage<PersonBean>
 			@Override
 			protected Button newOpenButton(final String id)
 			{
-				final Button button = new Button(id);
+				final Button button = super.newOpenButton(id);
 				button.add(new AttributeAppender("class", " btn btn-primary"));
 				return button;
 			}

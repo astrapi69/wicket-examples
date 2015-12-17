@@ -97,6 +97,9 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	/** The Constant FOOTER_PANEL_ID. */
 	protected static final String FOOTER_PANEL_ID = "footer";
 
+	/** The Constant FEEDBACK_PANEL_ID. */
+	protected static final String FEEDBACK_PANEL_ID = "feedback";
+
 	/** The feedback. */
 	protected FeedbackPanel feedback;
 
@@ -161,7 +164,12 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 *
 	 * @return 's the Container panel.
 	 */
-	public abstract Component getContainerPanel();
+	public abstract Component newContainerPanel(final String id, final IModel<T> model);
+
+
+//	protected Component newContainerPanel(final String id, final IModel<T> model) {
+//		return newContainerPanel();
+//	}
 
 	/**
 	 * Gets the feedback.
@@ -233,7 +241,7 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 *            the id
 	 * @return the new {@link FeedbackPanel}
 	 */
-	protected FeedbackPanel newFeedbackPanel(final String id)
+	protected FeedbackPanel newFeedbackPanel(final String id, final IModel<T> model)
 	{
 		final NotificationPanel notificationPanel = new NotificationPanel(id);
 		notificationPanel.setOutputMarkupId(true);
@@ -249,7 +257,7 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 *            the id
 	 * @return 's the Footer panel.
 	 */
-	protected Panel newFooterPanel(final String id)
+	protected Panel newFooterPanel(final String id, final IModel<T> model)
 	{
 		final List<LinkItem> linkModel = new ArrayList<LinkItem>();
 		linkModel.add(LinkItem

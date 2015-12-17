@@ -37,11 +37,32 @@ public class DeregistrationPage extends PubliclyBasePage<DeregistrationModelBean
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<DeregistrationModelBean> model)
 	{
-		final IModel<DeregistrationModelBean> model = new CompoundPropertyModel<DeregistrationModelBean>(
-			new DeregistrationModelBean());
-		return new DeregistrationPanel(CONTAINER_PANEL_ID, model)
+		if(model == null) {
+			final IModel<DeregistrationModelBean> deregistrationModel = new CompoundPropertyModel<DeregistrationModelBean>(
+				new DeregistrationModelBean());
+			return new DeregistrationPanel(CONTAINER_PANEL_ID, deregistrationModel)
+			{
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public String getDomainName()
+				{
+					return "jaulp.wicket.components.org";
+				}
+
+				@Override
+				public void onDeregistration(final AjaxRequestTarget target)
+				{
+					final IModel<DeregistrationModelBean> m = getModel();
+					final Object mo = getModelObject();
+					System.out.println(mo + m.toString());
+				}
+
+			};
+		}
+		return new DeregistrationPanel(id, model)
 		{
 			private static final long serialVersionUID = 1L;
 

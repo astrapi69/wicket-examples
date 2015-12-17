@@ -25,7 +25,7 @@ import de.alpharogroup.wicket.components.factory.ComponentFactory;
 import de.alpharogroup.wicket.components.i18n.content.ContentModelBean;
 import de.alpharogroup.wicket.components.i18n.content.ContentPanel;
 
-public class HomePanel extends BasePanel<Object>
+public class HomePanel extends BasePanel<HomeModel>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,6 @@ public class HomePanel extends BasePanel<Object>
 		add(contentPanel);
 		add(ComponentFactory.newLabel("currentTimeLabel", Model.of("")).add(
 			new CurrentDatetimeBehavior()));
-
 	}
 
 }

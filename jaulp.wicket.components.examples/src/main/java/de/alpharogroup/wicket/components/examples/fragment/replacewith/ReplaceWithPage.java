@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.fragment.replacewith;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -37,8 +38,11 @@ public class ReplaceWithPage extends PubliclyBasePage<PersonBean>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<PersonBean> model)
 	{
-		return new ReplaceWithPanel(CONTAINER_PANEL_ID, Model.of(new PersonBean()));
+		if(model == null) {
+			return new ReplaceWithPanel(id, Model.of(new PersonBean()));
+		}
+		return new ReplaceWithPanel(id, model);
 	}
 }

@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.home;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -32,8 +33,8 @@ public class HomePage extends PubliclyBasePage<HomeModel>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<HomeModel> model)
 	{
-		return new HomePanel(CONTAINER_PANEL_ID);
+		return new HomePanel(id);
 	}
 }

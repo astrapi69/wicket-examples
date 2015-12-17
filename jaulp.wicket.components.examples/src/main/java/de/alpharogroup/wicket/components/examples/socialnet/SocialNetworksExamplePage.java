@@ -17,6 +17,7 @@ package de.alpharogroup.wicket.components.examples.socialnet;
 
 import org.apache.log4j.Logger;
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
@@ -43,8 +44,8 @@ public class SocialNetworksExamplePage extends PubliclyBasePage<SocialNetworkBea
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<SocialNetworkBean> model)
 	{
-		return new SocialNetworksExamplePanel(CONTAINER_PANEL_ID);
+		return new SocialNetworksExamplePanel(id);
 	}
 }

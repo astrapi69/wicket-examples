@@ -18,6 +18,7 @@ package de.alpharogroup.wicket.components.examples.ajaxtabs.addtab;
 import java.util.ArrayList;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -40,7 +41,7 @@ public class EditableAjaxTabbedPage extends PubliclyBasePage<Object>
 
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
 		final TabbedPanelModels<String> tabmodels = new TabbedPanelModels<String>();
 		tabmodels.setTabModels(new ArrayList<TabModel<String>>());
@@ -51,7 +52,7 @@ public class EditableAjaxTabbedPage extends PubliclyBasePage<Object>
 		final TabModel<String> thirdTabModel = new TabModel<>(Model.of("tab 3"), Model.of("TAB_3"),
 			Model.of("x"));
 		tabmodels.add(firstTabModel).add(secondTabModel).add(thirdTabModel);
-		return new AddableTabbedPanel(CONTAINER_PANEL_ID, Model.of(tabmodels));
+		return new AddableTabbedPanel(id, Model.of(tabmodels));
 	}
 
 }

@@ -79,13 +79,22 @@ public class WicketApplication extends WicketBootstrap3Application
 		return HomePage.class;
 	}
 
-
-	public List<String> getPackagesToScan()
+	/**
+	 * Factory callback method that returns the packages to scan as a {@link List} object.
+	 *
+	 * @return the {@link List} with the packages to scan
+	 */
+	protected List<String> newPackagesToScan()
 	{
-		return Arrays.asList(getPackagesToScanAsArray());
+		return Arrays.asList(newPackagesToScanAsArray());
 	}
 
-	public String[] getPackagesToScanAsArray()
+	/**
+	 * Factory callback method that returns the packages to scan as a {@link String} array object.
+	 *
+	 * @return the {@link String} array object with the packages to scan
+	 */
+	protected String[] newPackagesToScanAsArray()
 	{
 		final String[] packagesToScan = { "de.alpharogroup.wicket.components.examples" };
 		return packagesToScan;
@@ -94,7 +103,7 @@ public class WicketApplication extends WicketBootstrap3Application
 	@Override
 	public String getPackageToScan()
 	{
-		return ListExtensions.getFirst(getPackagesToScan());
+		return ListExtensions.getFirst(newPackagesToScan());
 	}
 
 	/**

@@ -17,6 +17,7 @@ package de.alpharogroup.wicket.components.examples.exceptions;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.component.IRequestablePage;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -44,10 +45,10 @@ public class ExceptionPage extends PubliclyBasePage<Exception>
 	}
 
 	@Override
-	public Panel getContainerPanel()
+	public Panel newContainerPanel(final String id, final IModel<Exception> model)
 	{
 
-		return new ReportThrowablePanel(CONTAINER_PANEL_ID, getModelObject())
+		return new ReportThrowablePanel(id, model.getObject())
 		{
 			private static final long serialVersionUID = 1L;
 

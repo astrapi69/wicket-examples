@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.fragment.swapping.person;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -34,9 +35,12 @@ public class PersonPage extends PubliclyBasePage<PersonBean>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<PersonBean> model)
 	{
-		return new PersonPanel(CONTAINER_PANEL_ID, Model.of(PersonBean.builder().firstName("")
-			.lastName("").age("").gender("").build()));
+		if(model == null) {
+			return new PersonPanel(id, Model.of(PersonBean.builder().firstName("")
+				.lastName("").age("").gender("").build()));
+		}
+		return new PersonPanel(id, model);
 	}
 }

@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.googlecharts;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -33,8 +34,8 @@ public class GoogleChartsExamplePage extends PubliclyBasePage<Object>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
-		return new TimelineChartPanel(CONTAINER_PANEL_ID);
+		return new TimelineChartPanel(id);
 	}
 }

@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.notifications;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -37,8 +38,8 @@ public class NotificationExamplesPage extends PubliclyBasePage<PersonBean>
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<PersonBean> model)
 	{
-		return new NotificationExamplesPanel(CONTAINER_PANEL_ID, Model.of(""));
+		return new NotificationExamplesPanel(id, Model.of(""));
 	}
 }

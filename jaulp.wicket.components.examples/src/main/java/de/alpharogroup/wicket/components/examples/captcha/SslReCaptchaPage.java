@@ -16,6 +16,7 @@
 package de.alpharogroup.wicket.components.examples.captcha;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.https.RequireHttps;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -35,9 +36,9 @@ public class SslReCaptchaPage extends PubliclyBasePage<Object> implements SSLabl
 	}
 
 	@Override
-	public Component getContainerPanel()
+	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
-		return new ReCaptchaFormPanel(CONTAINER_PANEL_ID);
+		return new ReCaptchaFormPanel(id);
 	}
 
 }

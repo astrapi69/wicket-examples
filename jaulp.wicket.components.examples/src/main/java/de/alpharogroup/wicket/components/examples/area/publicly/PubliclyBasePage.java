@@ -129,10 +129,10 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 	private void initializeComponents()
 	{
 		add(getNavbarPanel());
-		add(feedback = newFeedbackPanel("feedback"));
+		add(feedback = newFeedbackPanel(FEEDBACK_PANEL_ID, getModel()));
 		add(new NavbarExamplePanel("newnav", Model.of("")));
-		add(getContainerPanel());
-		add(newFooterPanel("footer"));
+		add(newContainerPanel(CONTAINER_PANEL_ID, getModel()));
+		add(newFooterPanel(FOOTER_PANEL_ID, getModel()));
 	}
 
 	protected Component newFeaturesDropDownButton()
