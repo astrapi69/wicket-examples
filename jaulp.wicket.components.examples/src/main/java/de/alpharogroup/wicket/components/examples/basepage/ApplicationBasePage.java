@@ -225,11 +225,13 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * New feedback panel.
+	 * Factory method for creating a new {@link FeedbackPanel}. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link FeedbackPanel}.
 	 *
 	 * @param id
 	 *            the id
-	 * @return the feedback panel
+	 * @return the new {@link FeedbackPanel}
 	 */
 	protected FeedbackPanel newFeedbackPanel(final String id)
 	{
