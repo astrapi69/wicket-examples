@@ -15,14 +15,12 @@
  */
 package de.alpharogroup.wicket.components.examples.application;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.wicket.Application;
 import org.apache.wicket.IApplicationListener;
-import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -30,7 +28,6 @@ import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 
 import de.alpharogroup.collections.ListExtensions;
-import de.alpharogroup.wicket.PackageResourceReferences;
 import de.alpharogroup.wicket.base.application.plugins.ApplicationDebugSettingsPlugin;
 import de.alpharogroup.wicket.base.util.application.ApplicationExtensions;
 import de.alpharogroup.wicket.bootstrap3.application.WicketBootstrap3Application;
@@ -58,20 +55,19 @@ public class WicketApplication extends WicketBootstrap3Application
 		return (WicketApplication)Application.get();
 	}
 
-	@Override
-	public RuntimeConfigurationType getConfigurationType()
-	{
-		final RuntimeConfigurationType configType = super.getConfigurationType();
-		return configType;
-	}
 
+	/**
+	 * Gets the domain name.
+	 *
+	 * @return the domain name
+	 */
 	public String getDomainName()
 	{
 		return "jaulp-wicket-components.com";
 	}
 
 	/**
-	 * @see org.apache.wicket.Application#getHomePage()
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage()
@@ -80,79 +76,37 @@ public class WicketApplication extends WicketBootstrap3Application
 	}
 
 	/**
-	 * Factory callback method that returns the packages to scan as a {@link List} object.
-	 *
-	 * @return the {@link List} with the packages to scan
+	 * {@inheritDoc}
 	 */
-	protected List<String> newPackagesToScan()
-	{
-		return Arrays.asList(newPackagesToScanAsArray());
-	}
-
-	/**
-	 * Factory callback method that returns the packages to scan as a {@link String} array object.
-	 *
-	 * @return the {@link String} array object with the packages to scan
-	 */
-	protected String[] newPackagesToScanAsArray()
+	@Override
+	protected String[] newPackagesToScan()
 	{
 		final String[] packagesToScan = { "de.alpharogroup.wicket.components.examples" };
 		return packagesToScan;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getPackageToScan()
 	{
-		return ListExtensions.getFirst(newPackagesToScan());
+		return ListExtensions.getFirst(newPackagesToScanAsList());
 	}
 
 	/**
-	 * Initialize all header contributors.
-	 */
-	private void initializeAllHeaderContributors()
-	{
-		try
-		{
-			initializeResources();
-		}
-		catch (final ClassNotFoundException e)
-		{
-			LOGGER
-				.error(
-					"ClassNotFoundException in the initializeResources-Method from the WicketApplication.",
-					e);
-		}
-		catch (final IOException e)
-		{
-			LOGGER.error(
-				"IOException in the initializeResources-Method from the WicketApplication.", e);
-		}
-	}
-
-	/**
-	 * Initialize resources.
+	 * Factory callback method that returns the packages to scan as a {@link List} object.
 	 *
-	 * @throws ClassNotFoundException
-	 *             the class not found exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @return the {@link List} with the packages to scan
 	 */
-	public void initializeResources() throws ClassNotFoundException, IOException
+	protected List<String> newPackagesToScanAsList()
 	{
-		final PackageResourceReferences prr = PackageResourceReferences.getInstance();
-		prr.initializeResources(getPackageToScan());
+		return Arrays.asList(newPackagesToScan());
 	}
 
 	/**
-	 * Checks if is on development mode.
-	 *
-	 * @return true, if is on development mode
+	 * {@inheritDoc}
 	 */
-	public boolean isOnDevelopmentMode()
-	{
-		return getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT);
-	}
-
 	@Override
 	protected int newHttpPort()
 	{
@@ -172,6 +126,9 @@ public class WicketApplication extends WicketBootstrap3Application
 		return WicketApplication.DEFAULT_HTTP_PORT;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected int newHttpsPort()
 	{
@@ -210,8 +167,6 @@ public class WicketApplication extends WicketBootstrap3Application
 	protected void onBeforeApplicationConfigurations()
 	{
 		super.onBeforeApplicationConfigurations();
-		// initialize all header contributors
-		initializeAllHeaderContributors();
 		// Add a custom resource loader for ResourceBundles...
 		// getResourceSettings().getStringResourceLoaders().add(
 		// new BundleStringResourceLoader(MessageSource.class.getName()));
@@ -229,8 +184,7 @@ public class WicketApplication extends WicketBootstrap3Application
 	protected void onDevelopmentModeSettings()
 	{
 		super.onDevelopmentModeSettings();
-
-		ApplicationExtensions.setDefaultDebugSettingsForDevelopment(this);
+		// Demonstration how to install the debug plugin...
 		new ApplicationDebugSettingsPlugin()
 		{
 			/**
@@ -275,7 +229,7 @@ public class WicketApplication extends WicketBootstrap3Application
 				// been destroyed...
 			}
 		});
-
+		// strip wicket tags...
 		this.getMarkupSettings().setStripWicketTags(true);
 	}
 

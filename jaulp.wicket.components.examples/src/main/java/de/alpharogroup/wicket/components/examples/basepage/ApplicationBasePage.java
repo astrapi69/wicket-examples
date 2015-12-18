@@ -188,9 +188,15 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Gets the Container panel.
+	 * Factory method for creating a new {@link Component} for the main container. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link Component} for the main container.
 	 *
-	 * @return 's the Container panel.
+	 * @param id
+	 *            the id
+	 * @param model
+	 *            the model
+	 * @return the new {@link Component} for the main container
 	 */
 	public abstract Component newContainerPanel(final String id, final IModel<T> model);
 
@@ -260,11 +266,13 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 *
 	 * @param id
 	 *            the id
+         * @param model
+         * the model
 	 * @return 's the Footer panel.
 	 */
 	protected Panel newFooterPanel(final String id, final IModel<T> model)
 	{
-		final List<LinkItem> linkModel = new ArrayList<LinkItem>();
+		final List<LinkItem> linkModel = new ArrayList<>();
 		linkModel.add(LinkItem
 			.builder()
 			.url("http://www.alpharogroup.de/")
