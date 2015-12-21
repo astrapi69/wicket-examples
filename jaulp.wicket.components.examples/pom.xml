@@ -17,7 +17,7 @@
     </description>
 
 	<dependencies>
-
+		<!-- WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-extensions</artifactId>
@@ -27,12 +27,12 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-datetime</artifactId>
 		</dependency>
-		<!-- WICKETSTUFF -->
+		<!-- WICKETSTUFF DEPENDENCIES -->
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-annotation</artifactId>
 		</dependency>
-
+		<!-- JAULP-WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jaulp.wicket.annotated.header.contributors</artifactId>
@@ -62,12 +62,12 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-velocity</artifactId>
 		</dependency>
-
+		<!-- EXTENSIONS LIB DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>test-objects</artifactId>
 		</dependency>
-
+		<!-- MYSTIC-CRYPT DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>auth-security</artifactId>
@@ -77,13 +77,13 @@
 			<groupId>net.ftlines.wicket-source</groupId>
 			<artifactId>wicket-source</artifactId>
 		</dependency>
-
+		<!-- WICKET-BOOTSTRAP3 DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket.bootstrap3</artifactId>
 			<version>7.1.0</version>
 		</dependency>
-
+		<!-- WICKET-COMPONENT-EXPRESSIONS DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket-component-expressions</artifactId>
@@ -123,6 +123,7 @@
 			<groupId>org.odlabs.wiquery</groupId>
 			<artifactId>wiquery-core</artifactId>
 		</dependency>
+		<!-- YUICOMPRESSOR DEPENDENCIES -->
 		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
