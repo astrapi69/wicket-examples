@@ -23,6 +23,11 @@
 ##################
 /nb-configuration.xml
 
+################
+# tomcat files #
+################
+/src/main/webapp/META-INF/context.xml
+
 #########################
 # maven generated files #
 #########################
