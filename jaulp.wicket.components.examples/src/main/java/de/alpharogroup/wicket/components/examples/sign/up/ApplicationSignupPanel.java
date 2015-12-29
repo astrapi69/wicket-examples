@@ -20,8 +20,8 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.util.lang.Args;
 import org.odlabs.wiquery.core.javascript.JsUtils;
 
 import de.alpharogroup.auth.models.BaseUsernameSignUpModel;
@@ -48,11 +48,8 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 
 	public ApplicationSignupPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
-		super(id, model);
-
-		final IModel<BaseUsernameSignUpModel> cpm = new CompoundPropertyModel<BaseUsernameSignUpModel>(
-			model);
-		final SignupFormPanel signFormPanel = new SignupFormPanel("horizantalFormPanel", cpm)
+		super(id, Args.notNull(model, "model"));
+		final SignupFormPanel signupFormPanel = new SignupFormPanel("signupFormPanel", model)
 		{
 
 			/**
@@ -79,9 +76,9 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 
 			@Override
 			protected Form<?> newForm(final String id,
-				final IModel<? extends BaseUsernameSignUpModel> model)
+				final IModel<? extends BaseUsernameSignUpModel> formModel)
 			{
-				final Form<?> form = super.newForm(id, model);
+				final Form<?> form = super.newForm(id, formModel);
 				form.add(new AttributeAppender("class", " form-horizontal col-sm"
 					+ (labelSize - inputSize)));
 				return form;
@@ -89,9 +86,9 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 
 			@Override
 			protected Component newSignupPanel(final String id,
-				final IModel<BaseUsernameSignUpModel> model)
+				final IModel<BaseUsernameSignUpModel> signupModel)
 			{
-				return new SignupPanel<BaseUsernameSignUpModel>(id, model)
+				return new SignupPanel<BaseUsernameSignUpModel>(id, signupModel)
 				{
 					/**
 					 * The serialVersionUID
@@ -101,10 +98,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 					@SuppressWarnings("unchecked")
 					@Override
 					protected Component newRepeatPasswordTextField(final String id,
-						final IModel<BaseUsernameSignUpModel> model)
+						final IModel<BaseUsernameSignUpModel> repeatPasswordModel)
 					{
 						final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = (LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel>)super
-							.newRepeatPasswordTextField(id, model);
+							.newRepeatPasswordTextField(id, repeatPasswordModel);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField
 							.getPasswordTextField()
@@ -123,10 +120,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 
 					@Override
 					protected Component newSigninPanel(final String id,
-						final IModel<BaseUsernameSignUpModel> model)
+						final IModel<BaseUsernameSignUpModel> signinPanelmodel)
 					{
 						final SigninPanel<BaseUsernameSignUpModel> signinPanel = new SigninPanel<BaseUsernameSignUpModel>(
-							id, model)
+							id, signinPanelmodel)
 						{
 							/**
 							 * The serialVersionUID
@@ -136,10 +133,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 							@SuppressWarnings("unchecked")
 							@Override
 							protected Component newEmailTextField(final String id,
-								final IModel<BaseUsernameSignUpModel> model)
+								final IModel<BaseUsernameSignUpModel> emailModel)
 							{
 								final LabeledEmailTextFieldPanel<BaseUsernameSignUpModel> emailTextField = (LabeledEmailTextFieldPanel<BaseUsernameSignUpModel>)super
-									.newEmailTextField(id, model);
+									.newEmailTextField(id, emailModel);
 								emailTextField.add(new AttributeAppender("class", " form-group"));
 								emailTextField
 									.getEmailTextField()
@@ -160,10 +157,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 							@SuppressWarnings("unchecked")
 							@Override
 							protected Component newPasswordTextField(final String id,
-								final IModel<BaseUsernameSignUpModel> model)
+								final IModel<BaseUsernameSignUpModel> passwordModel)
 							{
 								final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = (LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel>)super
-									.newPasswordTextField(id, model);
+									.newPasswordTextField(id, passwordModel);
 								pwTextField.add(new AttributeAppender("class", " form-group"));
 								pwTextField
 									.getPasswordTextField()
@@ -187,10 +184,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 					@SuppressWarnings("unchecked")
 					@Override
 					protected Component newUsernameTextField(final String id,
-						final IModel<BaseUsernameSignUpModel> model)
+						final IModel<BaseUsernameSignUpModel> usernameModel)
 					{
 						final LabeledTextFieldPanel<BaseUsernameSignUpModel> nameTextField = (LabeledTextFieldPanel<BaseUsernameSignUpModel>)super
-							.newUsernameTextField(id, model);
+							.newUsernameTextField(id, usernameModel);
 						nameTextField.add(new AttributeAppender("class", " form-group"));
 						nameTextField
 							.getTextField()
@@ -222,7 +219,7 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 			}
 
 		};
-		add(signFormPanel);
+		add(signupFormPanel);
 	}
 
 }

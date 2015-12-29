@@ -32,7 +32,12 @@ public class SignupPage extends PubliclyBasePage<BaseUsernameSignUpModel>
 	public Component newContainerPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
 		if(model == null) {
-			return new ApplicationSignupPanel(id, Model.of(new BaseUsernameSignUpModel()));
+			final BaseUsernameSignUpModel signUpModelBean = new BaseUsernameSignUpModel();
+			signUpModelBean.setEmail("");
+			signUpModelBean.setPassword("");
+			signUpModelBean.setRepeatPassword("");
+			signUpModelBean.setUsername("");
+			return new ApplicationSignupPanel(id, Model.of(signUpModelBean));
 		}
 		return new ApplicationSignupPanel(id, model);
 	}
