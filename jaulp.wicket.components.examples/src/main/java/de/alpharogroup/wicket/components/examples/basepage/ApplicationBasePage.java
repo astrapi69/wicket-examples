@@ -69,12 +69,13 @@ import de.alpharogroup.wicket.header.contributors.HeaderResponseExtensions;
 import de.alpharogroup.wicket.js.addon.sessiontimeout.BootstrapSessionTimeoutResourceReference;
 import de.alpharogroup.wicket.js.addon.sessiontimeout.SessionTimeoutJsGenerator;
 import de.alpharogroup.wicket.js.addon.sessiontimeout.SessionTimeoutSettings;
+import lombok.Getter;
 
 /**
  * The Class ApplicationBasePage.
  *
  * @param <T>
- *            the generic type
+ *            the generic type of the model
  */
 @ImportResources(resources = {
 		@ImportResource(resourceName = "main.css", resourceType = "css", index = 1),
@@ -101,10 +102,11 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	protected static final String FEEDBACK_PANEL_ID = "feedback";
 
 	/** The feedback. */
+	@Getter
 	protected FeedbackPanel feedback;
 
 	/**
-	 * Instantiates a new application base page.
+	 * Default constructor that instantiates a new {@link ApplicationBasePage}.
 	 */
 	public ApplicationBasePage()
 	{
@@ -112,7 +114,7 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Instantiates a new application base page.
+	 * Instantiates a new {@link ApplicationBasePage} with the given model.
 	 *
 	 * @param model
 	 *            the model
@@ -123,10 +125,10 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Instantiates a new application base page.
+	 * Instantiates a new {@link ApplicationBasePage} with the given {@link PageParameters} object.
 	 *
 	 * @param parameters
-	 *            the parameters
+	 *            the {@link PageParameters} object
 	 */
 	public ApplicationBasePage(final PageParameters parameters)
 	{
@@ -200,15 +202,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 */
 	public abstract Component newContainerPanel(final String id, final IModel<T> model);
 
-	/**
-	 * Gets the feedback.
-	 *
-	 * @return the feedback
-	 */
-	public FeedbackPanel getFeedback()
-	{
-		return feedback;
-	}
 
 	/**
 	 * Gets the wicket application.
@@ -220,6 +213,11 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 		return WicketApplication.get();
 	}
 
+	/**
+	 * Factory method for creating a new {@link Behavior} for the session timeout. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link Behavior} for the session timeout.
+	 */
 	protected void newSessionTimeoutBehavior() {
 		final int sessionTimeout = WicketSession.get().getSessionTimeout();
 		if (0 < sessionTimeout)
@@ -262,44 +260,25 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Gets the Footer panel.
+	 * Factory method for creating a new {@link Panel} for the footer area. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link Panel} for the footer area.
 	 *
 	 * @param id
 	 *            the id
-         * @param model
-         * the model
-	 * @return 's the Footer panel.
+	 * @param model
+	 *            the model
+	 * @return the new {@link Panel} for the footer area
 	 */
 	protected Panel newFooterPanel(final String id, final IModel<T> model)
 	{
-		final List<LinkItem> linkModel = new ArrayList<>();
-		linkModel.add(LinkItem
-			.builder()
-			.url("http://www.alpharogroup.de/")
-			.target(DefaultTargets.BLANK.getTarget())
-			.linkClass(ExternalLink.class)
-			// open in a new tab or window...
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.footer.copyright.label")
-					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
-			.build());
-		linkModel.add(LinkItem
-			.builder()
-			.pageClass(ImprintPage.class)
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.global.menu.masthead.label")
-					.defaultValue("Imprint").build()).build());
-		linkModel.add(LinkItem
-			.builder()
-			.pageClass(TermOfUsePage.class)
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.global.menu.term.of.use.label")
-					.defaultValue("AGBs").build()).build());
-		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
-		return new FooterPanel<List<LinkItem>>(id, listModel)
+		return new FooterPanel<List<LinkItem>>(id, newFooterLinkItems())
 		{
 			private static final long serialVersionUID = 1L;
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected Component newFooterMenuPanel(final String id,
 				final IModel<List<LinkItem>> model)
@@ -307,8 +286,13 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 
 				final FooterMenuPanel footerMenu = new FooterMenuPanel(id, model)
 				{
+
+					/** The Constant serialVersionUID. */
 					private static final long serialVersionUID = 1L;
 
+					/**
+					 * {@inheritDoc}
+					 */
 					@Override
 					protected Component newLinkListPanel(final String id,
 						final IModel<List<LinkItem>> model)
@@ -317,12 +301,18 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 						{
 							private static final long serialVersionUID = 1L;
 
+							/**
+							 * {@inheritDoc}
+							 */
 							@Override
 							protected String getCurrentPageCssClass()
 							{
 								return "active";
 							}
 
+							/**
+							 * {@inheritDoc}
+							 */
 							@Override
 							protected Component newListComponent(final String id,
 								final ListItem<LinkItem> item)
@@ -353,9 +343,43 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
+	 * Factory method for creating a new list with the link items for the footer area.
+	 *
+	 * @return the new <code>{@link IModel}</code> with the link items for the footer area.
+	 */
+	protected IModel<List<LinkItem>> newFooterLinkItems()
+	{
+		final List<LinkItem> linkModel = new ArrayList<>();
+		linkModel.add(LinkItem
+			.builder()
+			.url("http://www.alpharogroup.de/")
+			.target(DefaultTargets.BLANK.getTarget())
+			.linkClass(ExternalLink.class)
+			// open in a new tab or window...
+			.resourceModelKey(
+				ResourceBundleKey.builder().key("main.footer.copyright.label")
+					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
+			.build());
+		linkModel.add(LinkItem
+			.builder()
+			.pageClass(ImprintPage.class)
+			.resourceModelKey(
+				ResourceBundleKey.builder().key("main.global.menu.masthead.label")
+					.defaultValue("Imprint").build()).build());
+		linkModel.add(LinkItem
+			.builder()
+			.pageClass(TermOfUsePage.class)
+			.resourceModelKey(
+				ResourceBundleKey.builder().key("main.global.menu.term.of.use.label")
+					.defaultValue("AGBs").build()).build());
+		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
+		return listModel;
+	}
+
+	/**
 	 * Factory method that can be overwritten for new meta tag content for keywords.
 	 *
-	 * @return the new <code>IModel</code>
+	 * @return the new <code>{@link IModel}</code> for the keywords.
 	 */
 	@Override
 	protected IModel<String> newKeywords()
@@ -365,25 +389,14 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * New theme.
+	 * Factory method for creating a new theme from the given {@link StringValue} that comes from the page parameters.
 	 *
 	 * @param theme
-	 *            the theme
+	 *            the new theme to set.
 	 */
 	protected void newTheme(final StringValue theme)
 	{
 		changeTheme(PageParametersExtensions.getString(theme));
-	}
-
-	/**
-	 * Factory method that can be overwritten for new meta tag content for the title.
-	 *
-	 * @return the new <code>IModel</code>
-	 */
-	@Override
-	protected IModel<String> newTitle()
-	{
-		return ResourceModelFactory.newResourceModel("page.title", this, "jaulp.wicket.components");
 	}
 
 	/**
