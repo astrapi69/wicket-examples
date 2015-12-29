@@ -20,7 +20,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.odlabs.wiquery.core.javascript.JsUtils;
@@ -28,7 +27,7 @@ import org.odlabs.wiquery.core.javascript.JsUtils;
 import de.alpharogroup.auth.models.BaseUsernameSignUpModel;
 import de.alpharogroup.wicket.behaviors.BuildableChainableStatement;
 import de.alpharogroup.wicket.behaviors.JqueryStatementsBehavior;
-import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
+import de.alpharogroup.wicket.components.examples.basepage.ApplicationBasePanel;
 import de.alpharogroup.wicket.components.labeled.textfield.LabeledEmailTextFieldPanel;
 import de.alpharogroup.wicket.components.labeled.textfield.LabeledPasswordTextFieldPanel;
 import de.alpharogroup.wicket.components.labeled.textfield.LabeledTextFieldPanel;
@@ -36,7 +35,7 @@ import de.alpharogroup.wicket.components.sign.in.SigninPanel;
 import de.alpharogroup.wicket.components.sign.up.SignupFormPanel;
 import de.alpharogroup.wicket.components.sign.up.SignupPanel;
 
-public class SignupExamplesPanel extends Panel
+public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSignUpModel>
 {
 
 	/**
@@ -44,10 +43,10 @@ public class SignupExamplesPanel extends Panel
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int labelSize = 4;
-	private int inputSize = 8;
+	private final int labelSize = 4;
+	private final int inputSize = 8;
 
-	public SignupExamplesPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
+	public ApplicationSignupPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
 		super(id, model);
 
@@ -224,12 +223,6 @@ public class SignupExamplesPanel extends Panel
 
 		};
 		add(signFormPanel);
-	}
-
-	protected Component getFeedback()
-	{
-		final PubliclyBasePage<?> basePage = (PubliclyBasePage<?>)getPage();
-		return basePage.getFeedback();
 	}
 
 }
