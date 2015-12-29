@@ -32,8 +32,8 @@ public class SignupPage extends PubliclyBasePage<BaseUsernameSignUpModel>
 	public Component newContainerPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
 		if(model == null) {
-			return new SignupExamplesPanel(id, Model.of(new BaseUsernameSignUpModel()));
+			return new ApplicationSignupPanel(id, Model.of(new BaseUsernameSignUpModel()));
 		}
-		return new SignupExamplesPanel(id, model);
+		return new ApplicationSignupPanel(id, model);
 	}
 }

@@ -44,13 +44,13 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int labelSize = 2;
-	private int inputSize = 4;
+	private final int labelSize = 2;
+	private final int inputSize = 4;
 
 	public SigninExamplesPanel(final String id, final IModel<SignInWithRedirectionBean> model)
 	{
 		super(id, model);
-		add(newSigninFormPanel("horizantalFormPanel", model));
+		add(newSigninFormPanel("horizontalFormPanel", model));
 	}
 
 	protected Component getFeedback()
@@ -65,8 +65,13 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 		final SigninFormPanel<SignInWithRedirectionBean> signFormPanel = new SigninFormPanel<SignInWithRedirectionBean>(
 			id, new CompoundPropertyModel<SignInWithRedirectionBean>(model))
 		{
+
+			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected Button newButton(final String id)
 			{
@@ -83,6 +88,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 				return button;
 			}
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected Form<?> newForm(final String id, final IModel<?> model)
 			{
@@ -91,6 +99,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 				return form;
 			}
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected MarkupContainer newPasswordForgottenLink(final String id,
 				final IModel<SignInWithRedirectionBean> model)
@@ -101,6 +112,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 				return passwordForgottenLink;
 			}
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected Component newSigninPanel(final String id,
 				final IModel<SignInWithRedirectionBean> model)
@@ -113,6 +127,10 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					 */
 					private static final long serialVersionUID = 1L;
 
+					/**
+					 * {@inheritDoc}
+					 */
+					@Override
 					@SuppressWarnings("unchecked")
 					protected Component newEmailTextField(final String id,
 						final IModel<SignInWithRedirectionBean> model)
@@ -132,6 +150,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 						return emailTextField;
 					}
 
+					/**
+					 * {@inheritDoc}
+					 */
 					@SuppressWarnings("unchecked")
 					@Override
 					protected Component newPasswordTextField(final String id,
@@ -155,24 +176,52 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 				return signinPanel;
 			}
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form)
 			{
-				target.add(getFeedback());
-				info("Email: " + getModelObject().getEmail() + "\nPassword:"
-					+ getModelObject().getPassword());
+				SigninExamplesPanel.this.onPasswordForgotten(target, form);
 			}
 
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
 			protected void onSignin(final AjaxRequestTarget target, final Form<?> form)
 			{
-				target.add(getFeedback());
-				info("Email: " + getModelObject().getEmail() + "\nPassword:"
-					+ getModelObject().getPassword());
+				SigninExamplesPanel.this.onSignin(target, form);
 			}
 
 		};
 		return signFormPanel;
 	}
 
+	/**
+	 * Application specific callback method that have to be overwritten to provide the action for password
+	 * forgotten.
+	 *
+	 * @param target the target
+	 * @param form the form
+	 */
+	protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form)
+	{
+		target.add(getFeedback());
+		info("Email: " + getModelObject().getEmail() + "\nPassword:"
+			+ getModelObject().getPassword());
+	}
+
+	/**
+	 * Application specific callback method that have to be overwritten to provide the action for signin.
+	 *
+	 * @param target the target
+	 * @param form the form
+	 */
+	protected void onSignin(final AjaxRequestTarget target, final Form<?> form)
+	{
+		target.add(getFeedback());
+		info("Email: " + getModelObject().getEmail() + "\nPassword:"
+			+ getModelObject().getPassword());
+	}
 }
