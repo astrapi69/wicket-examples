@@ -44,6 +44,16 @@ public class NavbarExamplePanel extends Panel {
 			}
 		});
 
+		add(new NavbarDropdownPanel("dropdownPanel", newNavbarLinkItems(), Model.of("Legal")));
+	}
+
+	/**
+	 * Factory method for creating a new list with the link items for the nav bar area.
+	 *
+	 * @return the new <code>{@link IModel}</code> with the link items for the nav bar area.
+	 */
+	protected IModel<List<LinkItem>> newNavbarLinkItems()
+	{
 		final List<LinkItem> linkModel = new ArrayList<LinkItem>();
 		linkModel.add(LinkItem
 			.builder()
@@ -68,8 +78,7 @@ public class NavbarExamplePanel extends Panel {
 				ResourceBundleKey.builder().key("main.global.menu.term.of.use.label")
 					.defaultValue("AGBs").build()).build());
 		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
-
-		add(new NavbarDropdownPanel("dropdownPanel", listModel, Model.of("Legal")));
+		return listModel;
 	}
 
 }
