@@ -72,46 +72,62 @@ import de.alpharogroup.wicket.components.examples.tooltips.TooltipsExamplePage;
 import de.alpharogroup.wicket.components.examples.urls.WicketUrlPage;
 
 /**
- * The Class BasePage.
+ * The class {@link PubliclyBasePage}.
  *
  * @author Asterios Raptis
  * @param <T>
- *            the generic type
+ *            the generic type of the page model
  */
 public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 {
 
-
-	/** The Constant logger. */
-	protected static final Logger LOGGER = Logger.getLogger(PubliclyBasePage.class.getName());
-
-	/**
-	 * The serialVersionUID.
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The logger constant. */
+	protected static final Logger LOG = Logger.getLogger(PubliclyBasePage.class.getName());
+
 	/**
-	 * Instantiates a new base page.
+	 * Default constructor that instantiates a new {@link PubliclyBasePage}.
 	 */
 	public PubliclyBasePage()
 	{
 		this(new PageParameters());
 	}
 
+	/**
+	 * Instantiates a new {@link PubliclyBasePage} with the given model.
+	 *
+	 * @param model the model
+	 */
 	public PubliclyBasePage(final IModel<T> model)
 	{
 		super(model);
 	}
 
 	/**
-	 * Instantiates a new base page.
+	 * Instantiates a new {@link PubliclyBasePage} with the given {@link PageParameters} object.
 	 *
 	 * @param parameters
-	 *            the parameters
+	 *            the {@link PageParameters} object
 	 */
 	public PubliclyBasePage(final PageParameters parameters)
 	{
 		super(parameters);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		add(newNavbarPanel(NAVBAR_PANEL_ID, getModel()));
+		add(feedback = newFeedbackPanel(FEEDBACK_PANEL_ID, getModel()));
+		add(new NavbarExamplePanel("newnav", Model.of("")));
+		add(newContainerPanel(CONTAINER_PANEL_ID, getModel()));
+		add(newFooterPanel(FOOTER_PANEL_ID, getModel()));
 	}
 
 	/**
@@ -129,22 +145,43 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 		return newNavbar(id);
 	}
 
-	@Override
-	protected void onInitialize()
+	/**
+	 * Factory method for creating a new {@link Navbar} instance.
+	 *
+	 * @param markupId
+	 *            The components markup id.
+	 * @return a new {@link Navbar} instance
+	 */
+	protected Navbar newNavbar(final String markupId)
 	{
-		super.onInitialize();
-		initializeComponents();
+		final Navbar navbar = new Navbar(markupId);
+
+        navbar.setPosition(Navbar.Position.TOP);
+        navbar.setInverted(true);
+
+		final IModel<String> brandNameModel = ResourceModelFactory.newResourceModel(
+			"global.slogan.mainhead.label", this);
+		final IModel<String> overviewModel = ResourceModelFactory.newResourceModel(
+			"global.menu.overview.label", this);
+		// show brand name
+		navbar.setBrandName(brandNameModel);
+
+		navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
+			new NavbarButton<Void>(HomePage.class, overviewModel).setIconType(GlyphIconType.home),
+			newLegalDropDownButton(),
+			newThemesNavbarDropDownButton())
+				);
+
+        navbar.addComponents(new ImmutableNavbarComponent(newFeaturesDropDownButton(), Navbar.ComponentPosition.RIGHT));
+
+		return navbar;
 	}
 
-	private void initializeComponents()
-	{
-		add(newNavbarPanel(NAVBAR_PANEL_ID, getModel()));
-		add(feedback = newFeedbackPanel(FEEDBACK_PANEL_ID, getModel()));
-		add(new NavbarExamplePanel("newnav", Model.of("")));
-		add(newContainerPanel(CONTAINER_PANEL_ID, getModel()));
-		add(newFooterPanel(FOOTER_PANEL_ID, getModel()));
-	}
-
+	/**
+	 * Factory method for creating a new dropdown navbar item for the features.
+	 *
+	 * @return the component
+	 */
 	protected Component newFeaturesDropDownButton()
 	{
 		final IModel<String> featuresMainModel = ResourceModelFactory.newResourceModel(
@@ -269,6 +306,11 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 		}.setIconType(GlyphIconType.folderopen);
 	}
 
+	/**
+	 * Factory method for creating a new dropdown navbar item for the legal issues like term of use.
+	 *
+	 * @return the component
+	 */
 	protected Component newLegalDropDownButton()
 	{
 		final IModel<String> legacyMainModel = ResourceModelFactory.newResourceModel(
@@ -301,44 +343,13 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T>
 		;
 	}
 
-	/**
-	 * creates a new {@link Navbar} instance
-	 *
-	 * @param markupId
-	 *            The components markup id.
-	 * @return a new {@link Navbar} instance
-	 */
-	protected Navbar newNavbar(final String markupId)
-	{
-		final Navbar navbar = new Navbar(markupId);
-
-        navbar.setPosition(Navbar.Position.TOP);
-        navbar.setInverted(true);
-
-		final IModel<String> brandNameModel = ResourceModelFactory.newResourceModel(
-			"global.slogan.mainhead.label", this);
-		final IModel<String> overviewModel = ResourceModelFactory.newResourceModel(
-			"global.menu.overview.label", this);
-		// show brand name
-		navbar.setBrandName(brandNameModel);
-
-		navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
-			new NavbarButton<Void>(HomePage.class, overviewModel).setIconType(GlyphIconType.home),
-			newLegalDropDownButton(),
-			newNavbarDropDownButton())
-				);
-
-        navbar.addComponents(new ImmutableNavbarComponent(newFeaturesDropDownButton(), Navbar.ComponentPosition.RIGHT));
-
-		return navbar;
-	}
 
 	/**
-	 * creates a new {@link NavbarDropDownButton} instance
+	 * Factory method for creating a new dropdown navbar item for the bootstrap themes.
 	 *
-	 * @return a new {@link NavbarDropDownButton} instance
+	 * @return the component
 	 */
-	protected DropDownButton newNavbarDropDownButton()
+	protected DropDownButton newThemesNavbarDropDownButton()
 	{
 		final DropDownButton dropdown = new NavbarDropDownButton(Model.of("Themes"))
 		{

@@ -26,6 +26,7 @@ import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 import de.alpharogroup.wicket.base.util.url.WicketUrlExtensions;
+import de.alpharogroup.wicket.components.socialnet.SocialNetworkModelBean;
 import de.alpharogroup.wicket.components.socialnet.fb.like.and.share.FacebookLikeAndShareModelBean;
 import de.alpharogroup.wicket.components.socialnet.fb.like.and.share.FacebookLikeAndSharePanel;
 import de.alpharogroup.wicket.components.socialnet.googleplus.share.GooglePlusShareModelBean;
@@ -38,7 +39,7 @@ import de.alpharogroup.wicket.components.socialnet.twitter.share.TwitterSharePan
 /**
  * Panel for social networks like fb, twitter, google+ etc.
  */
-public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkBean>
+public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkModelBean>
 {
 	private static final long serialVersionUID = 1L;
 

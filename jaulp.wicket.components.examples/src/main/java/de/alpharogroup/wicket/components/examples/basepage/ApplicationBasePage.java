@@ -142,15 +142,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	protected void onInitialize()
 	{
 		super.onInitialize();
-		initializeComponents();
-	}
-
-	/**
-	 * Initialize components.
-	 */
-	private void initializeComponents()
-	{
-
         add(new HtmlTag("html"));
         add(new OptimizedMobileViewportMetaTag("viewport"));
         add(new IeEdgeMetaTag("ie-edge"));

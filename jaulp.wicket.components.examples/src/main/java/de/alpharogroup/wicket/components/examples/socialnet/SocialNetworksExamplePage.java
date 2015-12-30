@@ -21,11 +21,12 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
+import de.alpharogroup.wicket.components.socialnet.SocialNetworkModelBean;
 
 /**
  * Example page for social networks like fb, twitter, google+ etc.
  */
-public class SocialNetworksExamplePage extends PubliclyBasePage<SocialNetworkBean>
+public class SocialNetworksExamplePage extends PubliclyBasePage<SocialNetworkModelBean>
 {
 
 	/** The Constant logger. */
@@ -44,7 +45,7 @@ public class SocialNetworksExamplePage extends PubliclyBasePage<SocialNetworkBea
 	}
 
 	@Override
-	public Component newContainerPanel(final String id, final IModel<SocialNetworkBean> model)
+	public Component newContainerPanel(final String id, final IModel<SocialNetworkModelBean> model)
 	{
 		return new SocialNetworksExamplePanel(id);
 	}
