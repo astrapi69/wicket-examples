@@ -213,21 +213,49 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 		final int sessionTimeout = WicketSession.get().getSessionTimeout();
 		if (0 < sessionTimeout)
 		{
-			final int oneThirdOfWarnAfter = (sessionTimeout * 1000) / 3;
-			final int twoThirdOfWarnAfter = oneThirdOfWarnAfter * 2;
-			final SessionTimeoutSettings settings = SessionTimeoutSettings.builder().build();
-			settings.getTitle().setValue("Session timeout warning");
-			settings.getMessage().setValue("Your session will be timeouted...");
-			settings.getWarnAfter().setValue(oneThirdOfWarnAfter);
-			settings.getRedirAfter().setValue(twoThirdOfWarnAfter);
-			settings.getRedirUrl().setValue("/public/imprint");
-			settings.getLogoutUrl().setValue("/public/imprint");
-
-			final SessionTimeoutJsGenerator generator = new SessionTimeoutJsGenerator(settings);
-			final String jsCode = generator.generateJs();
-			add(JavascriptAppenderBehavior.builder().id("sessionTimeoutNotification")
-				.javascript(jsCode).build());
+			add(newSessionTimeoutBehavior("sessionTimeoutNotification", newSessionTimeoutSettings()));
 		}
+	}
+
+	/**
+	 * Factory method for creating a new {@link SessionTimeoutSettings} for the session timeout. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link SessionTimeoutSettings} for the session timeout.
+	 */
+	protected SessionTimeoutSettings newSessionTimeoutSettings() {
+		final SessionTimeoutSettings settings;
+		final int sessionTimeout = WicketSession.get().getSessionTimeout();
+		final int oneThirdOfWarnAfter;
+		if (0 < sessionTimeout)
+		{
+			oneThirdOfWarnAfter = (sessionTimeout * 1000) / 3;
+		} else {
+			oneThirdOfWarnAfter = (300 * 1000) / 3;
+		}
+		final int twoThirdOfWarnAfter = oneThirdOfWarnAfter * 2;
+		settings = SessionTimeoutSettings.builder().build();
+		settings.getTitle().setValue("Session timeout warning");
+		settings.getMessage().setValue("Your session will be timeouted...");
+		settings.getWarnAfter().setValue(oneThirdOfWarnAfter);
+		settings.getRedirAfter().setValue(twoThirdOfWarnAfter);
+		settings.getRedirUrl().setValue("/public/imprint");
+		settings.getLogoutUrl().setValue("/public/imprint");
+		return settings;
+	}
+
+	/**
+	 * Factory method for creating a new {@link JavascriptAppenderBehavior}. This method is invoked in the
+	 * constructor from the derived classes and have to be overridden so users can provide their own
+	 * version of a new {@link JavascriptAppenderBehavior}.
+	 *
+	 * @param id the id
+	 * @param settings the settings
+	 * @return the new {@link JavascriptAppenderBehavior}
+	 */
+	protected JavascriptAppenderBehavior newSessionTimeoutBehavior(final String id, final SessionTimeoutSettings settings) {
+		final SessionTimeoutJsGenerator generator = new SessionTimeoutJsGenerator(settings);
+		final String jsCode = generator.generateJs();
+		return JavascriptAppenderBehavior.builder().id(id).javascript(jsCode).build();
 	}
 
 	/**

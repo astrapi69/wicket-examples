@@ -25,7 +25,7 @@ import de.alpharogroup.wicket.components.factory.ComponentFactory;
 import de.alpharogroup.wicket.components.i18n.content.ContentModelBean;
 import de.alpharogroup.wicket.components.i18n.content.ContentPanel;
 
-public class HomePanel extends BasePanel<HomeModel>
+public class HomePanel extends BasePanel<HomeModelBean>
 {
 	private static final long serialVersionUID = 1L;
 

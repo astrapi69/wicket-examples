@@ -23,7 +23,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 
 @MountPath("public/home")
-public class HomePage extends PubliclyBasePage<HomeModel>
+public class HomePage extends PubliclyBasePage<HomeModelBean>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class HomePage extends PubliclyBasePage<HomeModel>
 	}
 
 	@Override
-	public Component newContainerPanel(final String id, final IModel<HomeModel> model)
+	public Component newContainerPanel(final String id, final IModel<HomeModelBean> model)
 	{
 		return new HomePanel(id);
 	}
