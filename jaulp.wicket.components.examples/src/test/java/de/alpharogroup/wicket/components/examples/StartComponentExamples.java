@@ -38,12 +38,16 @@ import de.alpharogroup.jetty9.runner.config.ServletHolderConfiguration;
 import de.alpharogroup.jetty9.runner.factories.DeploymentManagerFactory;
 import de.alpharogroup.jetty9.runner.factories.ServletContextHandlerFactory;
 import de.alpharogroup.log.LoggerExtensions;
+import de.alpharogroup.wicket.base.application.ConfigurationPropertiesResolver;
 import de.alpharogroup.wicket.components.examples.application.WicketApplication;
 import lombok.experimental.ExtensionMethod;
 
 @ExtensionMethod(LoggerExtensions.class)
 public class StartComponentExamples
 {
+	/** The logger constant. */
+	protected static final Logger LOG = Logger.getLogger(StartComponentExamples.class.getName());
+
 	public static void main(final String[] args)
 	{
 		final int sessionTimeout = (int)Duration.minutes(1).seconds();// set timeout to 30min(60sec
@@ -117,11 +121,21 @@ public class StartComponentExamples
 		final ServletContextHandler servletContextHandler, final ContextHandlerCollection contexts,
 		final DeploymentManager deployer)
 	{
+
+		final ConfigurationPropertiesResolver configurationPropertiesResolver =
+			new ConfigurationPropertiesResolver(
+				WicketApplication.DEFAULT_HTTP_PORT,
+				WicketApplication.DEFAULT_HTTPS_PORT,
+				ConfigurationPropertiesResolver.DEFAULT_CONFIGURATION_PROPERTIES_FILENAME);
+
 		final Jetty9RunConfiguration config = Jetty9RunConfiguration.builder()
 			.servletContextHandler(servletContextHandler).contexts(contexts).deployer(deployer)
-			.httpPort(WicketApplication.DEFAULT_HTTP_PORT)
-			.httpsPort(WicketApplication.DEFAULT_HTTPS_PORT).keyStorePassword("wicket")
-			.keyStorePathResource("/keystore").build();
+			.httpPort(configurationPropertiesResolver.getHttpPort())
+			.httpsPort(configurationPropertiesResolver.getHttpsPort())
+			.keyStorePassword("wicket")
+			.keyStorePathResource("/keystore")
+			.build();
 		return config;
 	}
+
 }

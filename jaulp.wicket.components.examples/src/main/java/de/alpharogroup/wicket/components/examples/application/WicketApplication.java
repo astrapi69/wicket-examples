@@ -40,8 +40,8 @@ import net.ftlines.wicketsource.WicketSource;
  */
 public class WicketApplication extends WicketBootstrap3Application
 {
-	public static final int DEFAULT_HTTP_PORT = 9090;
-	public static final int DEFAULT_HTTPS_PORT = 9443;
+	public static final int DEFAULT_HTTP_PORT = 18080;
+	public static final int DEFAULT_HTTPS_PORT = 18443;
 	/** The Constant logger. */
 	private static final Logger LOGGER = Logger.getLogger(WicketApplication.class.getName());
 
@@ -108,21 +108,8 @@ public class WicketApplication extends WicketBootstrap3Application
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected int newHttpPort()
+	protected int getDefaultHttpPort()
 	{
-		if (getProperties().containsKey("application.http.port"))
-		{
-			final String httpPortString = getProperties().getProperty("application.http.port");
-			try
-			{
-				final int httpPort = Integer.valueOf(httpPortString);
-				return httpPort;
-			}
-			catch (final NumberFormatException e)
-			{
-				return WicketApplication.DEFAULT_HTTP_PORT;
-			}
-		}
 		return WicketApplication.DEFAULT_HTTP_PORT;
 	}
 
@@ -130,21 +117,8 @@ public class WicketApplication extends WicketBootstrap3Application
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected int newHttpsPort()
+	protected int getDefaultHttpsPort()
 	{
-		if (getProperties().containsKey("application.https.port"))
-		{
-			final String httpsPortString = getProperties().getProperty("application.https.port");
-			try
-			{
-				final int httpsPort = Integer.valueOf(httpsPortString);
-				return httpsPort;
-			}
-			catch (final NumberFormatException e)
-			{
-				return WicketApplication.DEFAULT_HTTPS_PORT;
-			}
-		}
 		return WicketApplication.DEFAULT_HTTPS_PORT;
 	}
 
