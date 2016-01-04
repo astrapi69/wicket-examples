@@ -22,6 +22,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.lang.Args;
+import org.apache.wicket.validation.validator.StringValidator;
 import org.odlabs.wiquery.core.javascript.JsUtils;
 
 import de.alpharogroup.auth.models.BaseUsernameSignUpModel;
@@ -34,6 +35,7 @@ import de.alpharogroup.wicket.components.labeled.textfield.LabeledTextFieldPanel
 import de.alpharogroup.wicket.components.sign.in.SigninPanel;
 import de.alpharogroup.wicket.components.sign.up.SignupFormPanel;
 import de.alpharogroup.wicket.components.sign.up.SignupPanel;
+import lombok.Getter;
 
 public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSignUpModel>
 {
@@ -45,10 +47,17 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 
 	private final int labelSize = 4;
 	private final int inputSize = 8;
+	@Getter
+	private SignupFormPanel signupFormPanel;
 
 	public ApplicationSignupPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
 		super(id, Args.notNull(model, "model"));
+		add(this.signupFormPanel = newSignupFormPanel("signupFormPanel", model));
+	}
+
+
+	protected SignupFormPanel newSignupFormPanel(final String id, final IModel<BaseUsernameSignUpModel> model) {
 		final SignupFormPanel signupFormPanel = new SignupFormPanel("signupFormPanel", model)
 		{
 
@@ -85,22 +94,22 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 			}
 
 			@Override
-			protected Component newSignupPanel(final String id,
+			protected SignupPanel<BaseUsernameSignUpModel> newSignupPanel(final String id,
 				final IModel<BaseUsernameSignUpModel> signupModel)
 			{
-				return new SignupPanel<BaseUsernameSignUpModel>(id, signupModel)
+				final SignupPanel<BaseUsernameSignUpModel> signupPanel =
+				 new SignupPanel<BaseUsernameSignUpModel>(id, signupModel)
 				{
 					/**
 					 * The serialVersionUID
 					 */
 					private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings("unchecked")
 					@Override
-					protected Component newRepeatPasswordTextField(final String id,
+					protected LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> newRepeatPasswordTextField(final String id,
 						final IModel<BaseUsernameSignUpModel> repeatPasswordModel)
 					{
-						final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = (LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel>)super
+						final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = super
 							.newRepeatPasswordTextField(id, repeatPasswordModel);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField
@@ -119,7 +128,7 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 					}
 
 					@Override
-					protected Component newSigninPanel(final String id,
+					protected SigninPanel<BaseUsernameSignUpModel> newSigninPanel(final String id,
 						final IModel<BaseUsernameSignUpModel> signinPanelmodel)
 					{
 						final SigninPanel<BaseUsernameSignUpModel> signinPanel = new SigninPanel<BaseUsernameSignUpModel>(
@@ -140,6 +149,7 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 								emailTextField.add(new AttributeAppender("class", " form-group"));
 								emailTextField
 									.getEmailTextField()
+									.add(new AttributeAppender("type", "email"))
 									.add(
 										new JqueryStatementsBehavior()
 											.add(new BuildableChainableStatement.Builder()
@@ -154,12 +164,11 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 								return emailTextField;
 							}
 
-							@SuppressWarnings("unchecked")
 							@Override
-							protected Component newPasswordTextField(final String id,
+							protected LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> newPasswordTextField(final String id,
 								final IModel<BaseUsernameSignUpModel> passwordModel)
 							{
-								final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = (LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel>)super
+								final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = super
 									.newPasswordTextField(id, passwordModel);
 								pwTextField.add(new AttributeAppender("class", " form-group"));
 								pwTextField
@@ -191,6 +200,7 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 						nameTextField.add(new AttributeAppender("class", " form-group"));
 						nameTextField
 							.getTextField()
+							.add(StringValidator.lengthBetween(3, 20))
 							.add(
 								new JqueryStatementsBehavior()
 									.add(new BuildableChainableStatement.Builder()
@@ -206,20 +216,43 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 						return nameTextField;
 					}
 				};
+				return signupPanel;
 			}
 
 			@Override
 			protected void onSignup(final AjaxRequestTarget target, final Form<?> form)
 			{
-				target.add(getFeedback());
-				info("Email: " + getModelObject().getEmail() + ":\nUsername:"
-					+ getModelObject().getUsername() + ":\nPassword:"
-					+ getModelObject().getPassword() + ":\nRepeatPassword:"
-					+ getModelObject().getRepeatPassword());
+				ApplicationSignupPanel.this.onSignup(target, form);
 			}
 
 		};
-		add(signupFormPanel);
+		return signupFormPanel;
+	}
+
+	/**
+	 * Callback method that provide the action on sign up.
+	 *
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
+	 */
+	protected void onSignup(final AjaxRequestTarget target, final Form<?> form)
+	{
+		target.add(getFeedback());
+		final String email = getModelObject().getEmail();
+		final String username = getModelObject().getUsername();
+		final String password = getModelObject().getPassword();
+		final String repeatPassword = getModelObject().getRepeatPassword();
+		if(password != null && !password.equals(repeatPassword)) {
+			error("Password is not same as repeated password");
+		}
+		if(username != null)
+		info("Email: " + email +
+			":Username:"	+ username +
+			":Password:" + password +
+			":RepeatPassword:" + repeatPassword);
+
 	}
 
 }

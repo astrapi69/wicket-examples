@@ -153,12 +153,11 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					/**
 					 * {@inheritDoc}
 					 */
-					@SuppressWarnings("unchecked")
 					@Override
-					protected Component newPasswordTextField(final String id,
+					protected LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> newPasswordTextField(final String id,
 						final IModel<SignInWithRedirectionBean> model)
 					{
-						final LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> pwTextField = (LabeledPasswordTextFieldPanel<SignInWithRedirectionBean>)super.newPasswordTextField(
+						final LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> pwTextField = super.newPasswordTextField(
 							id, model);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField.getPasswordTextField()

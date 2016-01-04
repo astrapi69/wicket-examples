@@ -88,15 +88,16 @@ public class StartComponentExamples
 
 		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
 			.getNewServletContextHandler(
-				ServletContextHandlerConfiguration.builder().parent(contexts)
-					.filterHolderConfiguration(
-						FilterHolderConfiguration.builder()
-						.filterClass(WicketFilter.class)
-						.filterPath(filterPath)
-						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
-						.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
-							WicketApplication.class.getName())
-						.build())
+				ServletContextHandlerConfiguration.builder()
+				.parent(contexts)
+				.filterHolderConfiguration(
+					FilterHolderConfiguration.builder()
+					.filterClass(WicketFilter.class)
+					.filterPath(filterPath)
+					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
+					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
+						WicketApplication.class.getName())
+					.build())
 				.servletHolderConfiguration(
 					ServletHolderConfiguration.builder()
 					.servletClass(DefaultServlet.class)
@@ -110,13 +111,21 @@ public class StartComponentExamples
 		final DeploymentManager deployer = DeploymentManagerFactory.newDeploymentManager(contexts,
 			webapp.getAbsolutePath(), null);
 
-		final Jetty9RunConfiguration config = newJetty9RunConfiguration(servletContextHandler,
+		final Jetty9RunConfiguration configuration = newJetty9RunConfiguration(servletContextHandler,
 			contexts, deployer);
 		final Server server = new Server();
-		Jetty9Runner.runServletContextHandler(server, config);
+		Jetty9Runner.runServletContextHandler(server, configuration);
 	}
 
-
+	/**
+	 * Factory method for create the {@link Jetty9RunConfiguration} and set the ports from the
+	 * config file or take the default if in configfile is not set.
+	 *
+	 * @param servletContextHandler
+	 *            the servlet context handler
+	 *
+	 * @return the new {@link Jetty9RunConfiguration}.
+	 */
 	private static Jetty9RunConfiguration newJetty9RunConfiguration(
 		final ServletContextHandler servletContextHandler, final ContextHandlerCollection contexts,
 		final DeploymentManager deployer)
@@ -128,14 +137,17 @@ public class StartComponentExamples
 				WicketApplication.DEFAULT_HTTPS_PORT,
 				ConfigurationPropertiesResolver.DEFAULT_CONFIGURATION_PROPERTIES_FILENAME);
 
-		final Jetty9RunConfiguration config = Jetty9RunConfiguration.builder()
-			.servletContextHandler(servletContextHandler).contexts(contexts).deployer(deployer)
+		final Jetty9RunConfiguration configuration = Jetty9RunConfiguration.builder()
+			.servletContextHandler(servletContextHandler)
+			.contexts(contexts)
+			.deployer(deployer)
 			.httpPort(configurationPropertiesResolver.getHttpPort())
 			.httpsPort(configurationPropertiesResolver.getHttpsPort())
 			.keyStorePassword("wicket")
 			.keyStorePathResource("/keystore")
 			.build();
-		return config;
+
+		return configuration;
 	}
 
 }
