@@ -135,7 +135,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					protected Component newEmailTextField(final String id,
 						final IModel<SignInWithRedirectionBean> model)
 					{
-						final LabeledEmailTextFieldPanel<SignInWithRedirectionBean> emailTextField = (LabeledEmailTextFieldPanel<SignInWithRedirectionBean>)super.newEmailTextField(
+						final LabeledEmailTextFieldPanel<String, SignInWithRedirectionBean> emailTextField = (LabeledEmailTextFieldPanel<String, SignInWithRedirectionBean>)super.newEmailTextField(
 							id, model);
 						emailTextField.add(new AttributeAppender("class", " form-group"));
 						emailTextField.getEmailTextField()
@@ -154,10 +154,10 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					 * {@inheritDoc}
 					 */
 					@Override
-					protected LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> newPasswordTextField(final String id,
+					protected LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> newPasswordTextField(final String id,
 						final IModel<SignInWithRedirectionBean> model)
 					{
-						final LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> pwTextField = super.newPasswordTextField(
+						final LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> pwTextField = super.newPasswordTextField(
 							id, model);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField.getPasswordTextField()

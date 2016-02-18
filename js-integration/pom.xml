@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.1.0</version>
+		<version>6.21.1</version>
 	</parent>
 	<artifactId>js-integration</artifactId>
 	<packaging>war</packaging>
@@ -30,8 +30,8 @@
 			<artifactId>wicket-request</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
-		<!-- OPTIONAL DEPENDENCY <dependency> <groupId>org.apache.wicket</groupId> 
-			<artifactId>wicket-extensions</artifactId> <version>${wicket.version}</version> 
+		<!-- OPTIONAL DEPENDENCY <dependency> <groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId> <version>${wicket.version}</version>
 			</dependency> -->
 		<dependency>
 			<groupId>com.googlecode.wicket-jquery-ui</groupId>

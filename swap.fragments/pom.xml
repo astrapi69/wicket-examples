@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.1.0</version>
+		<version>6.21.1</version>
 	</parent>
-	
+
 	<artifactId>swap.fragments</artifactId>
-	
+
 	<packaging>war</packaging>
 	<!-- TODO project name -->
 	<name>${project.artifactId}</name>
@@ -24,7 +24,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<dependencies>
 		<!-- WICKET DEPENDENCIES -->
 		<dependency>
@@ -141,5 +141,5 @@
 		</plugins>
 
 	</build>
-	
+
 </project>

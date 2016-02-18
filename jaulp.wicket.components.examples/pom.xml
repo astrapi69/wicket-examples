@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.1.0</version>
+		<version>6.21.1</version>
 	</parent>
 	<artifactId>jaulp.wicket.components.examples</artifactId>
 	<packaging>war</packaging>
@@ -81,13 +81,13 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket.bootstrap3</artifactId>
-			<version>7.1.0</version>
+			<version>6.21.0</version>
 		</dependency>
 		<!-- WICKET-COMPONENT-EXPRESSIONS DEPENDENCIES -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket-component-expressions</artifactId>
-			<version>7.1.0</version>
+			<version>6.21.0</version>
 		</dependency>
 		<!-- WICKET-JS-ADDONS DEPENDENCIES -->
 		<dependency>

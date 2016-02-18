@@ -92,25 +92,25 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 			Model.of("Name:"));
 		form.add(nameLabel);
 
-		final LabeledTextFieldPanel<Member> nameTextField = newLabeledTextFieldPanel("nickname",
+		final LabeledTextFieldPanel<String, Member> nameTextField = newLabeledTextFieldPanel("nickname",
 			cpm, Model.of("Input your nickname:"));
 		form.add(nameTextField);
 
-		final LabeledTextAreaPanel<Member> about = newLabeledTextAreaPanel("about", cpm,
+		final LabeledTextAreaPanel<String, Member> about = newLabeledTextAreaPanel("about", cpm,
 			Model.of("About:"));
 		form.add(about);
 
-		final LabeledCheckboxPanel<Member> married = newLabeledCheckboxPanel("married", cpm,
+		final LabeledCheckboxPanel<Boolean, Member> married = newLabeledCheckboxPanel("married", cpm,
 			Model.of("Married:"));
 
 		form.add(married);
 
-		final LabeledDateTextFieldPanel<Member> dateofbirth = newLabeledDateTextFieldPanel(
+		final LabeledDateTextFieldPanel<Date, Member> dateofbirth = newLabeledDateTextFieldPanel(
 			"dateofbirth", cpm, Model.of("Date of birth:"));
 		form.add(dateofbirth);
 
 
-		final LabeledDateTimeFieldPanel<Member> dateofMarriage = newLabeledDateTimeFieldPanel(
+		final LabeledDateTimeFieldPanel<Date, Member> dateofMarriage = newLabeledDateTimeFieldPanel(
 			"dateofMarriage", cpm, Model.of("Date of marriage:"));
 		form.add(dateofMarriage);
 
@@ -198,10 +198,10 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 		return addressPanel;
 	}
 
-	protected LabeledCheckboxPanel<Member> newLabeledCheckboxPanel(final String id,
+	protected LabeledCheckboxPanel<Boolean, Member> newLabeledCheckboxPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledCheckboxPanel<Member> married = new LabeledCheckboxPanel<Member>(id, model,
+		final LabeledCheckboxPanel<Boolean, Member> married = new LabeledCheckboxPanel<Boolean, Member>(id, model,
 			labelModel);
 		married.add(new AttributeAppender("class", " form-group"));
 		married
@@ -222,10 +222,10 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 		return married;
 	}
 
-	protected LabeledDateTextFieldPanel<Member> newLabeledDateTextFieldPanel(final String id,
+	protected LabeledDateTextFieldPanel<Date, Member> newLabeledDateTextFieldPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledDateTextFieldPanel<Member> dateofbirth = new LabeledDateTextFieldPanel<Member>(
+		final LabeledDateTextFieldPanel<Date, Member> dateofbirth = new LabeledDateTextFieldPanel<Date, Member>(
 			id, model, labelModel);
 		dateofbirth.add(new AttributeAppender("class", " form-group"));
 		dateofbirth
@@ -239,11 +239,11 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 		return dateofbirth;
 	}
 
-	protected LabeledDateTimeFieldPanel<Member> newLabeledDateTimeFieldPanel(final String id,
+	protected LabeledDateTimeFieldPanel<Date, Member> newLabeledDateTimeFieldPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
 
-		final LabeledDateTimeFieldPanel<Member> dateofMarriage = new LabeledDateTimeFieldPanel<Member>(
+		final LabeledDateTimeFieldPanel<Date, Member> dateofMarriage = new LabeledDateTimeFieldPanel<Date, Member>(
 			id, model, labelModel)
 		{
 			private static final long serialVersionUID = 1L;
@@ -303,10 +303,10 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 		return nameLabel;
 	}
 
-	protected LabeledTextAreaPanel<Member> newLabeledTextAreaPanel(final String id,
+	protected LabeledTextAreaPanel<String, Member> newLabeledTextAreaPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledTextAreaPanel<Member> about = new LabeledTextAreaPanel<Member>(id, model,
+		final LabeledTextAreaPanel<String, Member> about = new LabeledTextAreaPanel<String, Member>(id, model,
 			labelModel);
 		about.add(new AttributeAppender("class", " form-group"));
 		about
@@ -319,10 +319,10 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 		return about;
 	}
 
-	protected LabeledTextFieldPanel<Member> newLabeledTextFieldPanel(final String id,
+	protected LabeledTextFieldPanel<String, Member> newLabeledTextFieldPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledTextFieldPanel<Member> nameTextField = new LabeledTextFieldPanel<Member>(id,
+		final LabeledTextFieldPanel<String, Member> nameTextField = new LabeledTextFieldPanel<String, Member>(id,
 			model, labelModel);
 		nameTextField.add(new AttributeAppender("class", " form-group"));
 		nameTextField
@@ -333,6 +333,7 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 					.build())).add(new AttributeAppender("class", " form-control"));
 		nameTextField.getLabelComponent().add(
 			new AttributeAppender("class", " control-label " + COL_SM_2));
+		nameTextField.setRequired(true);
 		return nameTextField;
 	}
 }

@@ -6,26 +6,26 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.1.0</version>
+		<version>6.21.1</version>
 	</parent>
-	
+
 	<artifactId>component.authorization.strategy.example</artifactId>
-	
+
 	<packaging>war</packaging>
-	
+
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>authorization.strategy.api</artifactId>
 		</dependency>
-		
-	</dependencies>	
+
+	</dependencies>
 
 	<build>
-	
+
 		<finalName>${project.artifactId}</finalName>
-		
+
 		<resources>
 
 			<resource>
@@ -104,5 +104,5 @@
 		</plugins>
 
 	</build>
-	
+
 </project>

@@ -106,10 +106,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 					private static final long serialVersionUID = 1L;
 
 					@Override
-					protected LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> newRepeatPasswordTextField(final String id,
+					protected LabeledPasswordTextFieldPanel<String, BaseUsernameSignUpModel> newRepeatPasswordTextField(final String id,
 						final IModel<BaseUsernameSignUpModel> repeatPasswordModel)
 					{
-						final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = super
+						final LabeledPasswordTextFieldPanel<String, BaseUsernameSignUpModel> pwTextField = super
 							.newRepeatPasswordTextField(id, repeatPasswordModel);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField
@@ -144,7 +144,7 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 							protected Component newEmailTextField(final String id,
 								final IModel<BaseUsernameSignUpModel> emailModel)
 							{
-								final LabeledEmailTextFieldPanel<BaseUsernameSignUpModel> emailTextField = (LabeledEmailTextFieldPanel<BaseUsernameSignUpModel>)super
+								final LabeledEmailTextFieldPanel<String, BaseUsernameSignUpModel> emailTextField = (LabeledEmailTextFieldPanel<String, BaseUsernameSignUpModel>)super
 									.newEmailTextField(id, emailModel);
 								emailTextField.add(new AttributeAppender("class", " form-group"));
 								emailTextField
@@ -165,10 +165,10 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 							}
 
 							@Override
-							protected LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> newPasswordTextField(final String id,
+							protected LabeledPasswordTextFieldPanel<String, BaseUsernameSignUpModel> newPasswordTextField(final String id,
 								final IModel<BaseUsernameSignUpModel> passwordModel)
 							{
-								final LabeledPasswordTextFieldPanel<BaseUsernameSignUpModel> pwTextField = super
+								final LabeledPasswordTextFieldPanel<String, BaseUsernameSignUpModel> pwTextField = super
 									.newPasswordTextField(id, passwordModel);
 								pwTextField.add(new AttributeAppender("class", " form-group"));
 								pwTextField
@@ -195,7 +195,7 @@ public class ApplicationSignupPanel extends ApplicationBasePanel<BaseUsernameSig
 					protected Component newUsernameTextField(final String id,
 						final IModel<BaseUsernameSignUpModel> usernameModel)
 					{
-						final LabeledTextFieldPanel<BaseUsernameSignUpModel> nameTextField = (LabeledTextFieldPanel<BaseUsernameSignUpModel>)super
+						final LabeledTextFieldPanel<String, BaseUsernameSignUpModel> nameTextField = (LabeledTextFieldPanel<String, BaseUsernameSignUpModel>)super
 							.newUsernameTextField(id, usernameModel);
 						nameTextField.add(new AttributeAppender("class", " form-group"));
 						nameTextField

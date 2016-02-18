@@ -65,7 +65,7 @@ public class ViewOrEditPage extends BasePage
 		form.add(about);
 
 
-		final LabeledCheckboxPanel<Person> married = new LabeledCheckboxPanel<Person>("married",
+		final LabeledCheckboxPanel<Boolean, Person> married = new LabeledCheckboxPanel<>("married",
 			cpm, Model.of("Married:"));
 
 		form.add(married);
