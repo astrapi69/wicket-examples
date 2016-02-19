@@ -53,7 +53,8 @@ public class StartComponentExamples
 		final int sessionTimeout = (int)Duration.minutes(1).seconds();// set timeout to 30min(60sec
 																		// *
 																		// 30min=1800sec)...
-		System.setProperty("wicket.configuration", "development");
+//		System.setProperty("wicket.configuration", "development");
+		System.setProperty("wicket.configuration", "deployment");
 		final String projectname = "jaulp.wicket.components.examples";
 		final File projectDirectory = PathFinder.getProjectDirectory();
 		final File webapp;

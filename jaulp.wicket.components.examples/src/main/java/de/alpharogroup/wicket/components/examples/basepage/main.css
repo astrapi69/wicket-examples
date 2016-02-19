@@ -143,3 +143,10 @@ div.wicket-aa ul li.selected {
     vertical-align: bottom;
 }
 
+input:required:invalid {
+  background-color: #E9967A;
+}
+
+input:focus:invalid {
+  background-color: #F8F8F8;
+}
