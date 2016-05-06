@@ -118,6 +118,11 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket-session-timeout</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>wicket-collapsible</artifactId>
+			<version>7.1.0</version>
+		</dependency>
 		<!-- WIQUERY DEPENDENCIES -->
 		<dependency>
 			<groupId>org.odlabs.wiquery</groupId>

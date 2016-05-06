@@ -36,8 +36,7 @@ import de.alpharogroup.wicket.components.sign.in.SignInWithRedirectionBean;
 import de.alpharogroup.wicket.components.sign.in.SigninPanel;
 import de.alpharogroup.wicket.components.sign.in.form.SigninFormPanel;
 
-public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
-{
+public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean> {
 
 	/**
 	 * The serialVersionUID
@@ -47,24 +46,19 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	private final int labelSize = 2;
 	private final int inputSize = 4;
 
-	public SigninExamplesPanel(final String id, final IModel<SignInWithRedirectionBean> model)
-	{
+	public SigninExamplesPanel(final String id, final IModel<SignInWithRedirectionBean> model) {
 		super(id, model);
 		add(newSigninFormPanel("horizontalFormPanel", model));
 	}
 
-	protected Component getFeedback()
-	{
-		final PubliclyBasePage<?> basePage = (PubliclyBasePage<?>)getPage();
+	protected Component getFeedback() {
+		final PubliclyBasePage<?> basePage = (PubliclyBasePage<?>) getPage();
 		return basePage.getFeedback();
 	}
 
-	protected Component newSigninFormPanel(final String id,
-		final IModel<SignInWithRedirectionBean> model)
-	{
+	protected Component newSigninFormPanel(final String id, final IModel<SignInWithRedirectionBean> model) {
 		final SigninFormPanel<SignInWithRedirectionBean> signFormPanel = new SigninFormPanel<SignInWithRedirectionBean>(
-			id, new CompoundPropertyModel<SignInWithRedirectionBean>(model))
-		{
+				id, new CompoundPropertyModel<SignInWithRedirectionBean>(model)) {
 
 			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
@@ -73,17 +67,12 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 * {@inheritDoc}
 			 */
 			@Override
-			protected Button newButton(final String id)
-			{
+			protected Button newButton(final String id) {
 				final Button button = super.newButton(id);
-				button.add(Wrappers.FORM_GROUP_ELEMENT)
-					.add(
-						new JqueryStatementsBehavior()
-							.add(
-								new BuildableChainableStatement.Builder()
-									.label("wrap").args(JsUtils.quotes("<div class=\"col-sm-offset-"
-										+ labelSize + " col-sm-" + inputSize + "\"></div>"))
-						.build()));
+				button.add(Wrappers.FORM_GROUP_ELEMENT).add(new JqueryStatementsBehavior()
+						.add(new BuildableChainableStatement.Builder().label("wrap").args(JsUtils.quotes(
+								"<div class=\"col-sm-offset-" + labelSize + " col-sm-" + inputSize + "\"></div>"))
+								.build()));
 				button.add(new AttributeAppender("class", " btn btn-default"));
 				return button;
 			}
@@ -92,8 +81,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 * {@inheritDoc}
 			 */
 			@Override
-			protected Form<?> newForm(final String id, final IModel<?> model)
-			{
+			protected Form<?> newForm(final String id, final IModel<?> model) {
 				final Form<?> form = super.newForm(id, model);
 				form.add(new AttributeAppender("class", " form-horizontal"));
 				return form;
@@ -104,10 +92,8 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 */
 			@Override
 			protected MarkupContainer newPasswordForgottenLink(final String id,
-				final IModel<SignInWithRedirectionBean> model)
-			{
-				final MarkupContainer passwordForgottenLink = super.newPasswordForgottenLink(id,
-					model);
+					final IModel<SignInWithRedirectionBean> model) {
+				final MarkupContainer passwordForgottenLink = super.newPasswordForgottenLink(id, model);
 				passwordForgottenLink.add(new AttributeAppender("class", " btn btn-link"));
 				return passwordForgottenLink;
 			}
@@ -116,12 +102,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 * {@inheritDoc}
 			 */
 			@Override
-			protected Component newSigninPanel(final String id,
-				final IModel<SignInWithRedirectionBean> model)
-			{
+			protected Component newSigninPanel(final String id, final IModel<SignInWithRedirectionBean> model) {
 				final SigninPanel<SignInWithRedirectionBean> signinPanel = new SigninPanel<SignInWithRedirectionBean>(
-					id, model)
-				{
+						id, model) {
 					/**
 					 * The serialVersionUID
 					 */
@@ -133,20 +116,18 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					@Override
 					@SuppressWarnings("unchecked")
 					protected Component newEmailTextField(final String id,
-						final IModel<SignInWithRedirectionBean> model)
-					{
-						final LabeledEmailTextFieldPanel<SignInWithRedirectionBean> emailTextField = (LabeledEmailTextFieldPanel<SignInWithRedirectionBean>)super.newEmailTextField(
-							id, model);
+							final IModel<SignInWithRedirectionBean> model) {
+						final LabeledEmailTextFieldPanel<SignInWithRedirectionBean> emailTextField = (LabeledEmailTextFieldPanel<SignInWithRedirectionBean>) super.newEmailTextField(
+								id, model);
 						emailTextField.add(new AttributeAppender("class", " form-group"));
 						emailTextField.getEmailTextField()
-							.add(new JqueryStatementsBehavior()
-								.add(new BuildableChainableStatement.Builder().label("wrap")
-									.args(JsUtils
-										.quotes("<div class=\"col-sm-" + inputSize + "\"></div>"))
-								.build()))
-							.add(new AttributeAppender("class", " form-control"));
-						emailTextField.getLabelComponent().add(
-							new AttributeAppender("class", " control-label col-sm-" + labelSize));
+								.add(new JqueryStatementsBehavior()
+										.add(new BuildableChainableStatement.Builder().label("wrap")
+												.args(JsUtils.quotes("<div class=\"col-sm-" + inputSize + "\"></div>"))
+												.build()))
+								.add(new AttributeAppender("class", " form-control"));
+						emailTextField.getLabelComponent()
+								.add(new AttributeAppender("class", " control-label col-sm-" + labelSize));
 						return emailTextField;
 					}
 
@@ -154,21 +135,19 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					 * {@inheritDoc}
 					 */
 					@Override
-					protected LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> newPasswordTextField(final String id,
-						final IModel<SignInWithRedirectionBean> model)
-					{
-						final LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> pwTextField = super.newPasswordTextField(
-							id, model);
+					protected LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> newPasswordTextField(
+							final String id, final IModel<SignInWithRedirectionBean> model) {
+						final LabeledPasswordTextFieldPanel<SignInWithRedirectionBean> pwTextField = (LabeledPasswordTextFieldPanel<SignInWithRedirectionBean>) super.newPasswordTextField(
+								id, model);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField.getPasswordTextField()
-							.add(new JqueryStatementsBehavior()
-								.add(new BuildableChainableStatement.Builder().label("wrap")
-									.args(JsUtils
-										.quotes("<div class=\"col-sm-" + inputSize + "\"></div>"))
-								.build()))
-							.add(new AttributeAppender("class", " form-control"));
-						pwTextField.getLabelComponent().add(
-							new AttributeAppender("class", " control-label col-sm-" + labelSize));
+								.add(new JqueryStatementsBehavior()
+										.add(new BuildableChainableStatement.Builder().label("wrap")
+												.args(JsUtils.quotes("<div class=\"col-sm-" + inputSize + "\"></div>"))
+												.build()))
+								.add(new AttributeAppender("class", " form-control"));
+						pwTextField.getLabelComponent()
+								.add(new AttributeAppender("class", " control-label col-sm-" + labelSize));
 						return pwTextField;
 					}
 				};
@@ -179,8 +158,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 * {@inheritDoc}
 			 */
 			@Override
-			protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form)
-			{
+			protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form) {
 				SigninExamplesPanel.this.onPasswordForgotten(target, form);
 			}
 
@@ -188,8 +166,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 * {@inheritDoc}
 			 */
 			@Override
-			protected void onSignin(final AjaxRequestTarget target, final Form<?> form)
-			{
+			protected void onSignin(final AjaxRequestTarget target, final Form<?> form) {
 				SigninExamplesPanel.this.onSignin(target, form);
 			}
 
@@ -198,29 +175,30 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	}
 
 	/**
-	 * Application specific callback method that have to be overwritten to provide the action for password
-	 * forgotten.
+	 * Application specific callback method that have to be overwritten to
+	 * provide the action for password forgotten.
 	 *
-	 * @param target the target
-	 * @param form the form
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
 	 */
-	protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form)
-	{
+	protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form) {
 		target.add(getFeedback());
-		info("Email: " + getModelObject().getEmail() + "\nPassword:"
-			+ getModelObject().getPassword());
+		info("Email: " + getModelObject().getEmail() + "\nPassword:" + getModelObject().getPassword());
 	}
 
 	/**
-	 * Application specific callback method that have to be overwritten to provide the action for signin.
+	 * Application specific callback method that have to be overwritten to
+	 * provide the action for signin.
 	 *
-	 * @param target the target
-	 * @param form the form
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
 	 */
-	protected void onSignin(final AjaxRequestTarget target, final Form<?> form)
-	{
+	protected void onSignin(final AjaxRequestTarget target, final Form<?> form) {
 		target.add(getFeedback());
-		info("Email: " + getModelObject().getEmail() + "\nPassword:"
-			+ getModelObject().getPassword());
+		info("Email: " + getModelObject().getEmail() + "\nPassword:" + getModelObject().getPassword());
 	}
 }
