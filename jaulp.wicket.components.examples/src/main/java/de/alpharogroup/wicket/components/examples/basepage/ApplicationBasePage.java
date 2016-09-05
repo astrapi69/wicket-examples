@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
@@ -32,7 +33,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.util.ListModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.settings.IJavaScriptLibrarySettings;
+import org.apache.wicket.settings.JavaScriptLibrarySettings;
 import org.apache.wicket.util.string.StringValue;
 import org.apache.wicket.util.time.Duration;
 import org.odlabs.wiquery.core.javascript.JsUtils;
@@ -142,16 +143,16 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	protected void onInitialize()
 	{
 		super.onInitialize();
-        add(new HtmlTag("html"));
-        add(new OptimizedMobileViewportMetaTag("viewport"));
-        add(new IeEdgeMetaTag("ie-edge"));
+		add(new HtmlTag("html"));
+		add(new OptimizedMobileViewportMetaTag("viewport"));
+		add(new IeEdgeMetaTag("ie-edge"));
 		add(new FaviconBehavior());
 		add(new BootstrapBaseBehavior());
 		final HeaderResponseContainer headerResponseContainer = new HeaderResponseContainer(
 			WicketBootstrap3Application.FOOTER_FILTER_NAME,
 			WicketBootstrap3Application.FOOTER_FILTER_NAME);
 		add(headerResponseContainer);
-        add(new Code("code-internal"));
+		add(new Code("code-internal"));
 	}
 
 	/**
@@ -181,9 +182,9 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Factory method for creating a new {@link Component} for the main container. This method is invoked in the
-	 * constructor from the derived classes and have to be overridden so users can provide their own
-	 * version of a new {@link Component} for the main container.
+	 * Factory method for creating a new {@link Component} for the main container. This method is
+	 * invoked in the constructor from the derived classes and have to be overridden so users can
+	 * provide their own version of a new {@link Component} for the main container.
 	 *
 	 * @param id
 	 *            the id
@@ -205,31 +206,37 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Factory method for creating a new {@link Behavior} for the session timeout. This method is invoked in the
-	 * constructor from the derived classes and have to be overridden so users can provide their own
-	 * version of a new {@link Behavior} for the session timeout.
+	 * Factory method for creating a new {@link Behavior} for the session timeout. This method is
+	 * invoked in the constructor from the derived classes and have to be overridden so users can
+	 * provide their own version of a new {@link Behavior} for the session timeout.
 	 */
-	protected void newSessionTimeoutBehavior() {
+	protected void newSessionTimeoutBehavior()
+	{
 		final int sessionTimeout = WicketSession.get().getSessionTimeout();
 		if (0 < sessionTimeout)
 		{
-			add(newSessionTimeoutBehavior("sessionTimeoutNotification", newSessionTimeoutSettings()));
+			add(newSessionTimeoutBehavior("sessionTimeoutNotification",
+				newSessionTimeoutSettings()));
 		}
 	}
 
 	/**
-	 * Factory method for creating a new {@link SessionTimeoutSettings} for the session timeout. This method is invoked in the
-	 * constructor from the derived classes and have to be overridden so users can provide their own
-	 * version of a new {@link SessionTimeoutSettings} for the session timeout.
+	 * Factory method for creating a new {@link SessionTimeoutSettings} for the session timeout.
+	 * This method is invoked in the constructor from the derived classes and have to be overridden
+	 * so users can provide their own version of a new {@link SessionTimeoutSettings} for the
+	 * session timeout.
 	 */
-	protected SessionTimeoutSettings newSessionTimeoutSettings() {
+	protected SessionTimeoutSettings newSessionTimeoutSettings()
+	{
 		final SessionTimeoutSettings settings;
 		final int sessionTimeout = WicketSession.get().getSessionTimeout();
 		final int oneThirdOfWarnAfter;
 		if (0 < sessionTimeout)
 		{
 			oneThirdOfWarnAfter = (sessionTimeout * 1000) / 3;
-		} else {
+		}
+		else
+		{
 			oneThirdOfWarnAfter = (300 * 1000) / 3;
 		}
 		final int twoThirdOfWarnAfter = oneThirdOfWarnAfter * 2;
@@ -244,15 +251,19 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Factory method for creating a new {@link JavascriptAppenderBehavior}. This method is invoked in the
-	 * constructor from the derived classes and have to be overridden so users can provide their own
-	 * version of a new {@link JavascriptAppenderBehavior}.
+	 * Factory method for creating a new {@link JavascriptAppenderBehavior}. This method is invoked
+	 * in the constructor from the derived classes and have to be overridden so users can provide
+	 * their own version of a new {@link JavascriptAppenderBehavior}.
 	 *
-	 * @param id the id
-	 * @param settings the settings
+	 * @param id
+	 *            the id
+	 * @param settings
+	 *            the settings
 	 * @return the new {@link JavascriptAppenderBehavior}
 	 */
-	protected JavascriptAppenderBehavior newSessionTimeoutBehavior(final String id, final SessionTimeoutSettings settings) {
+	protected JavascriptAppenderBehavior newSessionTimeoutBehavior(final String id,
+		final SessionTimeoutSettings settings)
+	{
 		final SessionTimeoutJsGenerator generator = new SessionTimeoutJsGenerator(settings);
 		final String jsCode = generator.generateJs();
 		return JavascriptAppenderBehavior.builder().id(id).javascript(jsCode).build();
@@ -279,9 +290,9 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Factory method for creating a new {@link Panel} for the footer area. This method is invoked in the
-	 * constructor from the derived classes and have to be overridden so users can provide their own
-	 * version of a new {@link Panel} for the footer area.
+	 * Factory method for creating a new {@link Panel} for the footer area. This method is invoked
+	 * in the constructor from the derived classes and have to be overridden so users can provide
+	 * their own version of a new {@link Panel} for the footer area.
 	 *
 	 * @param id
 	 *            the id
@@ -351,10 +362,10 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 					}
 				};
 				// Add bootstrap class to ul element...
-				add(new JqueryStatementsBehavior().add(
-					new BuildableChainableStatement.Builder().label("find")
-						.args(JsUtils.quotes("ul")).build()).add(
-					new BuildableChainableStatement.Builder().label("addClass")
+				add(new JqueryStatementsBehavior()
+					.add(new BuildableChainableStatement.Builder().label("find")
+						.args(JsUtils.quotes("ul")).build())
+					.add(new BuildableChainableStatement.Builder().label("addClass")
 						.args(JsUtils.quotes("nav navbar-nav list-inline a")).build()));
 				return footerMenu;
 			}
@@ -369,28 +380,23 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	protected IModel<List<LinkItem>> newFooterLinkItems()
 	{
 		final List<LinkItem> linkModel = new ArrayList<>();
-		linkModel.add(LinkItem
-			.builder()
-			.url("http://www.alpharogroup.de/")
-			.target(DefaultTargets.BLANK.getTarget())
-			.linkClass(ExternalLink.class)
-			// open in a new tab or window...
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.footer.copyright.label")
+		linkModel
+			.add(LinkItem.builder().url("http://www.alpharogroup.de/")
+				.target(DefaultTargets.BLANK.getTarget()).linkClass(ExternalLink.class)
+				// open in a new tab or window...
+				.resourceModelKey(ResourceBundleKey.builder().key("main.footer.copyright.label")
 					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
-			.build());
-		linkModel.add(LinkItem
-			.builder()
-			.pageClass(ImprintPage.class)
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.global.menu.masthead.label")
-					.defaultValue("Imprint").build()).build());
-		linkModel.add(LinkItem
-			.builder()
-			.pageClass(TermOfUsePage.class)
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.global.menu.term.of.use.label")
-					.defaultValue("AGBs").build()).build());
+				.build());
+		linkModel
+			.add(LinkItem.builder()
+				.pageClass(ImprintPage.class).resourceModelKey(ResourceBundleKey.builder()
+					.key("main.global.menu.masthead.label").defaultValue("Imprint").build())
+				.build());
+		linkModel
+			.add(LinkItem.builder().pageClass(TermOfUsePage.class)
+				.resourceModelKey(ResourceBundleKey.builder()
+					.key("main.global.menu.term.of.use.label").defaultValue("AGBs").build())
+				.build());
 		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
 		return listModel;
 	}
@@ -408,7 +414,8 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Factory method for creating a new theme from the given {@link StringValue} that comes from the page parameters.
+	 * Factory method for creating a new theme from the given {@link StringValue} that comes from
+	 * the page parameters.
 	 *
 	 * @param theme
 	 *            the new theme to set.
@@ -435,13 +442,13 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		final IJavaScriptLibrarySettings javaScriptSettings = getApplication()
+		final JavaScriptLibrarySettings javaScriptSettings = getApplication()
 			.getJavaScriptLibrarySettings();
 		response.render(JavaScriptHeaderItem.forReference(javaScriptSettings.getJQueryReference()));
 		Bootstrap.renderHead(response);
 		HeaderResponseExtensions.renderHeaderResponse(response, ApplicationBasePage.class);
-		response.render(JavaScriptHeaderItem.forReference(BootstrapSessionTimeoutResourceReference
-			.get()));
+		response.render(
+			JavaScriptHeaderItem.forReference(BootstrapSessionTimeoutResourceReference.get()));
 	}
 
 }

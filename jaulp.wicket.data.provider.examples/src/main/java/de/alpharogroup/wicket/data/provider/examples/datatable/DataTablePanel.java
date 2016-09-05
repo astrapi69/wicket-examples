@@ -72,7 +72,7 @@ public class DataTablePanel extends Panel
 
 		final List<IColumn<Person, String>> columns = new ArrayList<>();
 
-		columns.add(new AbstractColumn<Person, String>(new Model<String>("Actions"))
+		columns.add(new AbstractColumn<Person, String>(new Model<>("Actions"))
 		{
 			/**
 			 * The serialVersionUID
@@ -120,36 +120,35 @@ public class DataTablePanel extends Panel
 			}
 		});
 
-		columns.add(new PropertyColumn<Person, String>(Model.of("First name"), "firstname",
-			"firstname"));
-		columns.add(new PropertyColumn<Person, String>(Model.of("Last Name"), "lastname",
-			"lastname")
-		{
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getCssClass()
+		columns.add(
+			new PropertyColumn<Person, String>(Model.of("First name"), "firstname", "firstname"));
+		columns
+			.add(new PropertyColumn<Person, String>(Model.of("Last Name"), "lastname", "lastname")
 			{
-				return "last-name";
-			}
-		});
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public String getCssClass()
+				{
+					return "last-name";
+				}
+			});
 		columns.add(new PropertyColumn<Person, String>(Model.of("Date of birth"), "dateOfBirth",
 			"dateOfBirth"));
 
-		final DataTable<Person, String> tableWithFilterForm = new DataTable<Person, String>(
+		final DataTable<Person, String> tableWithFilterForm = new DataTable<>(
 			"tableWithFilterForm", columns, dataProvider, 10);
 		tableWithFilterForm.setOutputMarkupId(true);
 
 		final FilterForm<PersonFilter> filterForm = new FilterForm<>("filterForm", dataProvider);
-		filterForm.add(new TextField<>("dateFrom", PropertyModel.of(dataProvider,
-			"filterState.dateFrom")));
-		filterForm.add(new TextField<>("dateTo", PropertyModel.of(dataProvider,
-			"filterState.dateTo")));
+		filterForm.add(
+			new TextField<>("dateFrom", PropertyModel.of(dataProvider, "filterState.dateFrom")));
+		filterForm
+			.add(new TextField<>("dateTo", PropertyModel.of(dataProvider, "filterState.dateTo")));
 		add(filterForm);
 
 
-		final FilterToolbar filterToolbar = new FilterToolbar(tableWithFilterForm, filterForm,
-			dataProvider);
+		final FilterToolbar filterToolbar = new FilterToolbar(tableWithFilterForm, filterForm);
 		tableWithFilterForm.addTopToolbar(filterToolbar);
 		tableWithFilterForm.addTopToolbar(new NavigationToolbar(tableWithFilterForm));
 		tableWithFilterForm.addTopToolbar(new HeadersToolbar<>(tableWithFilterForm, dataProvider));

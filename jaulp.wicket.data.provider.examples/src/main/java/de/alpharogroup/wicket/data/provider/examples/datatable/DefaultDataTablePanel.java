@@ -59,21 +59,21 @@ public class DefaultDataTablePanel extends Panel
 				return PersonDatabaseManager.getInstance().getPersons();
 			}
 		};
-		final List<IColumn<Person, String>> columns = new ArrayList<IColumn<Person, String>>();
-		columns.add(new TextFilteredPropertyColumn<Person, PersonFilter, String>(Model
-			.of("First name"), "firstname", "firstname"));
-		columns.add(new TextFilteredPropertyColumn<Person, PersonFilter, String>(Model
-			.of("Last Name"), "lastname", "lastname"));
+		final List<IColumn<Person, String>> columns = new ArrayList<>();
+		columns.add(new TextFilteredPropertyColumn<Person, PersonFilter, String>(
+			Model.of("First name"), "firstname", "firstname"));
+		columns.add(new TextFilteredPropertyColumn<Person, PersonFilter, String>(
+			Model.of("Last Name"), "lastname", "lastname"));
 		columns.add(new PropertyColumn<Person, String>(Model.of("Date of birth"), "dateOfBirth",
 			"dateOfBirth"));
 
-		final FilterForm<PersonFilter> form = new FilterForm<PersonFilter>("form", dataProvider);
-		form.add(new TextField<>("firstname", PropertyModel.of(dataProvider,
-			"filterState.firstname")));
+		final FilterForm<PersonFilter> form = new FilterForm<>("form", dataProvider);
+		form.add(
+			new TextField<>("firstname", PropertyModel.of(dataProvider, "filterState.firstname")));
 
 		final DefaultDataTable<Person, String> dataTable = new DefaultDataTable<>("dataTable",
 			columns, dataProvider, 10);
-		dataTable.addTopToolbar(new FilterToolbar(dataTable, form, dataProvider));
+		dataTable.addTopToolbar(new FilterToolbar(dataTable, form));
 		form.add(dataTable);
 
 		add(form);
