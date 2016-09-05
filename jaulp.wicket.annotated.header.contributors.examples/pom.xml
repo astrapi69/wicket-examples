@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.1.0</version>
+		<version>7.3.0</version>
 	</parent>
 
 	<artifactId>jaulp.wicket.annotated.header.contributors.examples</artifactId>

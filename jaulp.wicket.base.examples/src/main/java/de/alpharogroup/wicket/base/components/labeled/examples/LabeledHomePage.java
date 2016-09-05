@@ -61,25 +61,25 @@ public class LabeledHomePage extends BasePage
 
 		add(form);
 
-		final LabeledTextFieldPanel<Member> nameTextField = new LabeledTextFieldPanel<>("name",
-			cpm, Model.of("Name:"));
+		final LabeledTextFieldPanel<String, Member> nameTextField = new LabeledTextFieldPanel<>(
+			"name", cpm, Model.of("Name:"));
 
 		form.add(nameTextField);
 
-		final LabeledTextAreaPanel<Member> about = new LabeledTextAreaPanel<>("about", cpm,
+		final LabeledTextAreaPanel<String, Member> about = new LabeledTextAreaPanel<>("about", cpm,
 			Model.of("About:"));
 		form.add(about);
 
-		final LabeledCheckboxPanel<Member> married = new LabeledCheckboxPanel<>("married", cpm,
-			Model.of("Married:"));
+		final LabeledCheckboxPanel<String, Member> married = new LabeledCheckboxPanel<>("married",
+			cpm, Model.of("Married:"));
 
 		form.add(married);
 
-		final LabeledDateTextFieldPanel<Member> dateofbirth = new LabeledDateTextFieldPanel<>(
+		final LabeledDateTextFieldPanel<String, Member> dateofbirth = new LabeledDateTextFieldPanel<>(
 			"dateofbirth", cpm, Model.of("Date of birth:"));
 		form.add(dateofbirth);
 
-		final LabeledDateTimeFieldPanel<Member> dateofMarriage = new LabeledDateTimeFieldPanel<>(
+		final LabeledDateTimeFieldPanel<String, Member> dateofMarriage = new LabeledDateTimeFieldPanel<>(
 			"dateofMarriage", cpm, Model.of("Date of marriage:"));
 		form.add(dateofMarriage);
 

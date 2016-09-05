@@ -15,14 +15,13 @@
  */
 package de.alpharogroup.wicket.components.examples.labeled.address;
 
-import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.components.examples.fragment.swapping.HomeAddress;
-import de.alpharogroup.wicket.components.factory.ComponentFactory;
+import de.alpharogroup.wicket.components.form.input.TwoFormComponentBean;
 import de.alpharogroup.wicket.components.labeled.LabeledTwoFormComponentPanel;
 import lombok.Getter;
 
@@ -34,77 +33,44 @@ public class AddressPanel extends BasePanel<HomeAddress>
 	 */
 	private static final long serialVersionUID = 1L;
 	@Getter
-	LabeledTwoFormComponentPanel<String, String> zipcodeCityPanel;
+	LabeledTwoFormComponentPanel<String, String, HomeAddress> zipcodeCityPanel;
 	@Getter
-	LabeledTwoFormComponentPanel<String, String> streetNumberPanel;
+	LabeledTwoFormComponentPanel<String, String, HomeAddress> streetNumberPanel;
 
 	public AddressPanel(final String id, final IModel<HomeAddress> model)
 	{
 		super(id, model);
 		setOutputMarkupId(true);
-		add(streetNumberPanel = newStreetNumberPanel("streetNumberPanel",
+		add(this.streetNumberPanel = newStreetNumberPanel("streetNumberPanel",
 			Model.of("Street / number:")));
-		add(zipcodeCityPanel = newZipcodeCityPanel("zipcodeCityPanel", Model.of("Zip / City:")));
+		add(this.zipcodeCityPanel = newZipcodeCityPanel("zipcodeCityPanel",
+			Model.of("Zip / City:")));
 	}
 
-	protected LabeledTwoFormComponentPanel<String, String> newStreetNumberPanel(final String id,
-		final IModel<String> labelModel)
+	protected LabeledTwoFormComponentPanel<String, String, HomeAddress> newStreetNumberPanel(
+		final String id, final IModel<String> labelModel)
 	{
 
-		final LabeledTwoFormComponentPanel<String, String> streetNumberPanel = new LabeledTwoFormComponentPanel<String, String>(
-			id, labelModel)
-		{
-			/**
-			 * The serialVersionUID
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected FormComponent<String> newLeftFormComponent(final String id,
-				final IModel<String> model)
-			{
-				return ComponentFactory.newTextField(id,
-					new PropertyModel<String>(AddressPanel.this.getModelObject(), "street"));
-			}
-
-			@Override
-			protected FormComponent<String> newRightFormComponent(final String id,
-				final IModel<String> model)
-			{
-				return ComponentFactory.newTextField(id,
-					new PropertyModel<String>(AddressPanel.this.getModelObject(), "localNumber"));
-			}
-		};
+		final IModel<String> streetModel = new PropertyModel<>(getModelObject(), "street");
+		final IModel<String> streetNumberModel = new PropertyModel<>(getModelObject(),
+			"localNumber");
+		final TwoFormComponentBean<String, String> streetNumberTwoFormComponentBean = new TwoFormComponentBean<>(
+			streetModel, streetNumberModel);
+		final LabeledTwoFormComponentPanel<String, String, HomeAddress> streetNumberPanel = new LabeledTwoFormComponentPanel<>(
+			id, getModel(), Model.of(streetNumberTwoFormComponentBean), labelModel);
 		return streetNumberPanel;
 	}
 
-	protected LabeledTwoFormComponentPanel<String, String> newZipcodeCityPanel(final String id,
-		final IModel<String> labelModel)
+	protected LabeledTwoFormComponentPanel<String, String, HomeAddress> newZipcodeCityPanel(
+		final String id, final IModel<String> labelModel)
 	{
-		final LabeledTwoFormComponentPanel<String, String> zipcodeCityPanel = new LabeledTwoFormComponentPanel<String, String>(
-			id, labelModel)
-		{
-			/**
-			 * The serialVersionUID
-			 */
-			private static final long serialVersionUID = 1L;
 
-			@Override
-			protected FormComponent<String> newLeftFormComponent(final String id,
-				final IModel<String> model02)
-			{
-				return ComponentFactory.newTextField(id,
-					new PropertyModel<String>(AddressPanel.this.getModelObject(), "code"));
-			}
-
-			@Override
-			protected FormComponent<String> newRightFormComponent(final String id,
-				final IModel<String> model)
-			{
-				return ComponentFactory.newTextField(id,
-					new PropertyModel<String>(AddressPanel.this.getModelObject(), "city"));
-			}
-		};
+		final IModel<String> zipcodeModel = new PropertyModel<>(getModelObject(), "code");
+		final IModel<String> cityModel = new PropertyModel<>(getModelObject(), "city");
+		final TwoFormComponentBean<String, String> zipcodeCityTwoFormComponentBean = new TwoFormComponentBean<>(
+			zipcodeModel, cityModel);
+		final LabeledTwoFormComponentPanel<String, String, HomeAddress> zipcodeCityPanel = new LabeledTwoFormComponentPanel<>(
+			id, getModel(), Model.of(zipcodeCityTwoFormComponentBean), labelModel);
 		return zipcodeCityPanel;
 	}
 
