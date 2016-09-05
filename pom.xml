@@ -6,13 +6,13 @@
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>wicket-application</artifactId>
-		<version>6.21.1</version>
+		<artifactId>mvn-wicket-application-parent</artifactId>
+		<version>7.4.0</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>wicket-examples</artifactId>
-	<version>6.21.1</version>
+	<version>7.3.0</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -35,12 +35,12 @@
 
 	<properties>
 		<!-- WICKET version -->
-		<wicket.version>6.21.0</wicket.version>
+		<wicket.version>7.3.0</wicket.version>
 		<!-- WICKETSTUFF LIBRARIES versions -->
-		<wicketstuff.version>6.21.0</wicketstuff.version>
+		<wicketstuff.version>7.3.0</wicketstuff.version>
 		<!-- JAULP-WICKET version -->
-		<jaulp.wicket.version>6.21.1</jaulp.wicket.version>
-		<authorization.strategy.api.version>6.21.0</authorization.strategy.api.version>
+		<jaulp.wicket.version>7.3.0</jaulp.wicket.version>
+		<authorization.strategy.api.version>7.3.0</authorization.strategy.api.version>
 	</properties>
 
 	<dependencyManagement>

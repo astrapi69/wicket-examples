@@ -50,18 +50,17 @@ public class ViewOrEditPage extends BasePage
 		setDefaultModel(Model.of(person));
 
 
-		final CompoundPropertyModel<Person> cpm = new CompoundPropertyModel<Person>(person);
+		final CompoundPropertyModel<Person> cpm = new CompoundPropertyModel<>(person);
 
-		final Form<Person> form = new Form<Person>("form", cpm);
+		final Form<Person> form = new Form<>("form", cpm);
 
 		add(form);
-		final EditableTextField nameTextField = new EditableTextField("name", new PropertyModel<>(
-			person, "name"), Model.of("Name"));
+		final EditableTextField nameTextField = new EditableTextField("name",
+			new PropertyModel<>(person, "name"), Model.of("Name"));
 		form.add(nameTextField);
 
 		final EditableTextArea about = new EditableTextArea("about",
- new PropertyModel<>(person,
-			"about"), Model.of("About"));
+			new PropertyModel<>(person, "about"), Model.of("About"));
 		form.add(about);
 
 
@@ -82,8 +81,8 @@ public class ViewOrEditPage extends BasePage
 			public void onSubmit(final AjaxRequestTarget target, final Form<?> form)
 			{
 				info("Person:" + getDefaultModelObjectAsString());
-				enableFields = !enableFields;
-				if (enableFields)
+				ViewOrEditPage.this.enableFields = !ViewOrEditPage.this.enableFields;
+				if (ViewOrEditPage.this.enableFields)
 				{
 					about.getSwapPanel().onSwapToEdit(target, form);
 					nameTextField.getSwapPanel().onSwapToEdit(target, form);

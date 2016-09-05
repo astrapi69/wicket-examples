@@ -63,7 +63,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 		final IModel<SignInWithRedirectionBean> model)
 	{
 		final SigninFormPanel<SignInWithRedirectionBean> signFormPanel = new SigninFormPanel<SignInWithRedirectionBean>(
-			id, new CompoundPropertyModel<SignInWithRedirectionBean>(model))
+			id, new CompoundPropertyModel<>(model))
 		{
 
 			/** The Constant serialVersionUID. */
@@ -77,13 +77,12 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			{
 				final Button button = super.newButton(id);
 				button.add(Wrappers.FORM_GROUP_ELEMENT)
-					.add(
-						new JqueryStatementsBehavior()
-							.add(
-								new BuildableChainableStatement.Builder()
-									.label("wrap").args(JsUtils.quotes("<div class=\"col-sm-offset-"
-										+ labelSize + " col-sm-" + inputSize + "\"></div>"))
-						.build()));
+					.add(new JqueryStatementsBehavior()
+						.add(new BuildableChainableStatement.Builder().label("wrap")
+							.args(JsUtils.quotes("<div class=\"col-sm-offset-"
+								+ SigninExamplesPanel.this.labelSize + " col-sm-"
+								+ SigninExamplesPanel.this.inputSize + "\"></div>"))
+							.build()));
 				button.add(new AttributeAppender("class", " btn btn-default"));
 				return button;
 			}
@@ -138,15 +137,14 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 						final LabeledEmailTextFieldPanel<String, SignInWithRedirectionBean> emailTextField = (LabeledEmailTextFieldPanel<String, SignInWithRedirectionBean>)super.newEmailTextField(
 							id, model);
 						emailTextField.add(new AttributeAppender("class", " form-group"));
-						emailTextField.getEmailTextField()
-							.add(new JqueryStatementsBehavior()
-								.add(new BuildableChainableStatement.Builder().label("wrap")
-									.args(JsUtils
-										.quotes("<div class=\"col-sm-" + inputSize + "\"></div>"))
+						emailTextField.getEmailTextField().add(new JqueryStatementsBehavior()
+							.add(new BuildableChainableStatement.Builder().label("wrap")
+								.args(JsUtils.quotes("<div class=\"col-sm-"
+									+ SigninExamplesPanel.this.inputSize + "\"></div>"))
 								.build()))
 							.add(new AttributeAppender("class", " form-control"));
-						emailTextField.getLabelComponent().add(
-							new AttributeAppender("class", " control-label col-sm-" + labelSize));
+						emailTextField.getLabelComponent().add(new AttributeAppender("class",
+							" control-label col-sm-" + SigninExamplesPanel.this.labelSize));
 						return emailTextField;
 					}
 
@@ -154,21 +152,20 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					 * {@inheritDoc}
 					 */
 					@Override
-					protected LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> newPasswordTextField(final String id,
-						final IModel<SignInWithRedirectionBean> model)
+					protected LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> newPasswordTextField(
+						final String id, final IModel<SignInWithRedirectionBean> model)
 					{
 						final LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> pwTextField = super.newPasswordTextField(
 							id, model);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
-						pwTextField.getPasswordTextField()
-							.add(new JqueryStatementsBehavior()
-								.add(new BuildableChainableStatement.Builder().label("wrap")
-									.args(JsUtils
-										.quotes("<div class=\"col-sm-" + inputSize + "\"></div>"))
+						pwTextField.getPasswordTextField().add(new JqueryStatementsBehavior()
+							.add(new BuildableChainableStatement.Builder().label("wrap")
+								.args(JsUtils.quotes("<div class=\"col-sm-"
+									+ SigninExamplesPanel.this.inputSize + "\"></div>"))
 								.build()))
 							.add(new AttributeAppender("class", " form-control"));
-						pwTextField.getLabelComponent().add(
-							new AttributeAppender("class", " control-label col-sm-" + labelSize));
+						pwTextField.getLabelComponent().add(new AttributeAppender("class",
+							" control-label col-sm-" + SigninExamplesPanel.this.labelSize));
 						return pwTextField;
 					}
 				};
@@ -198,11 +195,13 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	}
 
 	/**
-	 * Application specific callback method that have to be overwritten to provide the action for password
-	 * forgotten.
+	 * Application specific callback method that have to be overwritten to provide the action for
+	 * password forgotten.
 	 *
-	 * @param target the target
-	 * @param form the form
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
 	 */
 	protected void onPasswordForgotten(final AjaxRequestTarget target, final Form<?> form)
 	{
@@ -212,10 +211,13 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	}
 
 	/**
-	 * Application specific callback method that have to be overwritten to provide the action for signin.
+	 * Application specific callback method that have to be overwritten to provide the action for
+	 * signin.
 	 *
-	 * @param target the target
-	 * @param form the form
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
 	 */
 	protected void onSignin(final AjaxRequestTarget target, final Form<?> form)
 	{

@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>6.21.1</version>
+		<version>7.3.0</version>
 	</parent>
 
 	<artifactId>wicket-channel-chat-examples</artifactId>

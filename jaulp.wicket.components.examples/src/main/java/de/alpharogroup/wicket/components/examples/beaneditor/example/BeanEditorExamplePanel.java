@@ -22,17 +22,18 @@ import java.util.List;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import de.alpharogroup.test.objects.Customer;
 import de.alpharogroup.test.objects.annotations.Mandatory;
+import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.components.beaneditor.BeanEditorPanel;
+import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.labeled.dropdown.LabeledEnumDropDownPanel;
 
-public class BeanEditorExamplePanel extends Panel
+public class BeanEditorExamplePanel extends BasePanel<Customer>
 {
 
 	/**
@@ -99,8 +100,22 @@ public class BeanEditorExamplePanel extends Panel
 			@Override
 			protected void onSubmit(final AjaxRequestTarget target, final Form<?> form)
 			{
-				System.out.println(getModel());
+				BeanEditorExamplePanel.this.onSubmit(target, form);
 			}
 		});
+	}
+
+
+	protected void onSubmit(final AjaxRequestTarget target, final Form<?> form)
+	{
+
+		target.add(getFeedback());
+		info(getModel());
+	}
+
+	protected Component getFeedback()
+	{
+		final PubliclyBasePage<?> basePage = (PubliclyBasePage<?>)getPage();
+		return basePage.getFeedback();
 	}
 }

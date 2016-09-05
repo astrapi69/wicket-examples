@@ -41,32 +41,36 @@ public class AddressPanel extends BasePanel<HomeAddress>
 	{
 		super(id, model);
 		setOutputMarkupId(true);
-		add(streetNumberPanel = newStreetNumberPanel("streetNumberPanel",
+		add(this.streetNumberPanel = newStreetNumberPanel("streetNumberPanel",
 			Model.of("Street / number:")));
-		add(zipcodeCityPanel = newZipcodeCityPanel("zipcodeCityPanel", Model.of("Zip / City:")));
+		add(this.zipcodeCityPanel = newZipcodeCityPanel("zipcodeCityPanel",
+			Model.of("Zip / City:")));
 	}
 
-	protected LabeledTwoFormComponentPanel<String, String, HomeAddress> newStreetNumberPanel(final String id,
-		final IModel<String> labelModel)
+	protected LabeledTwoFormComponentPanel<String, String, HomeAddress> newStreetNumberPanel(
+		final String id, final IModel<String> labelModel)
 	{
-		final TwoFormComponentBean<String, String> twoFormComponentBean =
-			new TwoFormComponentBean<>(
-				new PropertyModel<String>(AddressPanel.this.getModelObject(), "street") ,
-				new PropertyModel<String>(AddressPanel.this.getModelObject(), "localNumber"));
-		final LabeledTwoFormComponentPanel<String, String, HomeAddress> streetNumberPanel = new LabeledTwoFormComponentPanel<String, String, HomeAddress>(
-			id, getModel(), Model.of(twoFormComponentBean), labelModel);
+
+		final IModel<String> streetModel = new PropertyModel<>(getModelObject(), "street");
+		final IModel<String> streetNumberModel = new PropertyModel<>(getModelObject(),
+			"localNumber");
+		final TwoFormComponentBean<String, String> streetNumberTwoFormComponentBean = new TwoFormComponentBean<>(
+			streetModel, streetNumberModel);
+		final LabeledTwoFormComponentPanel<String, String, HomeAddress> streetNumberPanel = new LabeledTwoFormComponentPanel<>(
+			id, getModel(), Model.of(streetNumberTwoFormComponentBean), labelModel);
 		return streetNumberPanel;
 	}
 
-	protected LabeledTwoFormComponentPanel<String, String, HomeAddress> newZipcodeCityPanel(final String id,
-		final IModel<String> labelModel)
+	protected LabeledTwoFormComponentPanel<String, String, HomeAddress> newZipcodeCityPanel(
+		final String id, final IModel<String> labelModel)
 	{
-		final TwoFormComponentBean<String, String> twoFormComponentBean =
-			new TwoFormComponentBean<>(
-				new PropertyModel<String>(AddressPanel.this.getModelObject(), "code") ,
-				new PropertyModel<String>(AddressPanel.this.getModelObject(), "city"));
-		final LabeledTwoFormComponentPanel<String, String, HomeAddress> zipcodeCityPanel = new LabeledTwoFormComponentPanel<String, String, HomeAddress>(
-			id, getModel(), Model.of(twoFormComponentBean), labelModel);
+
+		final IModel<String> zipcodeModel = new PropertyModel<>(getModelObject(), "code");
+		final IModel<String> cityModel = new PropertyModel<>(getModelObject(), "city");
+		final TwoFormComponentBean<String, String> zipcodeCityTwoFormComponentBean = new TwoFormComponentBean<>(
+			zipcodeModel, cityModel);
+		final LabeledTwoFormComponentPanel<String, String, HomeAddress> zipcodeCityPanel = new LabeledTwoFormComponentPanel<>(
+			id, getModel(), Model.of(zipcodeCityTwoFormComponentBean), labelModel);
 		return zipcodeCityPanel;
 	}
 
