@@ -16,27 +16,14 @@
 package de.alpharogroup.wicket.components.examples;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.log4j.Logger;
-import org.apache.wicket.protocol.http.ContextParamWebApplicationFactory;
-import org.apache.wicket.protocol.http.WicketFilter;
 import org.apache.wicket.util.time.Duration;
-import org.eclipse.jetty.deploy.DeploymentManager;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ContextHandlerCollection;
-import org.eclipse.jetty.servlet.DefaultServlet;
-import org.eclipse.jetty.servlet.ServletContextHandler;
 
-import de.alpharogroup.file.delete.DeleteFileExtensions;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.jetty9.runner.Jetty9Runner;
-import de.alpharogroup.jetty9.runner.config.FilterHolderConfiguration;
-import de.alpharogroup.jetty9.runner.config.Jetty9RunConfiguration;
-import de.alpharogroup.jetty9.runner.config.ServletContextHandlerConfiguration;
-import de.alpharogroup.jetty9.runner.config.ServletHolderConfiguration;
-import de.alpharogroup.jetty9.runner.factories.DeploymentManagerFactory;
-import de.alpharogroup.jetty9.runner.factories.ServletContextHandlerFactory;
+import de.alpharogroup.jetty9.runner.WicketJetty9Runner;
+import de.alpharogroup.jetty9.runner.config.StartConfig;
 import de.alpharogroup.log.LoggerExtensions;
 import de.alpharogroup.wicket.base.application.ConfigurationPropertiesResolver;
 import de.alpharogroup.wicket.components.examples.application.WicketApplication;
@@ -50,105 +37,36 @@ public class StartComponentExamples
 
 	public static void main(final String[] args)
 	{
-		final int sessionTimeout = (int)Duration.minutes(1).seconds();// set timeout to 30min(60sec
-																		// *
-																		// 30min=1800sec)...
-//		System.setProperty("wicket.configuration", "development");
-		System.setProperty("wicket.configuration", "deployment");
-		final String projectname = "jaulp.wicket.components.examples";
-		final File projectDirectory = PathFinder.getProjectDirectory();
-		final File webapp;
-		if (projectDirectory.getAbsolutePath().endsWith(projectname))
-		{
-			webapp = PathFinder.getRelativePath(projectDirectory, "src", "main", "webapp");
-		}
-		else
-		{
-			webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src", "main",
-				"webapp");
-		}
-		final File logfile = new File(projectDirectory, "application.log");
-		if (logfile.exists())
-		{
-			try
-			{
-				DeleteFileExtensions.delete(logfile);
-			}
-			catch (final IOException e)
-			{
-				Logger.getRootLogger().error("logfile could not deleted.", e);
-			}
-		}
-		final String absolutePathFromLogfile = logfile.getAbsolutePath();
-		final String filterPath = "/*";
-		// Add a file appender to the logger programatically
-		LoggerExtensions.addFileAppender(Logger.getRootLogger(),
-			LoggerExtensions.newFileAppender(absolutePathFromLogfile));
-
-		final ContextHandlerCollection contexts = new ContextHandlerCollection();
-
-		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
-			.getNewServletContextHandler(
-				ServletContextHandlerConfiguration.builder()
-				.parent(contexts)
-				.filterHolderConfiguration(
-					FilterHolderConfiguration.builder()
-					.filterClass(WicketFilter.class)
-					.filterPath(filterPath)
-					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
-					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
-						WicketApplication.class.getName())
-					.build())
-				.servletHolderConfiguration(
-					ServletHolderConfiguration.builder()
-					.servletClass(DefaultServlet.class)
-					.pathSpec(filterPath)
-					.build())
-				.contextPath("/")
-				.webapp(webapp)
-				.maxInactiveInterval(sessionTimeout)
-				.filterPath(filterPath).build());
-
-		final DeploymentManager deployer = DeploymentManagerFactory.newDeploymentManager(contexts,
-			webapp.getAbsolutePath(), null);
-
-		final Jetty9RunConfiguration configuration = newJetty9RunConfiguration(servletContextHandler,
-			contexts, deployer);
-		final Server server = new Server();
-		Jetty9Runner.runServletContextHandler(server, configuration);
+		final ConfigurationPropertiesResolver configurationPropertiesResolver = new ConfigurationPropertiesResolver(
+			WicketApplication.DEFAULT_HTTP_PORT, WicketApplication.DEFAULT_HTTPS_PORT,
+			ConfigurationPropertiesResolver.DEFAULT_CONFIGURATION_PROPERTIES_FILENAME);
+		startWicketApplication(configurationPropertiesResolver);
 	}
 
-	/**
-	 * Factory method for create the {@link Jetty9RunConfiguration} and set the ports from the
-	 * config file or take the default if in configfile is not set.
-	 *
-	 * @param servletContextHandler
-	 *            the servlet context handler
-	 *
-	 * @return the new {@link Jetty9RunConfiguration}.
-	 */
-	private static Jetty9RunConfiguration newJetty9RunConfiguration(
-		final ServletContextHandler servletContextHandler, final ContextHandlerCollection contexts,
-		final DeploymentManager deployer)
+	private static void startWicketApplication(final ConfigurationPropertiesResolver configurationPropertiesResolver)
 	{
+		final String projectName = "jaulp.wicket.components.examples";
+		final File projectDirectory = PathFinder.getProjectDirectory();
+		final File webapp = Jetty9Runner.getWebappDirectory(projectDirectory, projectName);
+		final File logFile = Jetty9Runner.getLogFile(projectDirectory, "application.log");
 
-		final ConfigurationPropertiesResolver configurationPropertiesResolver =
-			new ConfigurationPropertiesResolver(
-				WicketApplication.DEFAULT_HTTP_PORT,
-				WicketApplication.DEFAULT_HTTPS_PORT,
-				ConfigurationPropertiesResolver.DEFAULT_CONFIGURATION_PROPERTIES_FILENAME);
-
-		final Jetty9RunConfiguration configuration = Jetty9RunConfiguration.builder()
-			.servletContextHandler(servletContextHandler)
-			.contexts(contexts)
-			.deployer(deployer)
+		final StartConfig startConfig = StartConfig.builder().applicationName(WicketApplication.class.getName())
+			.contextPath("/")
+			.filterPath("/*")
 			.httpPort(configurationPropertiesResolver.getHttpPort())
 			.httpsPort(configurationPropertiesResolver.getHttpsPort())
 			.keyStorePassword("wicket")
 			.keyStorePathResource("/keystore")
+			.projectDirectory(projectDirectory)
+			.projectName(projectName)
+			.runtimeConfigurationType("deployment")
+			.sessionTimeout((int)Duration.minutes(1).seconds())
+			.webapp(webapp)
+			.logFile(logFile)
+			.absolutePathFromLogfile(logFile.getAbsolutePath())
 			.build();
 
-		return configuration;
+		WicketJetty9Runner.run(startConfig);
 	}
 
 }
