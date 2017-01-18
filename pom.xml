@@ -31,6 +31,7 @@
 		<module>wicket.xslt.examples</module>
 		<module>wicket-channel-chat-examples</module>
 		<module>component.authorization.strategy.example</module>
+		<module>wicket-i18n</module>
 	</modules>
 
 	<properties>
