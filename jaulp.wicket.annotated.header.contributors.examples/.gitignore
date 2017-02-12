@@ -16,11 +16,7 @@
 /.project
 /.classpath
 /.settings
-
-##################
-# netbeans files #
-##################
-/nb-configuration.xml
+/.tern-project
 
 #########################
 # maven generated files #
