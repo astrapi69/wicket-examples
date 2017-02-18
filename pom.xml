@@ -6,13 +6,12 @@
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>mvn-wicket-application-parent</artifactId>
-		<version>7.4.3</version>
+		<artifactId>wicket-application</artifactId>
+		<version>6.25.0</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>wicket-examples</artifactId>
-	<version>7.3.0</version>
 	<packaging>pom</packaging>
 
 	<modules>

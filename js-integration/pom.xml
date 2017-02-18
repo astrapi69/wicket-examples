@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>wicket-examples</artifactId>
-		<version>7.3.0</version>
+		<version>6.25.0</version>
 	</parent>
 	<artifactId>js-integration</artifactId>
 	<packaging>war</packaging>
