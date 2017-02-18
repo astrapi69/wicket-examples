@@ -16,7 +16,6 @@ import de.alpharogroup.file.delete.DeleteFileExtensions;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.jetty9.runner.Jetty9Runner;
 import de.alpharogroup.jetty9.runner.config.FilterHolderConfiguration;
-import de.alpharogroup.jetty9.runner.config.InitParameters;
 import de.alpharogroup.jetty9.runner.config.Jetty9RunConfiguration;
 import de.alpharogroup.jetty9.runner.config.ServletContextHandlerConfiguration;
 import de.alpharogroup.jetty9.runner.config.ServletHolderConfiguration;
@@ -27,13 +26,14 @@ import de.alpharogroup.resourcebundle.properties.PropertiesExtensions;
 import lombok.experimental.ExtensionMethod;
 
 @ExtensionMethod(LoggerExtensions.class)
-public class ApplicationJettyRunner
+public class StartSslExamplesWithJettyRunner
 {
 
 	public static void main(final String[] args) throws Exception
 	{
 		final int sessionTimeout = (int) Duration.minutes(30).seconds();// set timeout to 30min(60sec * 30min=1800sec)...
-		System.setProperty("wicket.configuration", "deployment");
+		// change this if your on production with deployment
+		System.setProperty("wicket.configuration", "development");
 		final String projectname = "wicket-ssl";
 		final File projectDirectory = PathFinder.getProjectDirectory();
 		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src", "main",
@@ -61,8 +61,6 @@ public class ApplicationJettyRunner
 					.name(projectname)
 					.filterPath(filterPath)
 					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
-					.initParameter(InitParameters.APPLICATION_FACTORY_CLASS_NAME,
-						InitParameters.WICKET_SPRING_WEB_APPLICATION_FACTORY_CLASS)
 					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
 						WicketApplication.class.getName())
 					.build())

@@ -15,17 +15,13 @@
  */
 package org.wicket.ssl.pages.home;
 
-import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.PackageResourceReference;
 import org.wicket.ssl.pages.http.NormalHttpPage;
 import org.wicket.ssl.pages.https.NormalSecuredHttpsPage;
 import org.wicket.ssl.pages.mountedHttps.MountedHttpsPage;
-
-import de.alpharogroup.web.css.WebResources;
 
 /**
  * Homepage
@@ -33,11 +29,11 @@ import de.alpharogroup.web.css.WebResources;
 public class HomePage extends WebPage {
 
 	@Override
-	public void renderHead(IHeaderResponse response) {
+	public void renderHead(final IHeaderResponse response) {
 		super.renderHead(response);
-		PackageResourceReference cssFile = new PackageResourceReference(WebResources.class, "main-foobar.css");
-		CssHeaderItem cssItem = CssHeaderItem.forReference(cssFile);
-		response.render(cssItem);
+//		PackageResourceReference cssFile = new PackageResourceReference(WebResources.class, "main-foobar.css");
+//		CssHeaderItem cssItem = CssHeaderItem.forReference(cssFile);
+//		response.render(cssItem);
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -46,7 +42,6 @@ public class HomePage extends WebPage {
 
 	public HomePage() {
 		super();
-
 		initLayout();
 	}
 
