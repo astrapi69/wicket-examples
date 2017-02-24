@@ -33,8 +33,11 @@ public class StartSslExamplesWithJettyRunner
 	{
 		final int sessionTimeout = (int) Duration.minutes(30).seconds();// set timeout to 30min(60sec * 30min=1800sec)...
 		// change this if your on production with deployment
-		System.setProperty("wicket.configuration", "development");
-		final String projectname = "wicket-ssl";
+		String configurationType;
+		configurationType = "development";
+//		configurationType = "deployment";
+		System.setProperty("wicket.configuration", configurationType);
+		final String projectname = getProjectName();
 		final File projectDirectory = PathFinder.getProjectDirectory();
 		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src", "main",
 			"webapp");
@@ -75,7 +78,7 @@ public class StartSslExamplesWithJettyRunner
 			.filterPath(filterPath)
 			.initParameter("contextConfigLocation",
 				"classpath:applicationContext.hbm.xml\nclasspath:applicationContext.xml")
-			.initParameter("configuration", "deployment")
+			.initParameter("configuration", configurationType)
 			.build());
 
 		final Jetty9RunConfiguration configuration = newJetty9RunConfiguration(servletContextHandler);
