@@ -148,7 +148,8 @@ public class DataTablePanel extends Panel
 		add(filterForm);
 
 
-		final FilterToolbar filterToolbar = new FilterToolbar(tableWithFilterForm, filterForm);
+		final FilterToolbar filterToolbar = new FilterToolbar(tableWithFilterForm, filterForm,
+			dataProvider);
 		tableWithFilterForm.addTopToolbar(filterToolbar);
 		tableWithFilterForm.addTopToolbar(new NavigationToolbar(tableWithFilterForm));
 		tableWithFilterForm.addTopToolbar(new HeadersToolbar<>(tableWithFilterForm, dataProvider));
