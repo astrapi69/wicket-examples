@@ -6,7 +6,7 @@
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>wicket-application</artifactId>
+		<artifactId>mvn-wicket-application-parent</artifactId>
 		<version>6.25.0</version>
 		<relativePath></relativePath>
 	</parent>
@@ -40,7 +40,9 @@
 		<wicketstuff.version>6.25.0</wicketstuff.version>
 		<!-- JAULP-WICKET version -->
 		<jaulp.wicket.version>6.25.0</jaulp.wicket.version>
-		<authorization.strategy.api.version>6.21.0</authorization.strategy.api.version>
+		<authorization.strategy.api.version>6.25.0</authorization.strategy.api.version>
+		<wicket.bootstrap3.version>6.25.0</wicket.bootstrap3.version>
+		<wicket-component-expressions.version>6.25.0</wicket-component-expressions.version>
 	</properties>
 
 	<dependencyManagement>
@@ -94,6 +96,18 @@
 				<artifactId>jaulp.wicket.dropdownchoices</artifactId>
 				<version>${jaulp.wicket.version}</version>
 			</dependency>
+		<!-- WICKET-BOOTSTRAP3 DEPENDENCIES -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>wicket.bootstrap3</artifactId>
+			<version>${wicket.bootstrap3.version}</version>
+		</dependency>
+		<!-- WICKET-COMPONENT-EXPRESSIONS DEPENDENCIES -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>wicket-component-expressions</artifactId>
+			<version>${wicket-component-expressions.version}</version>
+		</dependency>
 
 		</dependencies>
 
