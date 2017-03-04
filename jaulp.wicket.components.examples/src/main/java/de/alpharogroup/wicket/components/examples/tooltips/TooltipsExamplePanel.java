@@ -16,8 +16,10 @@
 package de.alpharogroup.wicket.components.examples.tooltips;
 
 import org.apache.wicket.Application;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
@@ -25,6 +27,7 @@ import org.apache.wicket.model.Model;
 
 import de.alpharogroup.wicket.behaviors.JavascriptAppenderBehavior;
 import de.alpharogroup.wicket.components.factory.ComponentFactory;
+import de.alpharogroup.wicket.js.addon.ko.bind.tooltipster.TooltipsterKoBindingResourceReference;
 import de.alpharogroup.wicket.js.addon.tooltipster.TooltipsterJsGenerator;
 import de.alpharogroup.wicket.js.addon.tooltipster.TooltipsterResourceReference;
 import de.alpharogroup.wicket.js.addon.tooltipster.TooltipsterSettings;
@@ -55,6 +58,15 @@ public class TooltipsExamplePanel extends Panel
 		label.add(JavascriptAppenderBehavior.builder().id("tooltip_" + label.getMarkupId())
 			.javascript(js).build());
 		add(label);
+
+		final Label koTooltipster = ComponentFactory.newLabel("koTooltipster",
+			Model.of("A label with knockout-binding for tooltipster"));
+		koTooltipster
+			.add(AttributeModifier.append("title", Model.of("This is my span's tooltip message!")));
+		koTooltipster.add(AttributeModifier.append("data-bind",
+			Model.of("tooltipster: { theme: 'tooltipster-noir', content: 'foo bar' }")));
+
+		add(koTooltipster);
 	}
 
 
@@ -65,8 +77,14 @@ public class TooltipsExamplePanel extends Panel
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		response.render(JavaScriptHeaderItem.forReference(Application.get()
-			.getJavaScriptLibrarySettings().getJQueryReference()));
-		response.render(JavaScriptHeaderItem.forReference(TooltipsterResourceReference.INSTANCE));
+		response.render(JavaScriptHeaderItem
+			.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+
+		response.render(JavaScriptHeaderItem.forReference(TooltipsterResourceReference.get()));
+		response
+			.render(JavaScriptHeaderItem.forReference(TooltipsterKoBindingResourceReference.get()));
+
+		final String js = "var viewModel = {}; ko.applyBindings(viewModel)";
+		response.render(OnDomReadyHeaderItem.forScript(js));
 	}
 }

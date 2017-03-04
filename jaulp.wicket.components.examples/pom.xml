@@ -120,6 +120,11 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>wicket-collapsible</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>wi-ko-tooltipster</artifactId>
+			<version>6.25.0</version>
+		</dependency>
 		<!-- WIQUERY DEPENDENCIES -->
 		<dependency>
 			<groupId>org.odlabs.wiquery</groupId>
