@@ -17,6 +17,7 @@ package de.alpharogroup.wicket.components.examples.tooltips;
 
 import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
@@ -59,12 +60,24 @@ public class TooltipsExamplePanel extends Panel
 			.javascript(js).build());
 		add(label);
 
-		final Label koTooltipster = ComponentFactory.newLabel("koTooltipster",
-			Model.of("A label with knockout-binding for tooltipster"));
+		final Label koTooltipster = new Label("koTooltipster",
+			Model.of("A label with knockout-binding for tooltipster")) {
+				private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onComponentTag(final ComponentTag tag)
+			{
+				tag.getAttributes().put("title", "from onComponentTag");
+				super.onComponentTag(tag);
+				tag.getAttributes().put("data-bind", "tooltipster: { "
+					+ "theme: 'tooltipster-noir', "
+					+ "content: 'foo bar',"
+					+ "contentCloning: true }");
+
+			}
+		};
 		koTooltipster
-			.add(AttributeModifier.append("title", Model.of("This is my span's tooltip message!")));
-		koTooltipster.add(AttributeModifier.append("data-bind",
-			Model.of("tooltipster: { theme: 'tooltipster-noir', content: 'foo bar' }")));
+		.add(AttributeModifier.append("title", Model.of("This is my span's tooltip message!")));
 
 		add(koTooltipster);
 	}
