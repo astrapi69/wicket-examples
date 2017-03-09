@@ -55,6 +55,7 @@ import de.alpharogroup.wicket.components.examples.exceptions.ExceptionPage;
 import de.alpharogroup.wicket.components.examples.fragment.replacewith.ReplaceWithPage;
 import de.alpharogroup.wicket.components.examples.fragment.swapping.AddressPage;
 import de.alpharogroup.wicket.components.examples.fragment.swapping.person.PersonPage;
+import de.alpharogroup.wicket.components.examples.fragment.swapping.viewedit.ViewOrEditExamplePage;
 import de.alpharogroup.wicket.components.examples.googlecharts.GoogleChartsExamplePage;
 import de.alpharogroup.wicket.components.examples.home.HomePage;
 import de.alpharogroup.wicket.components.examples.imprint.ImprintPage;
@@ -182,6 +183,8 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T> {
 				this);
 		final IModel<String> swapModel = ResourceModelFactory.newResourceModel("global.menu.swap.label", this);
 		final IModel<String> swapPersonModel = ResourceModelFactory.newResourceModel("global.menu.swap.person.label",
+			this);
+		final IModel<String> viewOrEditModel = ResourceModelFactory.newResourceModel("global.menu.view.or.edit.label",
 				this);
 		final IModel<String> replaceWithPanelModel = ResourceModelFactory
 				.newResourceModel("global.menu.replace.with.panel.label", this);
@@ -233,7 +236,9 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T> {
 				subMenu.add(new MenuBookmarkablePageLink<Void>(AddressPage.class, swapModel)
 						.setIconType(GlyphIconType.eyeopen));
 				subMenu.add(new MenuBookmarkablePageLink<Void>(PersonPage.class, swapPersonModel)
-						.setIconType(GlyphIconType.eyeopen));
+					.setIconType(GlyphIconType.eyeopen));
+				subMenu.add(new MenuBookmarkablePageLink<Void>(ViewOrEditExamplePage.class, viewOrEditModel)
+					.setIconType(GlyphIconType.eyeopen));
 				subMenu.add(new MenuBookmarkablePageLink<Void>(BeanEditorExamplePage.class, beanEditorExampleModel)
 						.setIconType(GlyphIconType.eyeopen));
 				subMenu.add(new MenuBookmarkablePageLink<Void>(AnimationPage.class, animationExampleModel)
@@ -308,7 +313,7 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T> {
 
 			@Override
 			protected List<AbstractLink> newSubMenuButtons(final String buttonMarkupId) {
-				final List<AbstractLink> subMenu = new ArrayList<AbstractLink>();
+				final List<AbstractLink> subMenu = new ArrayList<>();
 				subMenu.add(new MenuBookmarkablePageLink<ImprintPage>(ImprintPage.class, imprintModel)
 						.setIconType(GlyphIconType.eyeopen));
 				subMenu.add(new MenuBookmarkablePageLink<TermOfUsePage>(TermOfUsePage.class, termOfUseModel)
@@ -340,7 +345,7 @@ public abstract class PubliclyBasePage<T> extends ApplicationBasePage<T> {
 
 			@Override
 			protected List<AbstractLink> newSubMenuButtons(final String buttonMarkupId) {
-				final List<AbstractLink> subMenu = new ArrayList<AbstractLink>();
+				final List<AbstractLink> subMenu = new ArrayList<>();
 				subMenu.add(new MenuHeader(Model.of("all available themes:")));
 				subMenu.add(new MenuDivider());
 

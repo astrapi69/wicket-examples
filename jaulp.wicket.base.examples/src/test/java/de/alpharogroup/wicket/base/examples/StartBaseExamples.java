@@ -36,7 +36,8 @@ public class StartBaseExamples
 {
 	public static void main(final String[] args) throws Exception
 	{
-		System.setProperty("wicket.configuration", "development");
+//		System.setProperty("wicket.configuration", "development");
+		System.setProperty("wicket.configuration", "deployment");
 		final String projectname = "jaulp.wicket.base.examples";
 		final File projectDirectory = PathFinder.getProjectDirectory();
 		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src",

@@ -1,40 +1,23 @@
-/**
- * Copyright (C) 2010 Asterios Raptis
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package de.alpharogroup.wicket.base.components.viewmode.examples;
+package de.alpharogroup.wicket.components.examples.fragment.swapping.viewedit;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.test.objects.Gender;
 import de.alpharogroup.test.objects.Person;
-import de.alpharogroup.wicket.base.BasePage;
 import de.alpharogroup.wicket.components.editable.checkbox.EditableCheckbox;
 import de.alpharogroup.wicket.components.editable.textarea.EditableTextArea;
 import de.alpharogroup.wicket.components.editable.textfield.EditableTextField;
 
-public class ViewOrEditPage extends BasePage
+public class ViewOrEditExamplePanel extends Panel
 {
-	private static final long serialVersionUID = 1L;
 
 	private boolean enableFields = true;
 	private final EditableTextArea about;
@@ -42,9 +25,9 @@ public class ViewOrEditPage extends BasePage
 	private final EditableCheckbox<Person> married;
 	private final Form<Person> form;
 
-	public ViewOrEditPage(final PageParameters parameters)
+	public ViewOrEditExamplePanel(final String id, final IModel<?> model)
 	{
-		super(parameters);
+		super(id, model);
 
 		final Person person = new Person();
 		person.setGender(Gender.UNDEFINED);
@@ -54,7 +37,7 @@ public class ViewOrEditPage extends BasePage
 		setDefaultModel(Model.of(person));
 
 
-		final CompoundPropertyModel<Person> cpm = new CompoundPropertyModel<>(person);
+		final IModel<Person> cpm = Model.of(person);
 
 		form = new Form<>("form", cpm);
 		form.setOutputMarkupId(true);
@@ -68,7 +51,7 @@ public class ViewOrEditPage extends BasePage
 		form.add(about);
 
 		married = new EditableCheckbox<>("married",
-			cpm, Model.of("Married"));
+			new PropertyModel<>(person, "married"), Model.of("Married"));
 
 		form.add(married);
 
@@ -83,7 +66,7 @@ public class ViewOrEditPage extends BasePage
 			@Override
 			public void onSubmit(final AjaxRequestTarget target, final Form<?> form)
 			{
-				ViewOrEditPage.this.onSubmit(target, form);
+				ViewOrEditExamplePanel.this.onSubmit(target, form);
 			}
 		};
 
@@ -97,9 +80,8 @@ public class ViewOrEditPage extends BasePage
 			@Override
 			public void onClick(final AjaxRequestTarget target)
 			{
-				info("Person:" + getDefaultModelObjectAsString());
-				ViewOrEditPage.this.enableFields = !ViewOrEditPage.this.enableFields;
-				if (ViewOrEditPage.this.enableFields)
+				ViewOrEditExamplePanel.this.enableFields = !ViewOrEditExamplePanel.this.enableFields;
+				if (ViewOrEditExamplePanel.this.enableFields)
 				{
 					about.getSwapPanel().onSwapToEdit(target, form);
 					nameTextField.getSwapPanel().onSwapToEdit(target, form);
@@ -119,14 +101,12 @@ public class ViewOrEditPage extends BasePage
 		form.add(submitButton);
 
 		add(new FeedbackPanel("feedbackpanel"));
-
-
 	}
 
 	public void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
 		info("Person:" + getDefaultModelObjectAsString());
-		ViewOrEditPage.this.enableFields = !ViewOrEditPage.this.enableFields;
-		if (ViewOrEditPage.this.enableFields)
+		ViewOrEditExamplePanel.this.enableFields = !ViewOrEditExamplePanel.this.enableFields;
+		if (ViewOrEditExamplePanel.this.enableFields)
 		{
 			about.getSwapPanel().onSwapToEdit(target, form);
 			nameTextField.getSwapPanel().onSwapToEdit(target, form);
