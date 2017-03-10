@@ -5,10 +5,9 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 
 import de.alpharogroup.test.objects.Gender;
 import de.alpharogroup.test.objects.Person;
@@ -16,16 +15,16 @@ import de.alpharogroup.wicket.components.editable.checkbox.EditableCheckbox;
 import de.alpharogroup.wicket.components.editable.textarea.EditableTextArea;
 import de.alpharogroup.wicket.components.editable.textfield.EditableTextField;
 
-public class ViewOrEditExamplePanel extends Panel
+public class ViewOrEditExamplePanel extends GenericPanel<Person>
 {
 
 	private boolean enableFields = true;
-	private final EditableTextArea about;
-	private final EditableTextField nameTextField;
+	private final EditableTextArea<Person> about;
+	private final EditableTextField<Person> nameTextField;
 	private final EditableCheckbox<Person> married;
 	private final Form<Person> form;
 
-	public ViewOrEditExamplePanel(final String id, final IModel<?> model)
+	public ViewOrEditExamplePanel(final String id, final IModel<Person> model)
 	{
 		super(id, model);
 
@@ -34,24 +33,24 @@ public class ViewOrEditExamplePanel extends Panel
 		person.setName("");
 		person.setAbout("bla");
 		person.setMarried(false);
-		setDefaultModel(Model.of(person));
+		setModel(Model.of(person));
 
 
-		final IModel<Person> cpm = Model.of(person);
+		final IModel<Person> cpm = getModel();
 
 		form = new Form<>("form", cpm);
 		form.setOutputMarkupId(true);
 		add(form);
-		nameTextField = new EditableTextField("name",
-			new PropertyModel<>(person, "name"), Model.of("Name"));
+		nameTextField = new EditableTextField<>("name",
+			getModel(), Model.of("Name"));
 		form.add(nameTextField);
 
-		about = new EditableTextArea("about",
-			new PropertyModel<>(person, "about"), Model.of("About"));
+		about = new EditableTextArea<>("about",
+			getModel(), Model.of("About"));
 		form.add(about);
 
 		married = new EditableCheckbox<>("married",
-			new PropertyModel<>(person, "married"), Model.of("Married"));
+			getModel(), Model.of("Married"));
 
 		form.add(married);
 
@@ -80,20 +79,7 @@ public class ViewOrEditExamplePanel extends Panel
 			@Override
 			public void onClick(final AjaxRequestTarget target)
 			{
-				ViewOrEditExamplePanel.this.enableFields = !ViewOrEditExamplePanel.this.enableFields;
-				if (ViewOrEditExamplePanel.this.enableFields)
-				{
-					about.getSwapPanel().onSwapToEdit(target, form);
-					nameTextField.getSwapPanel().onSwapToEdit(target, form);
-					married.getSwapPanel().onSwapToEdit(target, form);
-				}
-				else
-				{
-					about.getSwapPanel().onSwapToView(target, form);
-					nameTextField.getSwapPanel().onSwapToView(target, form);
-					married.getSwapPanel().onSwapToView(target, form);
-				}
-
+				ViewOrEditExamplePanel.this.onSubmit(target, form);
 			}
 		};
 		form.add(link);
@@ -106,6 +92,7 @@ public class ViewOrEditExamplePanel extends Panel
 	public void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
 		info("Person:" + getDefaultModelObjectAsString());
 		ViewOrEditExamplePanel.this.enableFields = !ViewOrEditExamplePanel.this.enableFields;
+		ViewOrEditExamplePanel.this.setModelObject(ViewOrEditExamplePanel.this.getModelObject());
 		if (ViewOrEditExamplePanel.this.enableFields)
 		{
 			about.getSwapPanel().onSwapToEdit(target, form);

@@ -21,13 +21,13 @@ import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 
 import de.alpharogroup.resourcebundle.locale.ResourceBundleKey;
 import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 
-public class EditPersonPanel extends Panel
+public class EditPersonPanel extends GenericPanel<PersonBean>
 {
 
 	/**
@@ -40,7 +40,7 @@ public class EditPersonPanel extends Panel
 		super(id, model);
 		setOutputMarkupId(true);
 		setDefaultModel(model);
-		final Form<PersonBean> form = new Form<PersonBean>("editPersonForm");
+		final Form<PersonBean> form = new Form<>("editPersonForm");
 		form.setOutputMarkupId(true);
 		add(form);
 		form.add(new TextField<String>("firstName").setOutputMarkupId(true));
