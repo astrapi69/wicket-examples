@@ -18,6 +18,7 @@ package de.alpharogroup.wicket.components.examples.sign.in;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -75,7 +76,28 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			@Override
 			protected Button newButton(final String id)
 			{
-				final Button button = super.newButton(id);
+				final AjaxButton button = new AjaxButton(id)
+				{
+					/**
+					 * The serialVersionUID.
+					 */
+					private static final long serialVersionUID = 1L;
+
+					/**
+					 * {@inheritDoc}
+					 */
+					@Override
+					public void onSubmit(final AjaxRequestTarget target, final Form<?> form)
+					{
+						SigninExamplesPanel.this.onSignin(target, form);
+					}
+
+					@Override
+					protected void onError(final AjaxRequestTarget target, final Form<?> form)
+					{
+						SigninExamplesPanel.this.onError(target, form);
+					}
+				};
 				button.add(Wrappers.FORM_GROUP_ELEMENT)
 					.add(new JqueryStatementsBehavior()
 						.add(new BuildableChainableStatement.Builder().label("wrap")
@@ -220,6 +242,22 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	 *            the form
 	 */
 	protected void onSignin(final AjaxRequestTarget target, final Form<?> form)
+	{
+		target.add(getFeedback());
+		info("Email: " + getModelObject().getEmail() + "\nPassword:"
+			+ getModelObject().getPassword());
+	}
+
+	/**
+	 * Application specific callback method that have to be overwritten to provide the action for
+	 * signin.
+	 *
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
+	 */
+	protected void onError(final AjaxRequestTarget target, final Form<?> form)
 	{
 		target.add(getFeedback());
 		info("Email: " + getModelObject().getEmail() + "\nPassword:"

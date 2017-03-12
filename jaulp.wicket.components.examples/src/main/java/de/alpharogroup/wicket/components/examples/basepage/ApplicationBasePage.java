@@ -79,8 +79,9 @@ import lombok.Getter;
  *            the generic type of the model
  */
 @ImportResources(resources = {
-		@ImportResource(resourceName = "main.css", resourceType = "css", index = 1),
-		@ImportResource(resourceName = "bootstrap_alert.js", resourceType = "js", index = 2) })
+		@ImportResource(resourceName = "main.css", resourceType = "css", index = 1)
+//		, @ImportResource(resourceName = "bootstrap_alert.js", resourceType = "js", index = 2	)
+		})
 public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 {
 

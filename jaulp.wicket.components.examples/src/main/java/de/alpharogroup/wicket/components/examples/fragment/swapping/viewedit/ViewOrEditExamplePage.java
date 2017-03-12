@@ -41,7 +41,10 @@ public class ViewOrEditExamplePage extends PubliclyBasePage<Person>
 	{
 		if(model == null) {
 			return new ViewOrEditExamplePanel(id, Model.of(Person.builder()
-				.name("").about("").married(true).gender(Gender.UNDEFINED)
+				.gender(Gender.UNDEFINED)
+				.name("")
+				.about("foo bar")
+				.married(true)
 				.build()));
 		}
 		return new ViewOrEditExamplePanel(id, model);
