@@ -13,6 +13,8 @@
 
 	<artifactId>wicket-examples</artifactId>
 	<packaging>pom</packaging>
+	
+	<name>${project.artifactId}</name>
 
 	<modules>
 		<module>swap.fragments</module>
