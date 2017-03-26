@@ -212,6 +212,15 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 				SigninExamplesPanel.this.onSignin(target, form);
 			}
 
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			protected void onError(final AjaxRequestTarget target, final Form<?> form)
+			{
+				SigninExamplesPanel.this.onError(target, form);
+			}
+
 		};
 		return signFormPanel;
 	}
