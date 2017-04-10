@@ -54,16 +54,17 @@ public class NavbarExamplePanel extends Panel {
 	 */
 	protected IModel<List<LinkItem>> newNavbarLinkItems()
 	{
-		final List<LinkItem> linkModel = new ArrayList<LinkItem>();
+		final List<LinkItem> linkModel = new ArrayList<>();
 		linkModel.add(LinkItem
 			.builder()
 			.url("http://www.alpharogroup.de/")
 			.target(DefaultTargets.BLANK.getTarget())
-			.linkClass(ExternalLink.class)
 			// open in a new tab or window...
+			.linkClass(ExternalLink.class)
 			.resourceModelKey(
 				ResourceBundleKey.builder().key("main.footer.copyright.label")
-					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
+					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group")
+					.build())
 			.build());
 		linkModel.add(LinkItem
 			.builder()
