@@ -43,14 +43,20 @@ public class StartComponentExamples
 		startWicketApplication(configurationPropertiesResolver);
 	}
 
-	private static void startWicketApplication(final ConfigurationPropertiesResolver configurationPropertiesResolver)
+	private static void startWicketApplication(
+		final ConfigurationPropertiesResolver configurationPropertiesResolver)
 	{
+		String runtimeConfigurationType;
+//		runtimeConfigurationType = "development";
+		runtimeConfigurationType = "deployment";
+
 		final String projectName = "jaulp.wicket.components.examples";
 		final File projectDirectory = PathFinder.getProjectDirectory();
 		final File webapp = Jetty9Runner.getWebappDirectory(projectDirectory, projectName);
 		final File logFile = Jetty9Runner.getLogFile(projectDirectory, "application.log");
 
-		final StartConfig startConfig = StartConfig.builder().applicationName(WicketApplication.class.getName())
+		final StartConfig startConfig = StartConfig.builder()
+			.applicationName(WicketApplication.class.getName())
 			.contextPath("/")
 			.filterPath("/*")
 			.httpPort(configurationPropertiesResolver.getHttpPort())
@@ -59,7 +65,7 @@ public class StartComponentExamples
 			.keyStorePathResource("/keystore")
 			.projectDirectory(projectDirectory)
 			.projectName(projectName)
-			.runtimeConfigurationType("deployment")
+			.runtimeConfigurationType(runtimeConfigurationType)
 			.sessionTimeout((int)Duration.minutes(1).seconds())
 			.webapp(webapp)
 			.logFile(logFile)
