@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -10,77 +10,54 @@
 		<version>7.5.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>rest-annotations</artifactId>
+	<artifactId>jaulp-wicket-data-provider-examples</artifactId>
 	<packaging>war</packaging>
-
-
 	<name>${project.artifactId}</name>
-	<!-- <organization> <name>company name</name> <url>company url</url> </organization> -->
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+
+	<description>
+		Demonstrates how to use the dialogs from the
+	  	'jaulp-wicket-data-provider' project.
+	</description>
 
 	<dependencies>
-		<!-- RESTFUL-WICKET DEPENDENCIES -->
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-restannotations</artifactId>
-			<version>${wicket.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-restannotations-json</artifactId>
-			<version>${wicket.version}</version>
-		</dependency>
-		<!-- DEPENDENCIES REQUIRED TO RUN EXAMPLES WITH JETTY -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.2.4</version>
-		</dependency>
-		<!-- TEST OBJECTS DEPENDENCY -->
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>test-objects</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.6</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpasyncclient</artifactId>
-			<version>4.0.2</version>
-			<scope>test</scope>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>xml-extensions</artifactId>
+			<artifactId>jaulp-wicket-base</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.ning</groupId>
-			<artifactId>async-http-client</artifactId>
-			<version>1.9.11</version>
-			<scope>test</scope>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>jaulp-wicket-data-provider</artifactId>
 		</dependency>
-		
+
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>jaulp-wicket-components</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>file-worker</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>vintage-time</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 
 	</dependencies>
+
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -139,6 +116,7 @@
 			</plugins>
 		</pluginManagement>
 
+
 		<plugins>
 
 			<plugin>
@@ -164,10 +142,21 @@
 			</plugin>
 			<!-- exclude this artifact from deploy -->
 			<plugin>
-				<inherited>false</inherited>
+				<inherited>true</inherited>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- skip this project from deploy and staging. -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
 				</configuration>
 			</plugin>
 

@@ -9,11 +9,21 @@
 		<artifactId>wicket-examples</artifactId>
 		<version>7.5.0-SNAPSHOT</version>
 	</parent>
+	
+	<artifactId>swap-fragments</artifactId>
 
-	<artifactId>wicket-ssl</artifactId>
 	<packaging>war</packaging>
 	<!-- TODO project name -->
 	<name>${project.artifactId}</name>
+	<description></description>
+	<!-- <organization> <name>company name</name> <url>company url</url> </organization> -->
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<dependencies>
 		<!-- WICKET DEPENDENCIES -->
@@ -21,21 +31,19 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
 		</dependency>
-		<!-- WICKETSTUFF DEPENDENCIES -->
+		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-annotation</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-		<!-- LESS-CSS DEPENDENCIES -->
 		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>simple-tmpl-less</artifactId>
-			<version>1.1.0</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
-
+		<!-- JUNIT DEPENDENCY FOR TESTING -->
 		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>resourcebundle-inspector</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -47,6 +55,17 @@
 
 			<resource>
 				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+
+			<resource>
+				<filtering>false</filtering>
 				<directory>src/main/resources</directory>
 			</resource>
 
@@ -55,6 +74,25 @@
 			</resource>
 
 		</resources>
+
+		<testResources>
+
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/resources</directory>
+			</testResource>
+
+		</testResources>
 
 		<pluginManagement>
 			<plugins>

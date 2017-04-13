@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -10,33 +8,16 @@
 		<version>7.5.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>wicket-ssl</artifactId>
+	<artifactId>wicket-xslt-examples</artifactId>
 	<packaging>war</packaging>
-	<!-- TODO project name -->
 	<name>${project.artifactId}</name>
 
+
 	<dependencies>
-		<!-- WICKET DEPENDENCIES -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-core</artifactId>
-		</dependency>
-		<!-- WICKETSTUFF DEPENDENCIES -->
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-annotation</artifactId>
-		</dependency>
-		<!-- LESS-CSS DEPENDENCIES -->
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>simple-tmpl-less</artifactId>
-			<version>1.1.0</version>
-		</dependency>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>resourcebundle-inspector</artifactId>
-			<scope>test</scope>
+			<artifactId>jaulp-wicket-base</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -44,6 +25,17 @@
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<resources>
+
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
 
 			<resource>
 				<filtering>false</filtering>
@@ -55,6 +47,25 @@
 			</resource>
 
 		</resources>
+
+		<testResources>
+
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/resources</directory>
+			</testResource>
+
+		</testResources>
 
 		<pluginManagement>
 			<plugins>
@@ -93,10 +104,21 @@
 			</plugin>
 			<!-- exclude this artifact from deploy -->
 			<plugin>
-				<inherited>false</inherited>
+				<inherited>true</inherited>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- skip this project from deploy and staging. -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
 				</configuration>
 			</plugin>
 
