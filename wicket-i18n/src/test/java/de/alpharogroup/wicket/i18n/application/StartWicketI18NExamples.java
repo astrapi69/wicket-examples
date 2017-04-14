@@ -27,28 +27,22 @@ public class StartWicketI18NExamples
 		startWicketApplication(configurationPropertiesResolver);
 	}
 
-	private static void startWicketApplication(final ConfigurationPropertiesResolver configurationPropertiesResolver)
+	private static void startWicketApplication(
+		final ConfigurationPropertiesResolver configurationPropertiesResolver)
 	{
 		final String projectName = "wicket-i18n";
 		final File projectDirectory = PathFinder.getProjectDirectory();
 		final File webapp = Jetty9Runner.getWebappDirectory(projectDirectory, projectName);
 		final File logFile = Jetty9Runner.getLogFile(projectDirectory, "application.log");
 
-		final StartConfig startConfig = StartConfig.builder().applicationName(WicketApplication.class.getName())
-			.contextPath("/")
-			.filterPath("/*")
+		final StartConfig startConfig = StartConfig.builder()
+			.applicationName(WicketApplication.class.getName()).contextPath("/").filterPath("/*")
 			.httpPort(configurationPropertiesResolver.getHttpPort())
-			.httpsPort(configurationPropertiesResolver.getHttpsPort())
-			.keyStorePassword("wicket")
-			.keyStorePathResource("/keystore")
-			.projectDirectory(projectDirectory)
-			.projectName(projectName)
-			.runtimeConfigurationType("deployment")
-			.sessionTimeout((int)Duration.minutes(1).seconds())
-			.webapp(webapp)
-			.logFile(logFile)
-			.absolutePathFromLogfile(logFile.getAbsolutePath())
-			.build();
+			.httpsPort(configurationPropertiesResolver.getHttpsPort()).keyStorePassword("wicket")
+			.keyStorePathResource("/keystore").projectDirectory(projectDirectory)
+			.projectName(projectName).runtimeConfigurationType("deployment")
+			.sessionTimeout((int)Duration.minutes(1).seconds()).webapp(webapp).logFile(logFile)
+			.absolutePathFromLogfile(logFile.getAbsolutePath()).build();
 
 		WicketJetty9Runner.run(startConfig);
 	}

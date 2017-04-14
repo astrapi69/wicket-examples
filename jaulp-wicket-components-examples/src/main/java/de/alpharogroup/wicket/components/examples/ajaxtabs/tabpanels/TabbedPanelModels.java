@@ -18,14 +18,14 @@ package de.alpharogroup.wicket.components.examples.ajaxtabs.tabpanels;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import org.apache.log4j.Logger;
 
 @Getter
 @Setter
@@ -46,8 +46,8 @@ public class TabbedPanelModels<T> implements Serializable
 	{
 		if (getTabModels() == null)
 		{
-			LOGGER
-				.info("The list tabModels is null! Please set the list tabModels and add than the Given tabModel.");
+			LOGGER.info(
+				"The list tabModels is null! Please set the list tabModels and add than the Given tabModel.");
 			return this;
 		}
 		getTabModels().add(tabModel);

@@ -31,7 +31,8 @@ public class SignupPage extends PubliclyBasePage<BaseUsernameSignUpModel>
 	@Override
 	public Component newContainerPanel(final String id, final IModel<BaseUsernameSignUpModel> model)
 	{
-		if(model == null) {
+		if (model == null)
+		{
 			final BaseUsernameSignUpModel signUpModelBean = new BaseUsernameSignUpModel();
 			signUpModelBean.setEmail("");
 			signUpModelBean.setPassword("");

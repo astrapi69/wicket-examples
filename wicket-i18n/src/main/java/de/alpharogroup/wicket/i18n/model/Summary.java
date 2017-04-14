@@ -6,9 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
-@Builder(toBuilder=true)
+@Builder(toBuilder = true)
 @Data
-public class Summary implements Serializable {
+public class Summary implements Serializable
+{
+
+	public static class SummaryBuilder
+	{
+		private MessagePreferences messagePreferences = MessagePreferences.LONG;
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,12 +23,8 @@ public class Summary implements Serializable {
 	private String title;
 
 	private String titleUrl;
-
 	private String rate;
+
 	@NonNull
 	private MessagePreferences messagePreferences = MessagePreferences.LONG;
-
-	public static class SummaryBuilder {
-		private MessagePreferences messagePreferences = MessagePreferences.LONG;
-	}
 }

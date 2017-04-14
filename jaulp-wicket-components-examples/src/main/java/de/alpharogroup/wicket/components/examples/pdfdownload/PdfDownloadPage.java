@@ -41,10 +41,10 @@ public class PdfDownloadPage extends PubliclyBasePage<Object>
 	@Override
 	public Component newContainerPanel(final String id, final IModel<Object> model)
 	{
-		final DownloadModelBean downloadModelBean = DownloadModelBean.builder().filename("download.pdf")
-			.path("pdf/download.pdf").contentType("application/pdf").build();
-		final DownloadPanel downloadPanel = new DownloadPanel(id,
-			Model.of(downloadModelBean))
+		final DownloadModelBean downloadModelBean = DownloadModelBean.builder()
+			.filename("download.pdf").path("pdf/download.pdf").contentType("application/pdf")
+			.build();
+		final DownloadPanel downloadPanel = new DownloadPanel(id, Model.of(downloadModelBean))
 		{
 			private static final long serialVersionUID = 1L;
 

@@ -18,13 +18,13 @@ public class ChatMessage implements Serializable
 		this.message = message;
 	}
 
-	public String getReceiver()
-	{
-		return receiver;
-	}
-
 	public String getMessage()
 	{
 		return message;
+	}
+
+	public String getReceiver()
+	{
+		return receiver;
 	}
 }

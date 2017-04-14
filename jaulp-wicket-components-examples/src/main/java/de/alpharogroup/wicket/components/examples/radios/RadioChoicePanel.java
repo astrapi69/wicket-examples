@@ -79,8 +79,7 @@ public class RadioChoicePanel extends Panel
 
 		};
 		final RadioChoice<Brands> brandingType = ComponentFactory.newRadioChoice("branding",
-			new PropertyModel<>(this, "selected")
-			, TYPES, renderer);
+			new PropertyModel<>(this, "selected"), TYPES, renderer);
 		// dont add a <br> after every radio...
 		brandingType.setSuffix("");
 		brandingType.setOutputMarkupId(true);

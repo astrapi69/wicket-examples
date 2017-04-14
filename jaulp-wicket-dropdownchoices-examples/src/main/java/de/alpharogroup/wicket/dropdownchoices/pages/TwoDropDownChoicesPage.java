@@ -38,7 +38,8 @@ import de.alpharogroup.wicket.model.dropdownchoices.TwoDropDownChoicesModel;
  *
  * @author Asterios Raptis
  */
-@ImportResources(resources = { @ImportResource(resourceName = "TwoDropDownChoicesPage.css", resourceType = "css") })
+@ImportResources(resources = {
+		@ImportResource(resourceName = "TwoDropDownChoicesPage.css", resourceType = "css") })
 public class TwoDropDownChoicesPage extends WebPage
 {
 
@@ -63,8 +64,9 @@ public class TwoDropDownChoicesPage extends WebPage
 		add(selectOptionForm);
 
 		final TwoDropDownChoicesPanel<String> twoDropDownChoicesPanel = new TrademarksModelsPanel(
-			"twoDropDownChoicesPanel", boundOptionModel, new PropertiesChoiceRenderer(this,
-				this.getClass()), new PropertiesChoiceRenderer(this, this.getClass()));
+			"twoDropDownChoicesPanel", boundOptionModel,
+			new PropertiesChoiceRenderer(this, this.getClass()),
+			new PropertiesChoiceRenderer(this, this.getClass()));
 		final AttributeModifier sam = new AttributeModifier("style",
 			"width: 200px; margin-bottom: 20px;");
 		final AttributeModifier samClass = new AttributeModifier("class", "nowrap");
@@ -92,10 +94,10 @@ public class TwoDropDownChoicesPage extends WebPage
 			public void onSubmit()
 			{
 
-				System.out.println("RootOption:"
-					+ stringTwoDropDownChoicesModel.getSelectedRootOption());
-				System.out.println("ChildOption:"
-					+ stringTwoDropDownChoicesModel.getSelectedChildOption());
+				System.out
+					.println("RootOption:" + stringTwoDropDownChoicesModel.getSelectedRootOption());
+				System.out.println(
+					"ChildOption:" + stringTwoDropDownChoicesModel.getSelectedChildOption());
 
 			}
 		};

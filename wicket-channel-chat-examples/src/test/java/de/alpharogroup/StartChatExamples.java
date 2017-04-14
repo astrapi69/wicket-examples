@@ -31,26 +31,23 @@ public class StartChatExamples
 		System.setProperty("wicket.configuration", "development");
 		final String projectname = "wicket-channel-chat-examples";
 		final File projectDirectory = PathFinder.getProjectDirectory();
-		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src",
-			"main", "webapp");
+		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src", "main",
+			"webapp");
 
 		final String filterPath = "/*";
 
 		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
-			.getNewServletContextHandler(ServletContextHandlerConfiguration
-				.builder()
-				.filterHolderConfiguration(
-					FilterHolderConfiguration
-						.builder()
-						.filterClass(WicketFilter.class)
-						.filterPath(filterPath)
-						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
-						.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
-							WicketApplication.class.getName()).build())
-				.servletHolderConfiguration(
-					ServletHolderConfiguration.builder().servletClass(DefaultServlet.class)
-						.pathSpec(filterPath).build()).contextPath("/").webapp(webapp)
-				.maxInactiveInterval(sessionTimeout).filterPath(filterPath).build());
+			.getNewServletContextHandler(ServletContextHandlerConfiguration.builder()
+				.filterHolderConfiguration(FilterHolderConfiguration.builder()
+					.filterClass(WicketFilter.class).filterPath(filterPath)
+					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
+					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
+						WicketApplication.class.getName())
+					.build())
+				.servletHolderConfiguration(ServletHolderConfiguration.builder()
+					.servletClass(DefaultServlet.class).pathSpec(filterPath).build())
+				.contextPath("/").webapp(webapp).maxInactiveInterval(sessionTimeout)
+				.filterPath(filterPath).build());
 
 		final Jetty9RunConfiguration config = Jetty9RunConfiguration.builder()
 			.servletContextHandler(servletContextHandler)

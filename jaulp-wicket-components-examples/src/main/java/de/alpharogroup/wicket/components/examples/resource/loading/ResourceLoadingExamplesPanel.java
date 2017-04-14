@@ -40,8 +40,8 @@ public class ResourceLoadingExamplesPanel extends BasePanel<ResourceLoadingBean>
 		// The resource is loaded from the BundleStringResourceLoader that are added in the init
 		// method of application...
 		// the key is in the resource bundle MessageSource.properties in this package.
-		add(new Label("messageSourceLabel", ResourceModelFactory.newResourceModel(ResourceBundleKey
-			.builder().key("foo.bar.bla").build())));
+		add(new Label("messageSourceLabel", ResourceModelFactory
+			.newResourceModel(ResourceBundleKey.builder().key("foo.bar.bla").build())));
 	}
 
 }

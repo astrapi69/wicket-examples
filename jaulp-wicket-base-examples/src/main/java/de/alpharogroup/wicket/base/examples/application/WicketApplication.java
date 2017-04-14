@@ -73,8 +73,8 @@ public class WicketApplication extends WebApplication
 
 		// install crypto mapper to encrypt all application urls
 		getSecuritySettings().setCryptFactory(new KeyInSessionSunJceCryptFactory());
-		setRootRequestMapper(new HighScoreRequestMapper().register(new CryptoMapper(
-			getRootRequestMapper(), this)));
+		setRootRequestMapper(
+			new HighScoreRequestMapper().register(new CryptoMapper(getRootRequestMapper(), this)));
 		initializeAllHeaderContributors();
 		new AnnotatedMountScanner().scanPackage(getPackageToScan()).mount(this);
 		// add your configuration here
@@ -91,10 +91,9 @@ public class WicketApplication extends WebApplication
 		}
 		catch (final ClassNotFoundException e)
 		{
-			logger
-				.error(
-					"ClassNotFoundException in the initializeResources-Method from the WicketApplication.",
-					e);
+			logger.error(
+				"ClassNotFoundException in the initializeResources-Method from the WicketApplication.",
+				e);
 		}
 		catch (final IOException e)
 		{

@@ -29,13 +29,29 @@ import lombok.experimental.ExtensionMethod;
 public class StartSslExamplesWithJettyRunner
 {
 
+	/**
+	 * Gets the project name.
+	 *
+	 * @return the project name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	protected static String getProjectName() throws IOException
+	{
+		final Properties projectProperties = PropertiesExtensions
+			.loadProperties("project.properties");
+		final String projectName = projectProperties.getProperty("artifactId");
+		return projectName;
+	}
+
 	public static void main(final String[] args) throws Exception
 	{
-		final int sessionTimeout = (int) Duration.minutes(30).seconds();// set timeout to 30min(60sec * 30min=1800sec)...
+		final int sessionTimeout = (int)Duration.minutes(30).seconds();// set timeout to 30min(60sec
+																		// * 30min=1800sec)...
 		// change this if your on production with deployment
 		String configurationType;
 		configurationType = "development";
-//		configurationType = "deployment";
+		// configurationType = "deployment";
 		System.setProperty("wicket.configuration", configurationType);
 		final String projectname = getProjectName();
 		final File projectDirectory = PathFinder.getProjectDirectory();
@@ -45,43 +61,40 @@ public class StartSslExamplesWithJettyRunner
 		final String filterPath = "/*";
 
 		final File logfile = new File(projectDirectory, "application.log");
-		if(logfile.exists()) {
-			try {
+		if (logfile.exists())
+		{
+			try
+			{
 				DeleteFileExtensions.delete(logfile);
-			} catch (final IOException e) {
+			}
+			catch (final IOException e)
+			{
 				Logger.getRootLogger().error("logfile could not deleted.", e);
 			}
 		}
 		final String absolutePathFromLogfile = logfile.getAbsolutePath();
 		// Add a file appender to the logger programatically
-		Logger.getRootLogger().addFileAppender(LoggerExtensions.newFileAppender(absolutePathFromLogfile));
+		Logger.getRootLogger()
+			.addFileAppender(LoggerExtensions.newFileAppender(absolutePathFromLogfile));
 
-		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory.getNewServletContextHandler(
-			ServletContextHandlerConfiguration.builder()
-			.filterHolderConfiguration(
-				FilterHolderConfiguration.builder()
-					.filterClass(WicketFilter.class)
-					.name(projectname)
-					.filterPath(filterPath)
+		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
+			.getNewServletContextHandler(ServletContextHandlerConfiguration.builder()
+				.filterHolderConfiguration(FilterHolderConfiguration.builder()
+					.filterClass(WicketFilter.class).name(projectname).filterPath(filterPath)
 					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, filterPath)
 					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
 						WicketApplication.class.getName())
 					.build())
-			.servletHolderConfiguration(
-				ServletHolderConfiguration.builder()
-					.servletClass(DefaultServlet.class)
-					.pathSpec(filterPath)
-					.build())
-			.contextPath("/")
-			.webapp(webapp)
-			.maxInactiveInterval(sessionTimeout)
-			.filterPath(filterPath)
-			.initParameter("contextConfigLocation",
-				"classpath:applicationContext.hbm.xml\nclasspath:applicationContext.xml")
-			.initParameter("configuration", configurationType)
-			.build());
+				.servletHolderConfiguration(ServletHolderConfiguration.builder()
+					.servletClass(DefaultServlet.class).pathSpec(filterPath).build())
+				.contextPath("/").webapp(webapp).maxInactiveInterval(sessionTimeout)
+				.filterPath(filterPath)
+				.initParameter("contextConfigLocation",
+					"classpath:applicationContext.hbm.xml\nclasspath:applicationContext.xml")
+				.initParameter("configuration", configurationType).build());
 
-		final Jetty9RunConfiguration configuration = newJetty9RunConfiguration(servletContextHandler);
+		final Jetty9RunConfiguration configuration = newJetty9RunConfiguration(
+			servletContextHandler);
 
 		final Server server = new Server();
 		Jetty9Runner.runServletContextHandler(server, configuration);
@@ -101,33 +114,17 @@ public class StartSslExamplesWithJettyRunner
 		final ServletContextHandler servletContextHandler)
 	{
 
-		final ConfigurationPropertiesResolver configurationPropertiesResolver =
-			new ConfigurationPropertiesResolver(
-				WicketApplication.DEFAULT_HTTP_PORT,
-				WicketApplication.DEFAULT_HTTPS_PORT,
-				ConfigurationPropertiesResolver.DEFAULT_CONFIGURATION_PROPERTIES_FILENAME);
+		final ConfigurationPropertiesResolver configurationPropertiesResolver = new ConfigurationPropertiesResolver(
+			WicketApplication.DEFAULT_HTTP_PORT, WicketApplication.DEFAULT_HTTPS_PORT,
+			ConfigurationPropertiesResolver.DEFAULT_CONFIGURATION_PROPERTIES_FILENAME);
 
 		final Jetty9RunConfiguration configuration = Jetty9RunConfiguration.builder()
 			.servletContextHandler(servletContextHandler)
 			.httpPort(configurationPropertiesResolver.getHttpPort())
-			.httpsPort(configurationPropertiesResolver.getHttpsPort())
-			.keyStorePassword("wicket")
-			.keyStorePathResource("/keystore")
-			.build();
+			.httpsPort(configurationPropertiesResolver.getHttpsPort()).keyStorePassword("wicket")
+			.keyStorePathResource("/keystore").build();
 
 		return configuration;
-	}
-
-	/**
-	 * Gets the project name.
-	 *
-	 * @return the project name
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	protected static String getProjectName() throws IOException {
-		final Properties projectProperties = PropertiesExtensions.loadProperties("project.properties");
-		final String projectName = projectProperties.getProperty("artifactId");
-		return projectName;
 	}
 
 }

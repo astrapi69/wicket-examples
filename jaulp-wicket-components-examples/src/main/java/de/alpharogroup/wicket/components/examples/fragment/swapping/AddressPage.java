@@ -37,7 +37,8 @@ public class AddressPage extends PubliclyBasePage<HomeAddress>
 	@Override
 	public Component newContainerPanel(final String id, final IModel<HomeAddress> model)
 	{
-		if(model == null) {
+		if (model == null)
+		{
 			return new AddressPanel(id, Model.of(new HomeAddress()));
 		}
 		return new AddressPanel(id, model);

@@ -17,8 +17,8 @@ public class ReceiverFilter implements Predicate<AtmosphereEvent>
 		if (input.getPayload() instanceof ChatMessage)
 		{
 			ChatMessage msg = (ChatMessage)input.getPayload();
-			return msg.getReceiver() == null || msg.getReceiver().isEmpty() ||
-				msg.getReceiver().equals(Session.get().getId());
+			return msg.getReceiver() == null || msg.getReceiver().isEmpty()
+				|| msg.getReceiver().equals(Session.get().getId());
 		}
 		return false;
 	}

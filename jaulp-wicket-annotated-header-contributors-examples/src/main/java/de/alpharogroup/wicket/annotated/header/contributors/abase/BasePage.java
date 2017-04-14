@@ -62,8 +62,8 @@ public abstract class BasePage extends AbstractBasePage
 	public BasePage(final PageParameters parameters)
 	{
 		super(parameters);
-		title = ResourceModelFactory.newResourceModel(ResourceBundleKey.builder().key("page.title")
-			.defaultValue("").build(), this);
+		title = ResourceModelFactory.newResourceModel(
+			ResourceBundleKey.builder().key("page.title").defaultValue("").build(), this);
 		add(new Label("title", title));
 	}
 

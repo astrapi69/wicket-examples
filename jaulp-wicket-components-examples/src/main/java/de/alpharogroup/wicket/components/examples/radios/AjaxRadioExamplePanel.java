@@ -18,8 +18,6 @@ package de.alpharogroup.wicket.components.examples.radios;
 import java.util.Arrays;
 import java.util.List;
 
-import lombok.Getter;
-
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -33,6 +31,7 @@ import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.radio.AjaxRadioPanel;
 import de.alpharogroup.wicket.components.radio.RadioGroupModelBean;
+import lombok.Getter;
 
 public class AjaxRadioExamplePanel extends BasePanel<List<Company>>
 {
@@ -49,8 +48,8 @@ public class AjaxRadioExamplePanel extends BasePanel<List<Company>>
 		super(id, model);
 		// create list...
 		final List<Company> items = Arrays.asList(Company.builder().name("Ferrari").build(),
-			Company.builder().name("Lamborgini").build(), Company.builder().name("Mazerati")
-				.build(), Company.builder().name("Porsche").build());
+			Company.builder().name("Lamborgini").build(),
+			Company.builder().name("Mazerati").build(), Company.builder().name("Porsche").build());
 		final RadioGroupModelBean<Company> radioGroupModel = new RadioGroupModelBean<>();
 		setModel(model);
 		radioGroupModel.setLabelPropertyExpression("name");
@@ -84,8 +83,8 @@ public class AjaxRadioExamplePanel extends BasePanel<List<Company>>
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		response.render(CssHeaderItem.forReference(new CssResourceReference(
-			AjaxRadioExamplePanel.class, "AjaxRadioExamplePanel.css")));
+		response.render(CssHeaderItem.forReference(
+			new CssResourceReference(AjaxRadioExamplePanel.class, "AjaxRadioExamplePanel.css")));
 
 	}
 }

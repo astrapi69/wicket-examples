@@ -25,31 +25,26 @@ public class AuthExample
 	public static void main(String[] args) throws ClientProtocolException, IOException
 	{
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-        cm.setMaxTotal(18);
-        cm.setDefaultMaxPerRoute(6);
-        
+		cm.setMaxTotal(18);
+		cm.setDefaultMaxPerRoute(6);
+
 		HttpGet httpget = new HttpGet("http://localhost:8080/employeesmanager/read/24");
-		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();		
-		credentialsProvider.setCredentials(new AuthScope("localhost", 8080, "myrealm"), new NTCredentials(
-			"wicket", "wicket", "localhost", "localhost"));		
+		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+		credentialsProvider.setCredentials(new AuthScope("localhost", 8080, "myrealm"),
+			new NTCredentials("wicket", "wicket", "localhost", "localhost"));
 
-        RequestConfig requestConfig = RequestConfig.custom()
-        .setSocketTimeout(30000)
-        .setConnectTimeout(30000)
-        .setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM))
-        .setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC))
-        .build();
-        
+		RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(30000)
+			.setConnectTimeout(30000).setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM))
+			.setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC)).build();
 
-		HttpClient httpclient =HttpClients.custom()
-	        .setConnectionManager(cm)
-	        .setDefaultCredentialsProvider(credentialsProvider)
-	        .setDefaultRequestConfig(requestConfig)
-	        .build();
-		
+
+		HttpClient httpclient = HttpClients.custom().setConnectionManager(cm)
+			.setDefaultCredentialsProvider(credentialsProvider)
+			.setDefaultRequestConfig(requestConfig).build();
+
 		HttpResponse response = httpclient.execute(httpget);
-		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity()
-			.getContent()));
+		BufferedReader rd = new BufferedReader(
+			new InputStreamReader(response.getEntity().getContent()));
 		String json = IOUtils.toString(rd);
 		System.out.println(json);
 	}

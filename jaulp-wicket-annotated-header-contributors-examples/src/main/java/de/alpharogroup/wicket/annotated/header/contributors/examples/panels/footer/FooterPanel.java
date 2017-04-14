@@ -24,7 +24,8 @@ import de.alpharogroup.wicket.annotated.header.contributors.abase.ApplicationBas
 /**
  * @author admin
  */
-@ImportResources(resources = { @ImportResource(resourceName = "FooterPanel.css", resourceType = "css", index = 0) })
+@ImportResources(resources = {
+		@ImportResource(resourceName = "FooterPanel.css", resourceType = "css", index = 0) })
 public class FooterPanel extends ApplicationBasePanel<Object>
 {
 

@@ -23,23 +23,26 @@ import org.apache.wicket.model.IModel;
 
 import de.alpharogroup.wicket.js.addon.collapse.CollapseJsReference;
 
-public class CollapsePanel extends Panel {
+public class CollapsePanel extends Panel
+{
 
 	/**
 	 * The serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CollapsePanel(final String id, final IModel<?> model) {
+	public CollapsePanel(final String id, final IModel<?> model)
+	{
 		super(id, model);
 
 	}
 
 	@Override
-	public void renderHead(final IHeaderResponse response) {
+	public void renderHead(final IHeaderResponse response)
+	{
 		super.renderHead(response);
 		response.render(JavaScriptHeaderItem
-				.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+			.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
 		response.render(JavaScriptHeaderItem.forReference(CollapseJsReference.get()));
 	}
 }

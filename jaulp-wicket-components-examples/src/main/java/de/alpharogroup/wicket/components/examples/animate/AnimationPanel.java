@@ -15,8 +15,6 @@
  */
 package de.alpharogroup.wicket.components.examples.animate;
 
-import lombok.Getter;
-
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
@@ -40,6 +38,7 @@ import de.alpharogroup.wicket.components.factory.ComponentFactory;
 import de.alpharogroup.wicket.js.addon.spin.SpinJsGenerator;
 import de.alpharogroup.wicket.js.addon.spin.SpinResourceReference;
 import de.alpharogroup.wicket.js.addon.spin.SpinSettings;
+import lombok.Getter;
 
 public class AnimationPanel extends Panel
 {
@@ -65,11 +64,10 @@ public class AnimationPanel extends Panel
 		form.add(containerAnimate);
 
 		final JqueryStatementsBehavior jqueryStatementsBehavior = new JqueryStatementsBehavior()
-			.add(
-				new BuildableChainableStatement.Builder().label("animate").args("{height: '300'}")
-					.build()).add(
-				new BuildableChainableStatement.Builder().label("animate").args("{left: '300px'}")
-					.build());
+			.add(new BuildableChainableStatement.Builder().label("animate").args("{height: '300'}")
+				.build())
+			.add(new BuildableChainableStatement.Builder().label("animate").args("{left: '300px'}")
+				.build());
 		final String render = (String)jqueryStatementsBehavior
 			.newRenderedStatement(containerAnimate);
 		System.out.println(render);
@@ -132,7 +130,8 @@ public class AnimationPanel extends Panel
 		return ComponentFactory.newLabel(id, model);
 	}
 
-	protected void onAnimate(final AjaxRequestTarget target, final Form<?> form, final boolean error)
+	protected void onAnimate(final AjaxRequestTarget target, final Form<?> form,
+		final boolean error)
 	{
 
 	}
@@ -141,8 +140,8 @@ public class AnimationPanel extends Panel
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		response.render(JavaScriptHeaderItem.forReference(Application.get()
-			.getJavaScriptLibrarySettings().getJQueryReference()));
+		response.render(JavaScriptHeaderItem
+			.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
 		response.render(JavaScriptHeaderItem.forReference(SpinResourceReference.get()));
 	}
 }

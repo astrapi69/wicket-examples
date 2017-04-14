@@ -8,19 +8,24 @@ import org.apache.wicket.model.IModel;
 
 import de.alpharogroup.swap.PersonModel;
 
-public class ViewPersonPanel extends Panel {
+public class ViewPersonPanel extends Panel
+{
 
 	/**
 	 * The serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ViewPersonPanel(String id, IModel<PersonModel> model) {
+	public ViewPersonPanel(String id, IModel<PersonModel> model)
+	{
 		super(id, model);
-		add(new AjaxFallbackLink<Object>("editLink") {
+		add(new AjaxFallbackLink<Object>("editLink")
+		{
 			private static final long serialVersionUID = 1L;
+
 			@Override
-			public void onClick(AjaxRequestTarget target) {
+			public void onClick(AjaxRequestTarget target)
+			{
 				ViewPersonPanel.this.onSubmit(target);
 			}
 		});
@@ -29,8 +34,9 @@ public class ViewPersonPanel extends Panel {
 		add(new Label("gender"));
 		add(new Label("age"));
 	}
-	
-	protected void onSubmit(final AjaxRequestTarget target) {		
+
+	protected void onSubmit(final AjaxRequestTarget target)
+	{
 	}
 
 }

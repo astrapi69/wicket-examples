@@ -20,11 +20,13 @@ import de.alpharogroup.wicket.components.examples.termofuse.TermOfUsePage;
 import de.alpharogroup.wicket.components.link.DefaultTargets;
 import de.alpharogroup.wicket.components.link.LinkItem;
 
-public class NavbarExamplePanel extends Panel {
+public class NavbarExamplePanel extends Panel
+{
 
 	private static final long serialVersionUID = 1L;
 
-	public NavbarExamplePanel(final String id, final IModel<?> model) {
+	public NavbarExamplePanel(final String id, final IModel<?> model)
+	{
 		super(id, model);
 		add(new NavbarBrandPanel("brandPanel", model)
 		{
@@ -55,28 +57,23 @@ public class NavbarExamplePanel extends Panel {
 	protected IModel<List<LinkItem>> newNavbarLinkItems()
 	{
 		final List<LinkItem> linkModel = new ArrayList<LinkItem>();
-		linkModel.add(LinkItem
-			.builder()
-			.url("http://www.alpharogroup.de/")
-			.target(DefaultTargets.BLANK.getTarget())
-			.linkClass(ExternalLink.class)
-			// open in a new tab or window...
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.footer.copyright.label")
+		linkModel
+			.add(LinkItem.builder().url("http://www.alpharogroup.de/")
+				.target(DefaultTargets.BLANK.getTarget()).linkClass(ExternalLink.class)
+				// open in a new tab or window...
+				.resourceModelKey(ResourceBundleKey.builder().key("main.footer.copyright.label")
 					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
-			.build());
-		linkModel.add(LinkItem
-			.builder()
-			.pageClass(ImprintPage.class)
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.global.menu.masthead.label")
-					.defaultValue("Imprint").build()).build());
-		linkModel.add(LinkItem
-			.builder()
-			.pageClass(TermOfUsePage.class)
-			.resourceModelKey(
-				ResourceBundleKey.builder().key("main.global.menu.term.of.use.label")
-					.defaultValue("AGBs").build()).build());
+				.build());
+		linkModel
+			.add(LinkItem.builder()
+				.pageClass(ImprintPage.class).resourceModelKey(ResourceBundleKey.builder()
+					.key("main.global.menu.masthead.label").defaultValue("Imprint").build())
+				.build());
+		linkModel
+			.add(LinkItem.builder().pageClass(TermOfUsePage.class)
+				.resourceModelKey(ResourceBundleKey.builder()
+					.key("main.global.menu.term.of.use.label").defaultValue("AGBs").build())
+				.build());
 		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
 		return listModel;
 	}

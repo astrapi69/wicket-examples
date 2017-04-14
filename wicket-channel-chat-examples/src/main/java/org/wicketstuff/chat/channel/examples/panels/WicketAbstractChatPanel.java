@@ -127,8 +127,8 @@ public abstract class WicketAbstractChatPanel extends Panel
 				getChannelService().publish(event);
 
 				// clear message area add focus it
-				target.appendJavaScript("document.getElementById('" + mess.getMarkupId()
-					+ "').value =''");
+				target.appendJavaScript(
+					"document.getElementById('" + mess.getMarkupId() + "').value =''");
 				target.focusComponent(mess);
 			}
 		});

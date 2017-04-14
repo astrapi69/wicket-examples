@@ -1,8 +1,10 @@
 package de.alpharogroup.wicket.i18n.model;
 
-public enum MessagePreferences {
+public enum MessagePreferences
+{
 	LONG, SHORT;
-	public String getStyle() {
+	public String getStyle()
+	{
 		return toString().toLowerCase();
 	}
 }

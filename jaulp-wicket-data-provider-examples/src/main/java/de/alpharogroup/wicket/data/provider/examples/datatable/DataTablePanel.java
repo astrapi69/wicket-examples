@@ -136,8 +136,8 @@ public class DataTablePanel extends Panel
 		columns.add(new PropertyColumn<Person, String>(Model.of("Date of birth"), "dateOfBirth",
 			"dateOfBirth"));
 
-		final DataTable<Person, String> tableWithFilterForm = new DataTable<>(
-			"tableWithFilterForm", columns, dataProvider, 10);
+		final DataTable<Person, String> tableWithFilterForm = new DataTable<>("tableWithFilterForm",
+			columns, dataProvider, 10);
 		tableWithFilterForm.setOutputMarkupId(true);
 
 		final FilterForm<PersonFilter> filterForm = new FilterForm<>("filterForm", dataProvider);

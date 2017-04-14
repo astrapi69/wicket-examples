@@ -31,7 +31,8 @@ import de.alpharogroup.wicket.components.examples.basepage.ApplicationBasePanel;
  * 
  * @author Asterios Raptis
  */
-@ImportResources(resources = { @ImportResource(resourceName = "LocaleMenuPanel.css", resourceType = "css", index = 1) })
+@ImportResources(resources = {
+		@ImportResource(resourceName = "LocaleMenuPanel.css", resourceType = "css", index = 1) })
 public class LocaleMenuPanel extends ApplicationBasePanel<Object>
 {
 

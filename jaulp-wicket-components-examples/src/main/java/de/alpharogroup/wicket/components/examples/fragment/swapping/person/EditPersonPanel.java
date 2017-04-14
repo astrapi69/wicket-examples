@@ -63,11 +63,9 @@ public class EditPersonPanel extends Panel
 			}
 		};
 		button.setOutputMarkupId(true);
-		button.add(new AttributeAppender("value",
-			ResourceModelFactory.newResourceModel(
-				ResourceBundleKey.builder()
-				.key("global.form.save.button.label")
-				.defaultValue("Save").build())));
+		button.add(
+			new AttributeAppender("value", ResourceModelFactory.newResourceModel(ResourceBundleKey
+				.builder().key("global.form.save.button.label").defaultValue("Save").build())));
 		return button;
 	}
 

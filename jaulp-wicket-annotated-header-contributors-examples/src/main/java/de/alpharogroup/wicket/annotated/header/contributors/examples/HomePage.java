@@ -30,7 +30,8 @@ import de.alpharogroup.wicket.annotated.header.contributors.examples.panels.home
 /**
  * Homepage
  */
-@ImportResources(resources = { @ImportResource(resourceName = "HomePage.css", resourceType = "css", index = 0) })
+@ImportResources(resources = {
+		@ImportResource(resourceName = "HomePage.css", resourceType = "css", index = 0) })
 public class HomePage extends BasePage
 {
 

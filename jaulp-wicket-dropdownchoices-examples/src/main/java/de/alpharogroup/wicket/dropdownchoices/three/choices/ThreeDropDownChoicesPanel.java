@@ -70,9 +70,8 @@ public class ThreeDropDownChoicesPanel extends Panel
 		selectedRootOptionModel = new PropertyModel<String>(stringThreeDropDownChoicesModel,
 			"selectedRootOption");
 		final LocalisedDropDownChoice<String> trademarks = new LocalisedDropDownChoice<String>(
-			"trademarks", selectedRootOptionModel,
-			stringThreeDropDownChoicesModel.getRootChoices(), new PropertiesChoiceRenderer(this,
-				this.getClass()));
+			"trademarks", selectedRootOptionModel, stringThreeDropDownChoicesModel.getRootChoices(),
+			new PropertiesChoiceRenderer(this, this.getClass()));
 		trademarks.setDefaultChoice(true);
 		trademarks.setOutputMarkupId(true);
 
@@ -81,8 +80,8 @@ public class ThreeDropDownChoicesPanel extends Panel
 		// model(from(stringThreeDropDownChoicesModel).getSelectedChildOption());
 		selectedChildOptionModel = new PropertyModel<String>(stringThreeDropDownChoicesModel,
 			"selectedChildOption");
-		final LocalisedDropDownChoice<String> models = new LocalisedDropDownChoice<String>(
-			"models", selectedChildOptionModel, stringThreeDropDownChoicesModel.getChildChoices(),
+		final LocalisedDropDownChoice<String> models = new LocalisedDropDownChoice<String>("models",
+			selectedChildOptionModel, stringThreeDropDownChoicesModel.getChildChoices(),
 			new PropertiesChoiceRenderer(this, this.getClass()));
 		models.setDefaultChoice(true);
 		models.setOutputMarkupId(true);

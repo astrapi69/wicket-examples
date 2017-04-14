@@ -44,6 +44,11 @@ public class ExceptionPage extends PubliclyBasePage<Exception>
 		this.exception = exception;
 	}
 
+	public Exception getException()
+	{
+		return exception;
+	}
+
 	@Override
 	public Panel newContainerPanel(final String id, final IModel<Exception> model)
 	{
@@ -82,10 +87,5 @@ public class ExceptionPage extends PubliclyBasePage<Exception>
 			}
 
 		};
-	}
-
-	public Exception getException()
-	{
-		return exception;
 	}
 }

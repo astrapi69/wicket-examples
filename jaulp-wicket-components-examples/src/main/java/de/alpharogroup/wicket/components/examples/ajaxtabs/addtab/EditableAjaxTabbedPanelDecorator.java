@@ -52,8 +52,8 @@ public class EditableAjaxTabbedPanelDecorator extends Panel
 		final List<TabModel<String>> tabModels = model.getObject().getTabModels();
 		for (int i = 0; i < tabModels.size(); i++)
 		{
-			tabs.add(new AbstractContentTab<TabModel<String>>(tabModels.get(i).getTitle(), Model
-				.of(tabModels.get(i)), Model.of("x"))
+			tabs.add(new AbstractContentTab<TabModel<String>>(tabModels.get(i).getTitle(),
+				Model.of(tabModels.get(i)), Model.of("x"))
 			{
 				private static final long serialVersionUID = 1L;
 
@@ -113,7 +113,8 @@ public class EditableAjaxTabbedPanelDecorator extends Panel
 					@Override
 					public Panel getPanel(final String panelId)
 					{
-						final Panel p = new TabPanel(panelId, getContent().getObject().getContent());
+						final Panel p = new TabPanel(panelId,
+							getContent().getObject().getContent());
 						return p;
 					}
 				};
@@ -146,7 +147,8 @@ public class EditableAjaxTabbedPanelDecorator extends Panel
 		target.add(ajaxTabbedPanel);
 	}
 
-	protected void onNewTab(final AjaxRequestTarget target, final ICloseableTab tab, final int index)
+	protected void onNewTab(final AjaxRequestTarget target, final ICloseableTab tab,
+		final int index)
 	{
 		ajaxTabbedPanel.onNewTab(target, tab, index);
 	}

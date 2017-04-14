@@ -49,10 +49,9 @@ public class NotificationExamplesPanel extends Panel
 	public NotificationExamplesPanel(final String id, final IModel<?> model)
 	{
 		super(id, model);
-		final IModel<String> labelModel = ResourceModelFactory
-			.newResourceModel(
-				ResourceBundleKey.builder().key("button.toastr.label")
-					.defaultValue("Show toastr notice.").build(), this);
+		final IModel<String> labelModel = ResourceModelFactory.newResourceModel(ResourceBundleKey
+			.builder().key("button.toastr.label").defaultValue("Show toastr notice.").build(),
+			this);
 		final Form<Object> form = new Form<Object>("form");
 		add(form);
 		form.add(new ButtonPanel("toastrButtonPanel", labelModel, form)
@@ -92,14 +91,14 @@ public class NotificationExamplesPanel extends Panel
 						target.prependJavaScript(js);
 					}
 				};
-				indicatingAjaxButton.add(new AttributeAppender("class", Model
-					.of(" btn btn-primary")));
+				indicatingAjaxButton
+					.add(new AttributeAppender("class", Model.of(" btn btn-primary")));
 				return indicatingAjaxButton;
 			}
 		});
-		final IModel<String> pnotifyLabelModel = ResourceModelFactory.newResourceModel(
-			ResourceBundleKey.builder().key("button.label").defaultValue("Show pnotify notice.")
-				.build(), this);
+		final IModel<String> pnotifyLabelModel = ResourceModelFactory
+			.newResourceModel(ResourceBundleKey.builder().key("button.label")
+				.defaultValue("Show pnotify notice.").build(), this);
 		form.add(new ButtonPanel("pnotifyButtonPanel", pnotifyLabelModel, form)
 		{
 
@@ -137,8 +136,8 @@ public class NotificationExamplesPanel extends Panel
 						target.prependJavaScript(js);
 					}
 				};
-				indicatingAjaxButton.add(new AttributeAppender("class", Model
-					.of(" btn btn-primary")));
+				indicatingAjaxButton
+					.add(new AttributeAppender("class", Model.of(" btn btn-primary")));
 				return indicatingAjaxButton;
 			}
 		});
@@ -148,8 +147,8 @@ public class NotificationExamplesPanel extends Panel
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		response.render(JavaScriptHeaderItem.forReference(Application.get()
-			.getJavaScriptLibrarySettings().getJQueryReference()));
+		response.render(JavaScriptHeaderItem
+			.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
 		response.render(JavaScriptHeaderItem.forReference(ToastrResourceReference.INSTANCE));
 		response.render(JavaScriptHeaderItem.forReference(PnotifyJsReference.INSTANCE));
 	}

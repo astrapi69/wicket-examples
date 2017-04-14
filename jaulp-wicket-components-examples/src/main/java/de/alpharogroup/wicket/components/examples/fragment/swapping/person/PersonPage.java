@@ -37,9 +37,10 @@ public class PersonPage extends PubliclyBasePage<PersonBean>
 	@Override
 	public Component newContainerPanel(final String id, final IModel<PersonBean> model)
 	{
-		if(model == null) {
-			return new PersonPanel(id, Model.of(PersonBean.builder().firstName("")
-				.lastName("").age("").gender("").build()));
+		if (model == null)
+		{
+			return new PersonPanel(id, Model
+				.of(PersonBean.builder().firstName("").lastName("").age("").gender("").build()));
 		}
 		return new PersonPanel(id, model);
 	}
