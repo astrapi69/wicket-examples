@@ -55,11 +55,11 @@ public class ViewOrEditPage extends BasePage
 		final Form<Person> form = new Form<>("form", cpm);
 
 		add(form);
-		final EditableTextField nameTextField = new EditableTextField("name",
+		final EditableTextField<String> nameTextField = new EditableTextField<>("name",
 			new PropertyModel<>(person, "name"), Model.of("Name"));
 		form.add(nameTextField);
 
-		final EditableTextArea about = new EditableTextArea("about",
+		final EditableTextArea<String> about = new EditableTextArea<>("about",
 			new PropertyModel<>(person, "about"), Model.of("About"));
 		form.add(about);
 

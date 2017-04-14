@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -33,7 +32,7 @@ public class NavbarExamplePanel extends Panel
 			@Override
 			protected AbstractLink newNavbarBrandLink(final String id)
 			{
-				final AjaxLink<Void> link = (AjaxLink<Void>)super.newNavbarBrandLink(id);
+				final AbstractLink link = super.newNavbarBrandLink(id);
 				link.setBody(Model.of("Brand a"));
 				return link;
 			}
@@ -56,7 +55,7 @@ public class NavbarExamplePanel extends Panel
 	 */
 	protected IModel<List<LinkItem>> newNavbarLinkItems()
 	{
-		final List<LinkItem> linkModel = new ArrayList<LinkItem>();
+		final List<LinkItem> linkModel = new ArrayList<>();
 		linkModel
 			.add(LinkItem.builder().url("http://www.alpharogroup.de/")
 				.target(DefaultTargets.BLANK.getTarget()).linkClass(ExternalLink.class)
