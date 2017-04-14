@@ -29,8 +29,8 @@ public class ResourceLoadingExamplesPage extends PubliclyBasePage<ResourceLoadin
 {
 
 	/** The Constant logger. */
-	protected static final Logger LOGGER = Logger.getLogger(ResourceLoadingExamplesPage.class
-		.getName());
+	protected static final Logger LOGGER = Logger
+		.getLogger(ResourceLoadingExamplesPage.class.getName());
 
 	private static final long serialVersionUID = 1L;
 

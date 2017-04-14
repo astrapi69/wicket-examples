@@ -34,7 +34,7 @@ public class HomePanel extends Panel
 		super(id);
 		final Label report = new Label("message", new Model<>(
 
-		"<message>Yep, it worked!</message>"));
+			"<message>Yep, it worked!</message>"));
 		add(report);
 		report.setEscapeModelStrings(false);
 		final XsltTransformerBehavior trans = new XsltTransformerBehavior("def.xsl");

@@ -50,25 +50,21 @@ public class StartDialogsExamples
 		System.setProperty("wicket.configuration", "development");
 		final String projectname = "jaulp.wicket.dialogs.examples";
 		final File projectDirectory = PathFinder.getProjectDirectory();
-		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src",
-			"main", "webapp");
+		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src", "main",
+			"webapp");
 		final String filterPath = "/*";
 
 		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
-			.getNewServletContextHandler(ServletContextHandlerConfiguration
-				.builder()
-				.filterHolderConfiguration(
-					FilterHolderConfiguration
-						.builder()
-						.filterClass(WicketFilter.class)
-						.filterPath(filterPath)
-						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
-						.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
-							WicketApplication.class.getName()).build())
-				.servletHolderConfiguration(
-					ServletHolderConfiguration.builder().servletClass(DefaultServlet.class)
-						.pathSpec(filterPath).build()).contextPath("/").webapp(webapp)
-				.maxInactiveInterval(300).filterPath("/*").build());
+			.getNewServletContextHandler(ServletContextHandlerConfiguration.builder()
+				.filterHolderConfiguration(FilterHolderConfiguration.builder()
+					.filterClass(WicketFilter.class).filterPath(filterPath)
+					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
+					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
+						WicketApplication.class.getName())
+					.build())
+				.servletHolderConfiguration(ServletHolderConfiguration.builder()
+					.servletClass(DefaultServlet.class).pathSpec(filterPath).build())
+				.contextPath("/").webapp(webapp).maxInactiveInterval(300).filterPath("/*").build());
 
 		final Jetty9RunConfiguration config = newJetty9RunConfiguration(servletContextHandler);
 

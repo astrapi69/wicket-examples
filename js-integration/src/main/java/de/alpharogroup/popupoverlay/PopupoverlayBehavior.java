@@ -16,30 +16,33 @@ import org.apache.wicket.util.template.TextTemplate;
 
 import de.alpharogroup.js.behaviors.simple.alert.WicketAlertJsBehavior;
 
-public class PopupoverlayBehavior  extends Behavior {
+public class PopupoverlayBehavior extends Behavior
+{
 
 	/**
 	 * The serialVersionUID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public static final ResourceReference pluginReference = new JavaScriptResourceReference(PopupoverlayBehavior.class,
-            "jquery.popupoverlay.js");
+
+	public static final ResourceReference pluginReference = new JavaScriptResourceReference(
+		PopupoverlayBehavior.class, "jquery.popupoverlay.js");
 
 
 	private Component component;
 	private PopupoverlaySettings settings = new PopupoverlaySettings();
 
-	private final TextTemplate wicketAlertTemplate = new PackageTextTemplate(PopupoverlayBehavior.class,
-		"popupoverlay-template.js");
-	
-	public PopupoverlayBehavior() {
+	private final TextTemplate wicketAlertTemplate = new PackageTextTemplate(
+		PopupoverlayBehavior.class, "popupoverlay-template.js");
+
+	public PopupoverlayBehavior()
+	{
 	}
 
-	public PopupoverlayBehavior(PopupoverlaySettings settings) {
+	public PopupoverlayBehavior(PopupoverlaySettings settings)
+	{
 		this.settings = settings;
 	}
-	
+
 
 	@Override
 	public void bind(final Component component)
@@ -48,19 +51,20 @@ public class PopupoverlayBehavior  extends Behavior {
 		this.component = component;
 		this.component.setOutputMarkupId(true);
 	}
-	
-	protected String generateJS(final TextTemplate textTemplate) {
+
+	protected String generateJS(final TextTemplate textTemplate)
+	{
 		final Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("componentId", this.component.getMarkupId());
-		variables.put("type", "'"+this.settings.getType()+"'");		
+		variables.put("type", "'" + this.settings.getType() + "'");
 		variables.put("autoopen", this.settings.isAutoopen());
 		variables.put("scrolllock", this.settings.isScrolllock());
 		variables.put("background", this.settings.isBackground());
 		variables.put("backgroundactive", this.settings.isBackgroundactive());
-		variables.put("color", "'"+this.settings.getColor()+"'");
-		variables.put("opacity", "'"+this.settings.getOpacity()+"'");
-		variables.put("horizontal", "'"+this.settings.getHorizontal()+"'");
-		variables.put("vertical", "'"+this.settings.getVertical()+"'");
+		variables.put("color", "'" + this.settings.getColor() + "'");
+		variables.put("opacity", "'" + this.settings.getOpacity() + "'");
+		variables.put("horizontal", "'" + this.settings.getHorizontal() + "'");
+		variables.put("vertical", "'" + this.settings.getVertical() + "'");
 		variables.put("offsettop", this.settings.getOffsettop());
 		variables.put("offsetleft", this.settings.getOffsetleft());
 		variables.put("escape", this.settings.isEscape());
@@ -68,15 +72,20 @@ public class PopupoverlayBehavior  extends Behavior {
 		variables.put("setzindex", this.settings.isSetzindex());
 		variables.put("autozindex", this.settings.isAutozindex());
 		variables.put("keepfocus", this.settings.isKeepfocus());
-		setVariableWithSingeQuotationMarks("focuselement", this.settings.getFocuselement(), variables);
+		setVariableWithSingeQuotationMarks("focuselement", this.settings.getFocuselement(),
+			variables);
 		variables.put("focusdelay", this.settings.getFocusdelay());
-		setVariableWithSingeQuotationMarks("pagecontainer", this.settings.getPagecontainer(), variables);
+		setVariableWithSingeQuotationMarks("pagecontainer", this.settings.getPagecontainer(),
+			variables);
 		variables.put("outline", this.settings.isOutline());
 		variables.put("detach", this.settings.isDetach());
-		setVariableWithSingeQuotationMarks("openelement", this.settings.getOpenelement(), variables);
-		setVariableWithSingeQuotationMarks("closeelement", this.settings.getCloseelement(), variables);
+		setVariableWithSingeQuotationMarks("openelement", this.settings.getOpenelement(),
+			variables);
+		setVariableWithSingeQuotationMarks("closeelement", this.settings.getCloseelement(),
+			variables);
 		setVariableWithSingeQuotationMarks("transition", this.settings.getTransition(), variables);
-		setVariableWithSingeQuotationMarks("tooltipanchor", this.settings.getTooltipanchor(), variables);
+		setVariableWithSingeQuotationMarks("tooltipanchor", this.settings.getTooltipanchor(),
+			variables);
 		setVariable("beforeopen", this.settings.getBeforeopen(), variables);
 		setVariable("onopen", this.settings.getOnopen(), variables);
 		setVariable("onclose", this.settings.getOnclose(), variables);
@@ -86,34 +95,50 @@ public class PopupoverlayBehavior  extends Behavior {
 		return textTemplate.asString();
 	}
 
-	protected void setVariable(String variablename, Object object, final Map<String, Object> variables) {
-		if(object != null) {
-			variables.put(variablename, object);			
-		} else {
-			variables.put(variablename, "null");			
-		}
-	}
-
-
-	protected void setVariableWithSingeQuotationMarks(String variablename, Object object, final Map<String, Object> variables) {
-		if(object != null) {
-			variables.put(variablename, "'"+object+"'");			
-		} else {
-			variables.put(variablename, "null");			
-		}
-	}
-	/** 
-	 * Replace the created map with the variables in the method {@link WicketAlertJsBehavior#generateJS(TextTemplate)} with in the js-template 'wicket-alert.js'.
+	/**
+	 * Replace the created map with the variables in the method
+	 * {@link WicketAlertJsBehavior#generateJS(TextTemplate)} with in the js-template
+	 * 'wicket-alert.js'.
 	 */
 	@Override
-	public void renderHead(Component c, final IHeaderResponse response)	{
-		response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+	public void renderHead(Component c, final IHeaderResponse response)
+	{
+		response.render(JavaScriptHeaderItem
+			.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
 		response.render(JavaScriptHeaderItem.forReference(pluginReference));
 		response.render(OnLoadHeaderItem.forScript(generateJS(wicketAlertTemplate)));
 	}
 
-	public void setSettings(PopupoverlaySettings settings) {
+
+	public void setSettings(PopupoverlaySettings settings)
+	{
 		this.settings = settings;
+	}
+
+	protected void setVariable(String variablename, Object object,
+		final Map<String, Object> variables)
+	{
+		if (object != null)
+		{
+			variables.put(variablename, object);
+		}
+		else
+		{
+			variables.put(variablename, "null");
+		}
+	}
+
+	protected void setVariableWithSingeQuotationMarks(String variablename, Object object,
+		final Map<String, Object> variables)
+	{
+		if (object != null)
+		{
+			variables.put(variablename, "'" + object + "'");
+		}
+		else
+		{
+			variables.put(variablename, "null");
+		}
 	}
 
 }

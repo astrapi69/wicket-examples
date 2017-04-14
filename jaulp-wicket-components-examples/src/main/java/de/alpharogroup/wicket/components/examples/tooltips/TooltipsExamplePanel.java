@@ -65,8 +65,8 @@ public class TooltipsExamplePanel extends Panel
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		response.render(JavaScriptHeaderItem.forReference(Application.get()
-			.getJavaScriptLibrarySettings().getJQueryReference()));
+		response.render(JavaScriptHeaderItem
+			.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
 		response.render(JavaScriptHeaderItem.forReference(TooltipsterResourceReference.INSTANCE));
 	}
 }

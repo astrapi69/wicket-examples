@@ -57,6 +57,24 @@ public class WicketApplication extends WicketBootstrap3Application
 
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected int getDefaultHttpPort()
+	{
+		return WicketApplication.DEFAULT_HTTP_PORT;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected int getDefaultHttpsPort()
+	{
+		return WicketApplication.DEFAULT_HTTPS_PORT;
+	}
+
+	/**
 	 * Gets the domain name.
 	 *
 	 * @return the domain name
@@ -79,19 +97,19 @@ public class WicketApplication extends WicketBootstrap3Application
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected String[] newPackagesToScan()
+	public String getPackageToScan()
 	{
-		final String[] packagesToScan = { "de.alpharogroup.wicket.components.examples" };
-		return packagesToScan;
+		return ListExtensions.getFirst(newPackagesToScanAsList());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getPackageToScan()
+	protected String[] newPackagesToScan()
 	{
-		return ListExtensions.getFirst(newPackagesToScanAsList());
+		final String[] packagesToScan = { "de.alpharogroup.wicket.components.examples" };
+		return packagesToScan;
 	}
 
 	/**
@@ -102,24 +120,6 @@ public class WicketApplication extends WicketBootstrap3Application
 	protected List<String> newPackagesToScanAsList()
 	{
 		return Arrays.asList(newPackagesToScan());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected int getDefaultHttpPort()
-	{
-		return WicketApplication.DEFAULT_HTTP_PORT;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected int getDefaultHttpsPort()
-	{
-		return WicketApplication.DEFAULT_HTTPS_PORT;
 	}
 
 	/**

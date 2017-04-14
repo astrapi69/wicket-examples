@@ -10,16 +10,46 @@ import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 
-public class PersonPanel extends SwapFragmentPanel<PersonModel> {
+public class PersonPanel extends SwapFragmentPanel<PersonModel>
+{
 
 	private static final long serialVersionUID = 1L;
-		
-	public PersonPanel(String id, IModel<PersonModel> model) {
+
+	public PersonPanel(String id, IModel<PersonModel> model)
+	{
 		super(id, model);
 		setDefaultModel(new CompoundPropertyModel<PersonModel>(model));
 		setOutputMarkupPlaceholderTag(true);
 		add(view = newFragmentView(FRAGMENT_ID));
-		edit = newFragmentEdit(FRAGMENT_ID);			
+		edit = newFragmentEdit(FRAGMENT_ID);
+	}
+
+	/**
+	 * Creates the fragment to edit person.
+	 *
+	 * @return the fragment
+	 */
+	protected Fragment newFragmentEdit(final String id)
+	{
+		Fragment editFragment = new Fragment(id, "edit", this, getDefaultModel());
+		editFragment.setOutputMarkupPlaceholderTag(true);
+		Form<PersonModel> form = new Form<PersonModel>("editPersonForm");
+		form.add(new TextField<String>("firstName"));
+		form.add(new TextField<String>("lastName"));
+		form.add(new TextField<String>("gender"));
+		form.add(new TextField<String>("age"));
+		form.add(new AjaxFallbackButton("submit", form)
+		{
+			private static final long serialVersionUID = 1L;
+
+			public void onSubmit(final AjaxRequestTarget target, final Form<?> form)
+			{
+				target.add(edit);
+				swapFragments();
+			}
+		});
+		editFragment.add(form);
+		return editFragment;
 	}
 
 	/**
@@ -27,12 +57,16 @@ public class PersonPanel extends SwapFragmentPanel<PersonModel> {
 	 *
 	 * @return the fragment
 	 */
-	protected Fragment newFragmentView(final String id) {
+	protected Fragment newFragmentView(final String id)
+	{
 		Fragment viewFragment = new Fragment(id, "view", this, getDefaultModel());
-		viewFragment.add(new AjaxFallbackLink<Object>("editLink") {
+		viewFragment.add(new AjaxFallbackLink<Object>("editLink")
+		{
 			private static final long serialVersionUID = 1L;
+
 			@Override
-			public void onClick(AjaxRequestTarget target) {
+			public void onClick(AjaxRequestTarget target)
+			{
 				swapFragments();
 				target.add(view);
 			}
@@ -43,31 +77,6 @@ public class PersonPanel extends SwapFragmentPanel<PersonModel> {
 		viewFragment.add(new Label("age"));
 		viewFragment.setOutputMarkupPlaceholderTag(true);
 		return viewFragment;
-	}
-
-	/**
-	 * Creates the fragment to edit person.
-	 *
-	 * @return the fragment
-	 */
-	protected Fragment newFragmentEdit(final String id) {
-		Fragment editFragment = new Fragment(id, "edit", this,
-				getDefaultModel());
-		editFragment.setOutputMarkupPlaceholderTag(true);
-		Form<PersonModel> form = new Form<PersonModel>("editPersonForm");
-		form.add(new TextField<String>("firstName"));
-		form.add(new TextField<String>("lastName"));
-		form.add(new TextField<String>("gender"));
-		form.add(new TextField<String>("age"));		
-		form.add(new AjaxFallbackButton("submit", form) {
-			private static final long serialVersionUID = 1L;			
-			public void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
-				target.add(edit);
-				swapFragments();
-			}
-		});
-		editFragment.add(form);
-		return editFragment;
 	}
 
 }

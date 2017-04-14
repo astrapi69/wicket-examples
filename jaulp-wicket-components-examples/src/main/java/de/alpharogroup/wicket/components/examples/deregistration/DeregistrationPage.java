@@ -39,7 +39,8 @@ public class DeregistrationPage extends PubliclyBasePage<DeregistrationModelBean
 	@Override
 	public Component newContainerPanel(final String id, final IModel<DeregistrationModelBean> model)
 	{
-		if(model == null) {
+		if (model == null)
+		{
 			final IModel<DeregistrationModelBean> deregistrationModel = new CompoundPropertyModel<DeregistrationModelBean>(
 				new DeregistrationModelBean());
 			return new DeregistrationPanel(CONTAINER_PANEL_ID, deregistrationModel)

@@ -12,8 +12,8 @@ import org.apache.wicket.atmosphere.config.AtmosphereTransport;
 import org.apache.wicket.protocol.http.WebApplication;
 
 /**
- * Application object for your web application.
- * If you want to run this application without deploying, run the Start class.
+ * Application object for your web application. If you want to run this application without
+ * deploying, run the Start class.
  * 
  * @see atmosphere.chat.Start#main(String[])
  */
@@ -21,23 +21,23 @@ public class WicketApplication extends WebApplication
 {
 	public static final int DEFAULT_HTTP_PORT = 9090;
 	public static final int DEFAULT_HTTPS_PORT = 9443;
-	
-	private EventBus eventBus;
 
-	@Override
-	public Class<HomePage> getHomePage()
+	public static WicketApplication get()
 	{
-		return HomePage.class;
+		return (WicketApplication)Application.get();
 	}
+
+	private EventBus eventBus;
 
 	public EventBus getEventBus()
 	{
 		return eventBus;
 	}
 
-	public static WicketApplication get()
+	@Override
+	public Class<HomePage> getHomePage()
 	{
-		return (WicketApplication)Application.get();
+		return HomePage.class;
 	}
 
 	@Override

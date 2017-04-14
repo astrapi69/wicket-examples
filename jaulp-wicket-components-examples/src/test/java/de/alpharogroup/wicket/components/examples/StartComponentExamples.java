@@ -47,8 +47,8 @@ public class StartComponentExamples
 		final ConfigurationPropertiesResolver configurationPropertiesResolver)
 	{
 		String runtimeConfigurationType;
-//		runtimeConfigurationType = "development";
-		runtimeConfigurationType = "deployment";
+		runtimeConfigurationType = "development";
+		// runtimeConfigurationType = "deployment";
 
 		final String projectName = "jaulp.wicket.components.examples";
 		final File projectDirectory = PathFinder.getProjectDirectory();
@@ -56,21 +56,13 @@ public class StartComponentExamples
 		final File logFile = Jetty9Runner.getLogFile(projectDirectory, "application.log");
 
 		final StartConfig startConfig = StartConfig.builder()
-			.applicationName(WicketApplication.class.getName())
-			.contextPath("/")
-			.filterPath("/*")
+			.applicationName(WicketApplication.class.getName()).contextPath("/").filterPath("/*")
 			.httpPort(configurationPropertiesResolver.getHttpPort())
-			.httpsPort(configurationPropertiesResolver.getHttpsPort())
-			.keyStorePassword("wicket")
-			.keyStorePathResource("/keystore")
-			.projectDirectory(projectDirectory)
-			.projectName(projectName)
-			.runtimeConfigurationType(runtimeConfigurationType)
-			.sessionTimeout((int)Duration.minutes(1).seconds())
-			.webapp(webapp)
-			.logFile(logFile)
-			.absolutePathFromLogfile(logFile.getAbsolutePath())
-			.build();
+			.httpsPort(configurationPropertiesResolver.getHttpsPort()).keyStorePassword("wicket")
+			.keyStorePathResource("/keystore").projectDirectory(projectDirectory)
+			.projectName(projectName).runtimeConfigurationType(runtimeConfigurationType)
+			.sessionTimeout((int)Duration.minutes(1).seconds()).webapp(webapp).logFile(logFile)
+			.absolutePathFromLogfile(logFile.getAbsolutePath()).build();
 
 		WicketJetty9Runner.run(startConfig);
 	}

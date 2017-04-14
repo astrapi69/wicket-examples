@@ -40,9 +40,9 @@ public class CheckGroupSelectorExamplePanel extends Panel
 	{
 		super(id, model);
 		final CheckboxModelBean<Company> checkboxModel = new CheckboxModelBean<Company>();
-		checkboxModel.setChoices(Arrays.asList(Company.builder().name("Ferrari").build(), Company
-			.builder().name("Lamborgini").build(), Company.builder().name("Mazerati").build(),
-			Company.builder().name("Porsche").build()));
+		checkboxModel.setChoices(Arrays.asList(Company.builder().name("Ferrari").build(),
+			Company.builder().name("Lamborgini").build(),
+			Company.builder().name("Mazerati").build(), Company.builder().name("Porsche").build()));
 		checkboxModel.setLabelPropertyExpression("name");
 		final IModel<CheckboxModelBean<Company>> checkGroupModel = Model.of(checkboxModel);
 		add(new CheckGroupSelectorPanel<Company>("checkGroupSelectorPanel", checkGroupModel)

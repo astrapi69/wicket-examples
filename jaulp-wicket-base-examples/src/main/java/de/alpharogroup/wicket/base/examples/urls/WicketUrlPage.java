@@ -39,18 +39,20 @@ public class WicketUrlPage extends WebPage
 		add(new MenubarPanel("menubarPanel"));
 		add(new Label("baseUrl", Model.of(WicketUrlExtensions.getBaseUrl())));
 		add(new Label("baseUrlPage", Model.of(WicketUrlExtensions.getBaseUrl(this))));
-		add(new Label("baseUrlClass", Model.of(WicketUrlExtensions.getBaseUrl(WicketUrlPage.class))));
+		add(new Label("baseUrlClass",
+			Model.of(WicketUrlExtensions.getBaseUrl(WicketUrlPage.class))));
 		add(new Label("contextPath", Model.of(WicketUrlExtensions.getContextPath())));
 		add(new Label("contextPathPage", Model.of(WicketUrlExtensions.getContextPath(this))));
-		add(new Label("pageUrlClass", Model.of(WicketUrlExtensions.getPageUrl(WicketUrlPage.class))));
-		add(new Label("canonicalPageUrlClass", Model.of(WicketUrlExtensions
-			.getCanonicalPageUrl(WicketUrlPage.class))));
+		add(new Label("pageUrlClass",
+			Model.of(WicketUrlExtensions.getPageUrl(WicketUrlPage.class))));
+		add(new Label("canonicalPageUrlClass",
+			Model.of(WicketUrlExtensions.getCanonicalPageUrl(WicketUrlPage.class))));
 		add(new Label("urlClass", Model.of(WicketUrlExtensions.getPageUrl(this))));
-		add(new Label("urlAsStringClass", Model.of(WicketUrlExtensions
-			.getUrlAsString(WicketUrlPage.class))));
+		add(new Label("urlAsStringClass",
+			Model.of(WicketUrlExtensions.getUrlAsString(WicketUrlPage.class))));
 		add(new Label("urlAsStringPage", Model.of(WicketUrlExtensions.getUrlAsString(this))));
-		add(new Label("contextPathApplication", Model.of(ApplicationExtensions
-			.getContextPath(WicketApplication.get()))));
+		add(new Label("contextPathApplication",
+			Model.of(ApplicationExtensions.getContextPath(WicketApplication.get()))));
 		add(new Label("requestURL", Model.of(WicketComponentExtensions.getRequestURL())));
 		add(new Label("remoteHost", Model.of(WicketComponentExtensions.getIpAddress())));
 		add(new Label("remoteAddr", Model.of(WicketComponentExtensions.getRemoteAddr())));
@@ -65,14 +67,14 @@ public class WicketUrlPage extends WebPage
 		final PageParameters params = new PageParameters();
 		params.add("USERNAME", "bla");
 		params.add("CONFIRMATION_CODE", "1HE23WE");
-		add(new Label("absoluteUrlFor", Model.of(WicketUrlExtensions.absoluteUrlFor(
-			WicketUrlPage.class, params, true))));
-		add(new Label("absoluteUrlFor2", Model.of(WicketUrlExtensions.absoluteUrlFor(
-			WicketUrlPage.class, params, false))));
-		add(new Label("absoluteUrlFor3", Model.of(WicketUrlExtensions.absoluteUrlFor(
-			WicketUrlPage.class, true))));
-		add(new Label("absoluteUrlFor4", Model.of(WicketUrlExtensions.absoluteUrlFor(
-			WicketUrlPage.class, false))));
+		add(new Label("absoluteUrlFor",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(WicketUrlPage.class, params, true))));
+		add(new Label("absoluteUrlFor2",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(WicketUrlPage.class, params, false))));
+		add(new Label("absoluteUrlFor3",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(WicketUrlPage.class, true))));
+		add(new Label("absoluteUrlFor4",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(WicketUrlPage.class, false))));
 
 	}
 }

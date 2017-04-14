@@ -30,8 +30,8 @@ public class SocialNetworksExamplePage extends PubliclyBasePage<SocialNetworkMod
 {
 
 	/** The Constant logger. */
-	protected static final Logger LOGGER = Logger.getLogger(SocialNetworksExamplePage.class
-		.getName());
+	protected static final Logger LOGGER = Logger
+		.getLogger(SocialNetworksExamplePage.class.getName());
 
 	private static final long serialVersionUID = 1L;
 

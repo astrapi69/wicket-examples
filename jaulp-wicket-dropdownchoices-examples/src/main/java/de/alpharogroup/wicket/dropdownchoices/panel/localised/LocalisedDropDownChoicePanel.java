@@ -65,9 +65,8 @@ public class LocalisedDropDownChoicePanel extends Panel
 		final List<String> values = Arrays.asList("1", "2");
 
 		final LocalisedDropDownChoice<String> ddc1 = new LocalisedDropDownChoice<String>("options",
-			new PropertyModel<>(optionModel, "value")
-		, values, new LocalisedChoiceRenderer(
-				"option.value", this, this.getClass()));
+			new PropertyModel<>(optionModel, "value"), values,
+			new LocalisedChoiceRenderer("option.value", this, this.getClass()));
 
 		selectOptionForm.add(ddc1);
 

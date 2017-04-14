@@ -188,8 +188,8 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 	protected LabeledCheckboxPanel<String, Member> newLabeledCheckboxPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledCheckboxPanel<String, Member> married = new LabeledCheckboxPanel<>(
-			id, model, labelModel);
+		final LabeledCheckboxPanel<String, Member> married = new LabeledCheckboxPanel<>(id, model,
+			labelModel);
 		married.add(new AttributeAppender("class", " form-group"));
 		married.getCheckBox()
 			.add(new JqueryStatementsBehavior()
@@ -233,8 +233,8 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 			@Override
 			protected DateTimeField newDateTimeField(final String id, final IModel<Member> model)
 			{
-				final PropertyModel<Date> textFieldModel = new PropertyModel<>(
-					model.getObject(), getId());
+				final PropertyModel<Date> textFieldModel = new PropertyModel<>(model.getObject(),
+					getId());
 				final DateTimeField dateTextField = new DateTimeField(id, textFieldModel);
 				return dateTextField;
 			}
@@ -270,8 +270,7 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
 
-		final LabeledLabelPanel<Member> nameLabel = new LabeledLabelPanel<>(id, model,
-			labelModel);
+		final LabeledLabelPanel<Member> nameLabel = new LabeledLabelPanel<>(id, model, labelModel);
 		nameLabel.add(new AttributeAppender("class", " form-group"));
 		nameLabel.getViewableLabel()
 			.add(new JqueryStatementsBehavior()
@@ -285,8 +284,8 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 	protected LabeledTextAreaPanel<String, Member> newLabeledTextAreaPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledTextAreaPanel<String, Member> about = new LabeledTextAreaPanel<>(
-			id, model, labelModel);
+		final LabeledTextAreaPanel<String, Member> about = new LabeledTextAreaPanel<>(id, model,
+			labelModel);
 		about.add(new AttributeAppender("class", " form-group"));
 		about.getTextArea()
 			.add(new JqueryStatementsBehavior()
@@ -300,8 +299,8 @@ public class LabeledComponentsPanel extends BasePanel<Object>
 	protected LabeledTextFieldPanel<String, Member> newLabeledTextFieldPanel(final String id,
 		final IModel<Member> model, final IModel<String> labelModel)
 	{
-		final LabeledTextFieldPanel<String, Member> nameTextField = new LabeledTextFieldPanel<>(
-			id, model, labelModel);
+		final LabeledTextFieldPanel<String, Member> nameTextField = new LabeledTextFieldPanel<>(id,
+			model, labelModel);
 		nameTextField.add(new AttributeAppender("class", " form-group"));
 		nameTextField.getTextField()
 			.add(new JqueryStatementsBehavior()

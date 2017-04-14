@@ -66,12 +66,13 @@ public class WicketWikiExample extends WebPage
 		add(wicketWikiExamplePanel);
 
 		final IModel<TwoDropDownChoicesModel<String>> stringTwoDropDownChoicesModel = Model
-			.of(new StringTwoDropDownChoicesModel("trademark.audi", DatabaseManager
-				.initializeModelMap()));
+			.of(new StringTwoDropDownChoicesModel("trademark.audi",
+				DatabaseManager.initializeModelMap()));
 
 		final TwoDropDownChoicesPanel<String> twoDropDownChoicesPanel = new TrademarksModelsPanel(
-			"twoDropDownChoicesPanel", stringTwoDropDownChoicesModel, new PropertiesChoiceRenderer(
-				this, this.getClass()), new PropertiesChoiceRenderer(this, this.getClass()));
+			"twoDropDownChoicesPanel", stringTwoDropDownChoicesModel,
+			new PropertiesChoiceRenderer(this, this.getClass()),
+			new PropertiesChoiceRenderer(this, this.getClass()));
 		add(twoDropDownChoicesPanel);
 
 		final LocalisedDropDownChoicePanel localisedDropDownChoicePanel = new LocalisedDropDownChoicePanel(

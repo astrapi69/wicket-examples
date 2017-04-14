@@ -23,19 +23,22 @@ import org.wicketstuff.annotation.mount.MountPath;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 
 @MountPath("public/collapse")
-public class CollapsePage extends PubliclyBasePage<Object> {
+public class CollapsePage extends PubliclyBasePage<Object>
+{
 
 	/**
 	 * The serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public CollapsePage(final PageParameters parameters) {
+	public CollapsePage(final PageParameters parameters)
+	{
 		super(parameters);
 	}
 
 	@Override
-	public Component newContainerPanel(final String id, final IModel<Object> model) {
+	public Component newContainerPanel(final String id, final IModel<Object> model)
+	{
 		return new CollapsePanel(id, model);
 	}
 

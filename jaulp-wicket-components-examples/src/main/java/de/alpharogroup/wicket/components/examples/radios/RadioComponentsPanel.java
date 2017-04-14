@@ -49,8 +49,8 @@ public class RadioComponentsPanel extends Panel
 			public void renderHead(final IHeaderResponse response)
 			{
 				super.renderHead(response);
-				response.render(CssHeaderItem.forReference(new CssResourceReference(
-					AjaxRadioExamplePanel.class, "AjaxRadioPanel.css")));
+				response.render(CssHeaderItem.forReference(
+					new CssResourceReference(AjaxRadioExamplePanel.class, "AjaxRadioPanel.css")));
 
 			}
 		};

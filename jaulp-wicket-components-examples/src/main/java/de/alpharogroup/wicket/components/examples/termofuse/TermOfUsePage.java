@@ -31,9 +31,10 @@ public class TermOfUsePage extends PubliclyBasePage<TermOfUseModelBean>
 	@Override
 	public Component newContainerPanel(final String id, final IModel<TermOfUseModelBean> model)
 	{
-		if(model == null) {
-			return new ApplicationTermOfUsePanel(id, Model.of(ApplicationTermOfUseBean
-			.getInstance().getModel()));
+		if (model == null)
+		{
+			return new ApplicationTermOfUsePanel(id,
+				Model.of(ApplicationTermOfUseBean.getInstance().getModel()));
 		}
 		return new ApplicationTermOfUsePanel(id, model);
 	}

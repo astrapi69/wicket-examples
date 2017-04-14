@@ -50,7 +50,8 @@ public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkModelBean
 
 	protected Component newFacebookLikeAndSharePanel(final String id)
 	{
-		final FacebookLikeAndShareModelBean model = new FacebookLikeAndShareModelBean.Builder().build();
+		final FacebookLikeAndShareModelBean model = new FacebookLikeAndShareModelBean.Builder()
+			.build();
 		final FacebookLikeAndSharePanel facebookLikeAndSharePanel = new FacebookLikeAndSharePanel(
 			id, Model.of(model));
 		return facebookLikeAndSharePanel;
@@ -60,7 +61,8 @@ public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkModelBean
 	{
 		final IModel<GooglePlusShareModelBean> model = new GooglePlusShareModelBean.Builder()
 			.scriptSrc("https://apis.google.com/js/platform.js")
-			.locale(LocaleExtensions.getLocaleFileSuffix(Session.get().getLocale(), false, false, false))
+			.locale(LocaleExtensions.getLocaleFileSuffix(Session.get().getLocale(), false, false,
+				false))
 			.cssClass("g-plusone").dataAnnotation("inline").dataWith("300")
 			.dataHref(WicketUrlExtensions.absoluteUrlFor(this.getPage().getClass(), false)).build()
 			.toModel();
@@ -70,9 +72,10 @@ public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkModelBean
 	protected Component newTwitterFollowPanel(final String id)
 	{
 		final String username = "jaulp.wicket";
-		return new TwitterFollowPanel(id, new TwitterFollowModelBean.Builder().username(username)
-			.urlPrefix("https://twitter.com/").url("https://twitter.com/" + username).build()
-			.toModel());
+		return new TwitterFollowPanel(id,
+			new TwitterFollowModelBean.Builder().username(username)
+				.urlPrefix("https://twitter.com/").url("https://twitter.com/" + username).build()
+				.toModel());
 	}
 
 	protected Component newTwitterSharePanel(final String id)
@@ -93,7 +96,7 @@ public class SocialNetworksExamplePanel extends BasePanel<SocialNetworkModelBean
 		add(newTwitterFollowPanel("twitterFollowPanel"));
 		add(newGooglePlusSharePanel("googleplusSharePanel"));
 
-		add(new Label("messageSourceLabel", ResourceModelFactory.newResourceModel(ResourceBundleKey
-			.builder().key("foo.bar.bla").build())));
+		add(new Label("messageSourceLabel", ResourceModelFactory
+			.newResourceModel(ResourceBundleKey.builder().key("foo.bar.bla").build())));
 	}
 }

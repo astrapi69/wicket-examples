@@ -27,12 +27,12 @@ import de.alpharogroup.wicket.base.examples.urls.WicketUrlPage;
 import de.alpharogroup.wicket.base.examples.velocity.DynamicPage;
 import de.alpharogroup.wicket.base.mainbase.ApplicationBasePanel;
 import de.alpharogroup.wicket.components.menu.suckerfish.MenuItem;
-import de.alpharogroup.wicket.components.menu.suckerfish.MenuPanel;
 import de.alpharogroup.wicket.components.menu.suckerfish.MenuItemFactory;
+import de.alpharogroup.wicket.components.menu.suckerfish.MenuPanel;
 
 
 @ImportResources(resources = { // This css file is currently loaded...
-@ImportResource(resourceName = "MenubarPanel.css", resourceType = "css") })
+		@ImportResource(resourceName = "MenubarPanel.css", resourceType = "css") })
 public class MenubarPanel extends ApplicationBasePanel<Object>
 {
 
@@ -60,8 +60,8 @@ public class MenubarPanel extends ApplicationBasePanel<Object>
 
 		menuBar.addMenu(miHome);
 
-		final MenuItem miAnother = MenuItemFactory.newMenuItem(AnotherPage.class, "top.menu.another",
-			this);
+		final MenuItem miAnother = MenuItemFactory.newMenuItem(AnotherPage.class,
+			"top.menu.another", this);
 
 		menuBar.addMenu(miAnother);
 
@@ -80,20 +80,22 @@ public class MenubarPanel extends ApplicationBasePanel<Object>
 			"top.menu.viewmode", this);
 		menuBar.addMenu(miViewOrEdit);
 
-		final MenuItem miUrls = MenuItemFactory.newMenuItem(WicketUrlPage.class, "top.menu.urls", this);
+		final MenuItem miUrls = MenuItemFactory.newMenuItem(WicketUrlPage.class, "top.menu.urls",
+			this);
 		menuBar.addMenu(miUrls);
 
-		final MenuItem miLabeled = MenuItemFactory.newMenuItem(LabeledHomePage.class, "top.menu.labeled",
-			this);
+		final MenuItem miLabeled = MenuItemFactory.newMenuItem(LabeledHomePage.class,
+			"top.menu.labeled", this);
 
 		menuBar.addMenu(miLabeled);
 
-		final MenuItem miSitemap = MenuItemFactory.newMenuItem(SiteMapPage.class, "top.menu.sitemap",
-			this);
+		final MenuItem miSitemap = MenuItemFactory.newMenuItem(SiteMapPage.class,
+			"top.menu.sitemap", this);
 
 		menuBar.addMenu(miSitemap);
 
-		final MenuItem miModel = MenuItemFactory.newMenuItem(ModelPage.class, "top.menu.model", this);
+		final MenuItem miModel = MenuItemFactory.newMenuItem(ModelPage.class, "top.menu.model",
+			this);
 
 		menuBar.addMenu(miModel);
 	}

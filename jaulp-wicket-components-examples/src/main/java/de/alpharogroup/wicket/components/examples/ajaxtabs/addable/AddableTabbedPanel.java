@@ -18,8 +18,6 @@ package de.alpharogroup.wicket.components.examples.ajaxtabs.addable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
-
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -42,6 +40,7 @@ import de.alpharogroup.wicket.components.examples.ajaxtabs.tabpanels.TabPanel;
 import de.alpharogroup.wicket.components.examples.ajaxtabs.tabpanels.TabbedPanelModels;
 import de.alpharogroup.wicket.components.factory.ComponentFactory;
 import de.alpharogroup.wicket.dialogs.panels.save.SaveDialogPanel;
+import lombok.Getter;
 
 public class AddableTabbedPanel extends Panel
 {
@@ -62,8 +61,8 @@ public class AddableTabbedPanel extends Panel
 		final List<TabModel<String>> tabModels = model.getObject().getTabModels();
 		for (int i = 0; i < tabModels.size(); i++)
 		{
-			tabs.add(new AbstractContentTab<TabModel<String>>(tabModels.get(i).getTitle(), Model
-				.of(tabModels.get(i)), Model.of("x"))
+			tabs.add(new AbstractContentTab<TabModel<String>>(tabModels.get(i).getTitle(),
+				Model.of(tabModels.get(i)), Model.of("x"))
 			{
 				private static final long serialVersionUID = 1L;
 
@@ -128,66 +127,66 @@ public class AddableTabbedPanel extends Panel
 				modalWindow.setTitle(model.getObject());
 				modalWindow.setInitialHeight(200);
 				modalWindow.setInitialWidth(300);
-				modalWindow.setContent(new SaveDialogPanel<String>(modalWindow.getContentId(),
-					Model.of(new String()))
-				{
-					/**
-					 * The serialVersionUID.
-					 */
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					protected void onCancel(final AjaxRequestTarget target, final Form<?> form)
+				modalWindow.setContent(
+					new SaveDialogPanel<String>(modalWindow.getContentId(), Model.of(new String()))
 					{
-						super.onCancel(target, form);
-						modalWindow.close(target);
-					}
+						/**
+						 * The serialVersionUID.
+						 */
+						private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings("unchecked")
-					@Override
-					protected void onSave(AjaxRequestTarget target, final Form<?> form)
-					{
-						super.onSave(target, form);
-						if (target == null)
+						@Override
+						protected void onCancel(final AjaxRequestTarget target, final Form<?> form)
 						{
-							target = ComponentFinder.findAjaxRequestTarget();
+							super.onCancel(target, form);
+							modalWindow.close(target);
 						}
-						final Object value = getModel();
-						String v = null;
-						if (value instanceof IModel)
+
+						@SuppressWarnings("unchecked")
+						@Override
+						protected void onSave(AjaxRequestTarget target, final Form<?> form)
 						{
-							final Object obj = ((IModel<?>)value).getObject();
-							if (obj instanceof String)
+							super.onSave(target, form);
+							if (target == null)
 							{
-								v = (String)obj;
+								target = ComponentFinder.findAjaxRequestTarget();
 							}
+							final Object value = getModel();
+							String v = null;
+							if (value instanceof IModel)
+							{
+								final Object obj = ((IModel<?>)value).getObject();
+								if (obj instanceof String)
+								{
+									v = (String)obj;
+								}
+							}
+							target.add(ajaxTabbedPanel);
+
+							final TabModel<String> newTabModel = new TabModel<>(Model.of(v),
+								Model.of(v), Model.of("x"));
+
+							final AbstractContentTab<TabModel<String>> tab = new AbstractContentTab<TabModel<String>>(
+								newTabModel.getTitle(), Model.of(newTabModel), Model.of("x"))
+							{
+								private static final long serialVersionUID = 1L;
+
+								@Override
+								public Panel getPanel(final String panelId)
+								{
+									final Panel p = new TabPanel(panelId,
+										getContent().getObject().getContent());
+									return p;
+								}
+							};
+							final Object object = AddableTabbedPanel.this.getDefaultModelObject();
+							final TabbedPanelModels<String> tabbedModel = (TabbedPanelModels<String>)object;
+							final List<TabModel<String>> tabModels = tabbedModel.getTabModels();
+							tabModels.add(newTabModel);
+							ajaxTabbedPanel.onNewTab(target, tab);
+							modalWindow.close(target);
 						}
-						target.add(ajaxTabbedPanel);
-
-						final TabModel<String> newTabModel = new TabModel<>(Model.of(v), Model
-							.of(v), Model.of("x"));
-
-						final AbstractContentTab<TabModel<String>> tab = new AbstractContentTab<TabModel<String>>(
-							newTabModel.getTitle(), Model.of(newTabModel), Model.of("x"))
-						{
-							private static final long serialVersionUID = 1L;
-
-							@Override
-							public Panel getPanel(final String panelId)
-							{
-								final Panel p = new TabPanel(panelId, getContent().getObject()
-									.getContent());
-								return p;
-							}
-						};
-						final Object object = AddableTabbedPanel.this.getDefaultModelObject();
-						final TabbedPanelModels<String> tabbedModel = (TabbedPanelModels<String>)object;
-						final List<TabModel<String>> tabModels = tabbedModel.getTabModels();
-						tabModels.add(newTabModel);
-						ajaxTabbedPanel.onNewTab(target, tab);
-						modalWindow.close(target);
-					}
-				});
+					});
 				return modalWindow;
 			}
 

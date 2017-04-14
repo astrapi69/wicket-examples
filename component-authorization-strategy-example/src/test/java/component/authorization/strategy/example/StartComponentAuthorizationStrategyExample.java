@@ -28,28 +28,25 @@ public class StartComponentAuthorizationStrategyExample
 		System.setProperty("wicket.configuration", "development");
 		final String projectname = "component.authorization.strategy.example";
 		final File projectDirectory = PathFinder.getProjectDirectory();
-		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src",
-			"main", "webapp");
+		final File webapp = PathFinder.getRelativePath(projectDirectory, projectname, "src", "main",
+			"webapp");
 		final String filterPath = "/*";
 		// Add a file appender to the logger programatically
 		// Logger logger = org.apache.log4j.LogManager.getLogger("org.eclipse.jetty");
 		// Logger.getRootLogger().addFileAppender(newFileAppender("./application.log"));
 
 		final ServletContextHandler servletContextHandler = ServletContextHandlerFactory
-			.getNewServletContextHandler(ServletContextHandlerConfiguration
-				.builder()
-				.filterHolderConfiguration(
-					FilterHolderConfiguration
-						.builder()
-						.filterClass(WicketFilter.class)
-						.filterPath(filterPath)
-						.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
-						.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
-							WicketApplication.class.getName()).build())
-				.servletHolderConfiguration(
-					ServletHolderConfiguration.builder().servletClass(DefaultServlet.class)
-						.pathSpec(filterPath).build()).contextPath("/").webapp(webapp)
-				.maxInactiveInterval(sessionTimeout).filterPath(filterPath).build());
+			.getNewServletContextHandler(ServletContextHandlerConfiguration.builder()
+				.filterHolderConfiguration(FilterHolderConfiguration.builder()
+					.filterClass(WicketFilter.class).filterPath(filterPath)
+					.initParameter(WicketFilter.FILTER_MAPPING_PARAM, "/*")
+					.initParameter(ContextParamWebApplicationFactory.APP_CLASS_PARAM,
+						WicketApplication.class.getName())
+					.build())
+				.servletHolderConfiguration(ServletHolderConfiguration.builder()
+					.servletClass(DefaultServlet.class).pathSpec(filterPath).build())
+				.contextPath("/").webapp(webapp).maxInactiveInterval(sessionTimeout)
+				.filterPath(filterPath).build());
 
 		final Jetty9RunConfiguration config = Jetty9RunConfiguration.builder()
 			.servletContextHandler(servletContextHandler)

@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-wicket-application-parent</artifactId>
-		<version>7.5.0-SNAPSHOT</version>
+		<version>7.3.1-SNAPSHOT</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -35,15 +35,15 @@
 
 	<properties>
 		<!-- WICKET version -->
-		<wicket.version>7.5.0</wicket.version>
+		<wicket.version>7.3.0</wicket.version>
 		<!-- WICKETSTUFF LIBRARIES versions -->
-		<wicketstuff.version>7.5.0</wicketstuff.version>
+		<wicketstuff.version>7.3.0</wicketstuff.version>
 		<!-- JAULP-WICKET version -->
-		<jaulp-wicket.version>7.5.0-SNAPSHOT</jaulp-wicket.version>
-		<wicket-chat-api.version>7.5.0-SNAPSHOT</wicket-chat-api.version>
-		<wicket-bootstrap3.version>7.5.0-SNAPSHOT</wicket-bootstrap3.version>
-		<wicket-component-expressions.version>7.5.0-SNAPSHOT</wicket-component-expressions.version>
-		<authorization-strategy-api.version>7.5.0-SNAPSHOT</authorization-strategy-api.version>
+		<jaulp-wicket.version>7.3.1-SNAPSHOT</jaulp-wicket.version>
+		<wicket-chat-api.version>7.3.1-SNAPSHOT</wicket-chat-api.version>
+		<wicket-bootstrap3.version>7.3.1-SNAPSHOT</wicket-bootstrap3.version>
+		<wicket-component-expressions.version>7.3.1-SNAPSHOT</wicket-component-expressions.version>
+		<authorization-strategy-api.version>7.3.1-SNAPSHOT</authorization-strategy-api.version>
 	</properties>
 
 	<dependencyManagement>

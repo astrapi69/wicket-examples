@@ -32,17 +32,17 @@ public class HomePanel extends BasePanel<HomeModelBean>
 	public HomePanel(final String id)
 	{
 		super(id);
-		final ContentPanel contentPanel = new ContentPanel("contentPanel", Model.of(ContentModelBean
-			.builder()
-			.headerResourceKey(ResourceBundleKey.builder().key("home.header.label").build())
-			.contentResourceKey(ResourceBundleKey.builder().key("home.content.label").build())
-			.build()));
+		final ContentPanel contentPanel = new ContentPanel("contentPanel",
+			Model.of(ContentModelBean.builder()
+				.headerResourceKey(ResourceBundleKey.builder().key("home.header.label").build())
+				.contentResourceKey(ResourceBundleKey.builder().key("home.content.label").build())
+				.build()));
 		contentPanel.getHeader().add(new JQueryJsAppenderBehavior("wrap", "<h1></h1>"));
-		contentPanel.getContent().add(
-			new JQueryJsAppenderBehavior("wrap", "<p class=\"lead\"></p>"));
+		contentPanel.getContent()
+			.add(new JQueryJsAppenderBehavior("wrap", "<p class=\"lead\"></p>"));
 		add(contentPanel);
-		add(ComponentFactory.newLabel("currentTimeLabel", Model.of("")).add(
-			new CurrentDatetimeBehavior()));
+		add(ComponentFactory.newLabel("currentTimeLabel", Model.of(""))
+			.add(new CurrentDatetimeBehavior()));
 	}
 
 }

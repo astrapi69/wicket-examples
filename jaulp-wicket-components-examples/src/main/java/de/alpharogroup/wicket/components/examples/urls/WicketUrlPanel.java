@@ -41,57 +41,57 @@ public class WicketUrlPanel extends BasePanel<Object>
 		final PageParameters pageParameters = PageParametersExtensions.toPageParameters(parameters);
 		final AddressPage addressPage = new AddressPage(pageParameters);
 
-		add(new Label("absoluteUrlFor", Model.of(WicketUrlExtensions
-			.absoluteUrlFor(AddressPage.class))));
+		add(new Label("absoluteUrlFor",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(AddressPage.class))));
 
-		add(new Label("absoluteUrlForWithPort", Model.of(WicketUrlExtensions.absoluteUrlFor(
-			AddressPage.class, true))));
+		add(new Label("absoluteUrlForWithPort",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(AddressPage.class, true))));
 
-		add(new Label("absoluteUrlForWithPortAndPageParameters", Model.of(WicketUrlExtensions
-			.absoluteUrlFor(AddressPage.class, pageParameters, true))));
+		add(new Label("absoluteUrlForWithPortAndPageParameters",
+			Model.of(WicketUrlExtensions.absoluteUrlFor(AddressPage.class, pageParameters, true))));
 
-		add(new Label("absoluteUrlForWithoutPortAndPageParameters", Model.of(WicketUrlExtensions
-			.absoluteUrlFor(AddressPage.class, pageParameters, false))));
+		add(new Label("absoluteUrlForWithoutPortAndPageParameters", Model
+			.of(WicketUrlExtensions.absoluteUrlFor(AddressPage.class, pageParameters, false))));
 
-		add(new Label("getPageUrl", Model.of(WicketUrlExtensions.getPageUrl(new AddressPage(
-			new PageParameters())))));
+		add(new Label("getPageUrl",
+			Model.of(WicketUrlExtensions.getPageUrl(new AddressPage(new PageParameters())))));
 
-		add(new Label("getPageUrlWithPageParameters", Model.of(WicketUrlExtensions.getPageUrl(
-			addressPage, pageParameters))));
+		add(new Label("getPageUrlWithPageParameters",
+			Model.of(WicketUrlExtensions.getPageUrl(addressPage, pageParameters))));
 
-		add(new Label("getPageUrlWithPageClass", Model.of(WicketUrlExtensions
-			.getPageUrl(AddressPage.class))));
+		add(new Label("getPageUrlWithPageClass",
+			Model.of(WicketUrlExtensions.getPageUrl(AddressPage.class))));
 
-		add(new Label("getPageUrlWithPageClassAndPageParameters", Model.of(WicketUrlExtensions
-			.getPageUrl(AddressPage.class, pageParameters))));
+		add(new Label("getPageUrlWithPageClassAndPageParameters",
+			Model.of(WicketUrlExtensions.getPageUrl(AddressPage.class, pageParameters))));
 
-		add(new Label("getCanonicalPageUrlWithPageClass", Model.of(WicketUrlExtensions
-			.getCanonicalPageUrl(AddressPage.class))));
+		add(new Label("getCanonicalPageUrlWithPageClass",
+			Model.of(WicketUrlExtensions.getCanonicalPageUrl(AddressPage.class))));
 
 		add(new Label("getCanonicalPageUrlWithPageClassAndPageParameters",
 			Model.of(WicketUrlExtensions.getCanonicalPageUrl(AddressPage.class, pageParameters))));
 
 		add(new Label("getBaseUrl", Model.of(WicketUrlExtensions.getBaseUrl())));
 
-		add(new Label("getBaseUrlWithPageObject", Model.of(WicketUrlExtensions
-			.getBaseUrl(addressPage))));
+		add(new Label("getBaseUrlWithPageObject",
+			Model.of(WicketUrlExtensions.getBaseUrl(addressPage))));
 
-		add(new Label("getBaseUrlWithPageClass", Model.of(WicketUrlExtensions
-			.getBaseUrl(AddressPage.class))));
+		add(new Label("getBaseUrlWithPageClass",
+			Model.of(WicketUrlExtensions.getBaseUrl(AddressPage.class))));
 
-		add(new Label("getBaseUrlWithPageClassAndPageParameters", Model.of(WicketUrlExtensions
-			.getBaseUrl(AddressPage.class, pageParameters))));
+		add(new Label("getBaseUrlWithPageClassAndPageParameters",
+			Model.of(WicketUrlExtensions.getBaseUrl(AddressPage.class, pageParameters))));
 
 		add(new Label("getContextPath", Model.of(WicketUrlExtensions.getContextPath())));
 
-		add(new Label("getContextPathWithPageObject", Model.of(WicketUrlExtensions
-			.getContextPath(addressPage))));
+		add(new Label("getContextPathWithPageObject",
+			Model.of(WicketUrlExtensions.getContextPath(addressPage))));
 
-		add(new Label("getUrlAsStringWithPageObject", Model.of(WicketUrlExtensions
-			.getUrlAsString(addressPage))));
+		add(new Label("getUrlAsStringWithPageObject",
+			Model.of(WicketUrlExtensions.getUrlAsString(addressPage))));
 
-		add(new Label("getUrlAsStringWithPageClass", Model.of(WicketUrlExtensions
-			.getUrlAsString(AddressPage.class))));
+		add(new Label("getUrlAsStringWithPageClass",
+			Model.of(WicketUrlExtensions.getUrlAsString(AddressPage.class))));
 
 		add(new Label("getLocalName", Model.of(WicketUrlExtensions.getLocalName())));
 
@@ -99,16 +99,17 @@ public class WicketUrlPanel extends BasePanel<Object>
 
 		add(new Label("getDomainUrl", Model.of(WicketUrlExtensions.getDomainUrl())));
 
-		add(new Label("getDomainUrlWithoutPort", Model.of(WicketUrlExtensions.getDomainUrl(false))));
+		add(new Label("getDomainUrlWithoutPort",
+			Model.of(WicketUrlExtensions.getDomainUrl(false))));
 
-		add(new Label("getDomainUrlWithoutPortAndSlash", Model.of(WicketUrlExtensions.getDomainUrl(
-			false, false))));
+		add(new Label("getDomainUrlWithoutPortAndSlash",
+			Model.of(WicketUrlExtensions.getDomainUrl(false, false))));
 
-		add(new Label("getDomainUrlWithSslAndPortAndSlash", Model.of(WicketUrlExtensions
-			.getDomainUrl(true, true, true))));
+		add(new Label("getDomainUrlWithSslAndPortAndSlash",
+			Model.of(WicketUrlExtensions.getDomainUrl(true, true, true))));
 
-		add(new Label("getDomainUrlWithSslWithoutPortAndWithSlash", Model.of(WicketUrlExtensions
-			.getDomainUrl(true, false, true))));
+		add(new Label("getDomainUrlWithSslWithoutPortAndWithSlash",
+			Model.of(WicketUrlExtensions.getDomainUrl(true, false, true))));
 
 	}
 }

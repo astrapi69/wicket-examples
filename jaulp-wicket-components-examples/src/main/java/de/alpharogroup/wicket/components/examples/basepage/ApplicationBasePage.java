@@ -137,25 +137,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void onInitialize()
-	{
-		super.onInitialize();
-		add(new HtmlTag("html"));
-		add(new OptimizedMobileViewportMetaTag("viewport"));
-		add(new IeEdgeMetaTag("ie-edge"));
-		add(new FaviconBehavior());
-		add(new BootstrapBaseBehavior());
-		final HeaderResponseContainer headerResponseContainer = new HeaderResponseContainer(
-			WicketBootstrap3Application.FOOTER_FILTER_NAME,
-			WicketBootstrap3Application.FOOTER_FILTER_NAME);
-		add(headerResponseContainer);
-		add(new Code("code-internal"));
-	}
-
-	/**
 	 * Change theme.
 	 *
 	 * @param themeParameter
@@ -182,6 +163,16 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
+	 * Gets the wicket application.
+	 *
+	 * @return the wicket application
+	 */
+	public WicketApplication getWicketApplication()
+	{
+		return WicketApplication.get();
+	}
+
+	/**
 	 * Factory method for creating a new {@link Component} for the main container. This method is
 	 * invoked in the constructor from the derived classes and have to be overridden so users can
 	 * provide their own version of a new {@link Component} for the main container.
@@ -194,80 +185,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 */
 	public abstract Component newContainerPanel(final String id, final IModel<T> model);
 
-
-	/**
-	 * Gets the wicket application.
-	 *
-	 * @return the wicket application
-	 */
-	public WicketApplication getWicketApplication()
-	{
-		return WicketApplication.get();
-	}
-
-	/**
-	 * Factory method for creating a new {@link Behavior} for the session timeout. This method is
-	 * invoked in the constructor from the derived classes and have to be overridden so users can
-	 * provide their own version of a new {@link Behavior} for the session timeout.
-	 */
-	protected void newSessionTimeoutBehavior()
-	{
-		final int sessionTimeout = WicketSession.get().getSessionTimeout();
-		if (0 < sessionTimeout)
-		{
-			add(newSessionTimeoutBehavior("sessionTimeoutNotification",
-				newSessionTimeoutSettings()));
-		}
-	}
-
-	/**
-	 * Factory method for creating a new {@link SessionTimeoutSettings} for the session timeout.
-	 * This method is invoked in the constructor from the derived classes and have to be overridden
-	 * so users can provide their own version of a new {@link SessionTimeoutSettings} for the
-	 * session timeout.
-	 */
-	protected SessionTimeoutSettings newSessionTimeoutSettings()
-	{
-		final SessionTimeoutSettings settings;
-		final int sessionTimeout = WicketSession.get().getSessionTimeout();
-		final int oneThirdOfWarnAfter;
-		if (0 < sessionTimeout)
-		{
-			oneThirdOfWarnAfter = (sessionTimeout * 1000) / 3;
-		}
-		else
-		{
-			oneThirdOfWarnAfter = (300 * 1000) / 3;
-		}
-		final int twoThirdOfWarnAfter = oneThirdOfWarnAfter * 2;
-		settings = SessionTimeoutSettings.builder().build();
-		settings.getTitle().setValue("Session timeout warning");
-		settings.getMessage().setValue("Your session will be timeouted...");
-		settings.getWarnAfter().setValue(oneThirdOfWarnAfter);
-		settings.getRedirAfter().setValue(twoThirdOfWarnAfter);
-		settings.getRedirUrl().setValue("/public/imprint");
-		settings.getLogoutUrl().setValue("/public/imprint");
-		return settings;
-	}
-
-	/**
-	 * Factory method for creating a new {@link JavascriptAppenderBehavior}. This method is invoked
-	 * in the constructor from the derived classes and have to be overridden so users can provide
-	 * their own version of a new {@link JavascriptAppenderBehavior}.
-	 *
-	 * @param id
-	 *            the id
-	 * @param settings
-	 *            the settings
-	 * @return the new {@link JavascriptAppenderBehavior}
-	 */
-	protected JavascriptAppenderBehavior newSessionTimeoutBehavior(final String id,
-		final SessionTimeoutSettings settings)
-	{
-		final SessionTimeoutJsGenerator generator = new SessionTimeoutJsGenerator(settings);
-		final String jsCode = generator.generateJs();
-		return JavascriptAppenderBehavior.builder().id(id).javascript(jsCode).build();
-	}
 
 	/**
 	 * Factory method for creating a new {@link FeedbackPanel}. This method is invoked in the
@@ -287,6 +204,35 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 		notificationPanel.setOutputMarkupPlaceholderTag(true);
 		notificationPanel.hideAfter(Duration.seconds(5));
 		return notificationPanel;
+	}
+
+	/**
+	 * Factory method for creating a new list with the link items for the footer area.
+	 *
+	 * @return the new <code>{@link IModel}</code> with the link items for the footer area.
+	 */
+	protected IModel<List<LinkItem>> newFooterLinkItems()
+	{
+		final List<LinkItem> linkModel = new ArrayList<>();
+		linkModel
+			.add(LinkItem.builder().url("http://www.alpharogroup.de/")
+				.target(DefaultTargets.BLANK.getTarget()).linkClass(ExternalLink.class)
+				// open in a new tab or window...
+				.resourceModelKey(ResourceBundleKey.builder().key("main.footer.copyright.label")
+					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
+				.build());
+		linkModel
+			.add(LinkItem.builder()
+				.pageClass(ImprintPage.class).resourceModelKey(ResourceBundleKey.builder()
+					.key("main.global.menu.masthead.label").defaultValue("Imprint").build())
+				.build());
+		linkModel
+			.add(LinkItem.builder().pageClass(TermOfUsePage.class)
+				.resourceModelKey(ResourceBundleKey.builder()
+					.key("main.global.menu.term.of.use.label").defaultValue("AGBs").build())
+				.build());
+		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
+		return listModel;
 	}
 
 	/**
@@ -373,35 +319,6 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	}
 
 	/**
-	 * Factory method for creating a new list with the link items for the footer area.
-	 *
-	 * @return the new <code>{@link IModel}</code> with the link items for the footer area.
-	 */
-	protected IModel<List<LinkItem>> newFooterLinkItems()
-	{
-		final List<LinkItem> linkModel = new ArrayList<>();
-		linkModel
-			.add(LinkItem.builder().url("http://www.alpharogroup.de/")
-				.target(DefaultTargets.BLANK.getTarget()).linkClass(ExternalLink.class)
-				// open in a new tab or window...
-				.resourceModelKey(ResourceBundleKey.builder().key("main.footer.copyright.label")
-					.defaultValue("\u0040 copyright 2012 Design by Alpha Ro Group").build())
-				.build());
-		linkModel
-			.add(LinkItem.builder()
-				.pageClass(ImprintPage.class).resourceModelKey(ResourceBundleKey.builder()
-					.key("main.global.menu.masthead.label").defaultValue("Imprint").build())
-				.build());
-		linkModel
-			.add(LinkItem.builder().pageClass(TermOfUsePage.class)
-				.resourceModelKey(ResourceBundleKey.builder()
-					.key("main.global.menu.term.of.use.label").defaultValue("AGBs").build())
-				.build());
-		final IModel<List<LinkItem>> listModel = new ListModel<>(linkModel);
-		return listModel;
-	}
-
-	/**
 	 * Factory method that can be overwritten for new meta tag content for keywords.
 	 *
 	 * @return the new <code>{@link IModel}</code> for the keywords.
@@ -411,6 +328,70 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	{
 		return ResourceModelFactory.newResourceModel("page.meta.keywords", this,
 			"wicket, components, examples");
+	}
+
+	/**
+	 * Factory method for creating a new {@link Behavior} for the session timeout. This method is
+	 * invoked in the constructor from the derived classes and have to be overridden so users can
+	 * provide their own version of a new {@link Behavior} for the session timeout.
+	 */
+	protected void newSessionTimeoutBehavior()
+	{
+		final int sessionTimeout = WicketSession.get().getSessionTimeout();
+		if (0 < sessionTimeout)
+		{
+			add(newSessionTimeoutBehavior("sessionTimeoutNotification",
+				newSessionTimeoutSettings()));
+		}
+	}
+
+	/**
+	 * Factory method for creating a new {@link JavascriptAppenderBehavior}. This method is invoked
+	 * in the constructor from the derived classes and have to be overridden so users can provide
+	 * their own version of a new {@link JavascriptAppenderBehavior}.
+	 *
+	 * @param id
+	 *            the id
+	 * @param settings
+	 *            the settings
+	 * @return the new {@link JavascriptAppenderBehavior}
+	 */
+	protected JavascriptAppenderBehavior newSessionTimeoutBehavior(final String id,
+		final SessionTimeoutSettings settings)
+	{
+		final SessionTimeoutJsGenerator generator = new SessionTimeoutJsGenerator(settings);
+		final String jsCode = generator.generateJs();
+		return JavascriptAppenderBehavior.builder().id(id).javascript(jsCode).build();
+	}
+
+	/**
+	 * Factory method for creating a new {@link SessionTimeoutSettings} for the session timeout.
+	 * This method is invoked in the constructor from the derived classes and have to be overridden
+	 * so users can provide their own version of a new {@link SessionTimeoutSettings} for the
+	 * session timeout.
+	 */
+	protected SessionTimeoutSettings newSessionTimeoutSettings()
+	{
+		final SessionTimeoutSettings settings;
+		final int sessionTimeout = WicketSession.get().getSessionTimeout();
+		final int oneThirdOfWarnAfter;
+		if (0 < sessionTimeout)
+		{
+			oneThirdOfWarnAfter = (sessionTimeout * 1000) / 3;
+		}
+		else
+		{
+			oneThirdOfWarnAfter = (300 * 1000) / 3;
+		}
+		final int twoThirdOfWarnAfter = oneThirdOfWarnAfter * 2;
+		settings = SessionTimeoutSettings.builder().build();
+		settings.getTitle().setValue("Session timeout warning");
+		settings.getMessage().setValue("Your session will be timeouted...");
+		settings.getWarnAfter().setValue(oneThirdOfWarnAfter);
+		settings.getRedirAfter().setValue(twoThirdOfWarnAfter);
+		settings.getRedirUrl().setValue("/public/imprint");
+		settings.getLogoutUrl().setValue("/public/imprint");
+		return settings;
 	}
 
 	/**
@@ -433,6 +414,25 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	{
 		super.onConfigure();
 		configureTheme(getPageParameters());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		add(new HtmlTag("html"));
+		add(new OptimizedMobileViewportMetaTag("viewport"));
+		add(new IeEdgeMetaTag("ie-edge"));
+		add(new FaviconBehavior());
+		add(new BootstrapBaseBehavior());
+		final HeaderResponseContainer headerResponseContainer = new HeaderResponseContainer(
+			WicketBootstrap3Application.FOOTER_FILTER_NAME,
+			WicketBootstrap3Application.FOOTER_FILTER_NAME);
+		add(headerResponseContainer);
+		add(new Code("code-internal"));
 	}
 
 	/**

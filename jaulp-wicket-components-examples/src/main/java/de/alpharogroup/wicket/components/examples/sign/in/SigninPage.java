@@ -16,24 +16,27 @@
 package de.alpharogroup.wicket.components.examples.sign.in;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.Page;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import de.alpharogroup.auth.models.SignInWithRedirectionModel;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
-import de.alpharogroup.wicket.components.sign.in.SignInWithRedirectionBean;
 
 @MountPath("public/signin")
-public class SigninPage extends PubliclyBasePage<SignInWithRedirectionBean>
+public class SigninPage extends PubliclyBasePage<SignInWithRedirectionModel<Page>>
 {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Component newContainerPanel(final String id, final IModel<SignInWithRedirectionBean> model)
+	public Component newContainerPanel(final String id,
+		final IModel<SignInWithRedirectionModel<Page>> model)
 	{
-		if(model == null) {
+		if (model == null)
+		{
 			return new SigninExamplesPanel(id,
-				new CompoundPropertyModel<SignInWithRedirectionBean>(new SignInWithRedirectionBean()));
+				new CompoundPropertyModel<>(new SignInWithRedirectionModel<Page>()));
 		}
 		return new SigninExamplesPanel(id, model);
 	}

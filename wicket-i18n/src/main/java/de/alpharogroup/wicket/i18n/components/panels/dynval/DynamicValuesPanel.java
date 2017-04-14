@@ -7,11 +7,13 @@ import org.apache.wicket.model.IModel;
 import de.alpharogroup.wicket.base.util.resource.ResourceModelFactory;
 import de.alpharogroup.wicket.i18n.model.Summary;
 
-public class DynamicValuesPanel extends Panel {
+public class DynamicValuesPanel extends Panel
+{
 
 	private static final long serialVersionUID = 1L;
 
-	public DynamicValuesPanel(String id, IModel<Summary> model) {
+	public DynamicValuesPanel(String id, IModel<Summary> model)
+	{
 		super(id, model);
 		IModel<String> resourceModel = ResourceModelFactory.newResourceModel("summ", this, model);
 		add(new Label("summary", resourceModel));

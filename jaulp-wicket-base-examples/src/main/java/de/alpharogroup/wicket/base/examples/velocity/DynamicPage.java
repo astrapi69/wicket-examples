@@ -79,8 +79,8 @@ public class DynamicPage extends WebPage
 		final WicketField<TextField<String>> textWicketField = new WicketField<TextField<String>>();
 		textWicketField.addAttribute(WICKET_ID, "inputLabel");
 		textWicketField.addAttribute("type", "text");
-		textWicketField.setComponent(new TextField<String>(textWicketField.getAttributes().get(
-			WICKET_ID)));
+		textWicketField
+			.setComponent(new TextField<String>(textWicketField.getAttributes().get(WICKET_ID)));
 		textWicketField.getComponent().setDefaultModel(Model.of(""));
 		textWicketField.setName("input");
 		textWicketField.setEndTag(false);

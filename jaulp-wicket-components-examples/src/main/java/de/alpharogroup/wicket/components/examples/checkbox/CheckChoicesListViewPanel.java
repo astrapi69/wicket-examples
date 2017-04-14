@@ -47,9 +47,9 @@ public class CheckChoicesListViewPanel extends Panel
 		final Form<?> form = new Form<>("form");
 		add(form);
 		final CheckboxModelBean<Company> checkboxModel = new CheckboxModelBean<>();
-		checkboxModel.setChoices(Arrays.asList(Company.builder().name("Ferrari").build(), Company
-			.builder().name("Lamborgini").build(), Company.builder().name("Mazerati").build(),
-			Company.builder().name("Porsche").build()));
+		checkboxModel.setChoices(Arrays.asList(Company.builder().name("Ferrari").build(),
+			Company.builder().name("Lamborgini").build(),
+			Company.builder().name("Mazerati").build(), Company.builder().name("Porsche").build()));
 
 		// Tell CheckChoicesListView what properties to use for label
 		final ChoiceRenderer<Company> renderer = new ChoiceRenderer<Company>("name");

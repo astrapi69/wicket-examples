@@ -40,7 +40,8 @@ public class ReplaceWithPage extends PubliclyBasePage<PersonBean>
 	@Override
 	public Component newContainerPanel(final String id, final IModel<PersonBean> model)
 	{
-		if(model == null) {
+		if (model == null)
+		{
 			return new ReplaceWithPanel(id, Model.of(new PersonBean()));
 		}
 		return new ReplaceWithPanel(id, model);

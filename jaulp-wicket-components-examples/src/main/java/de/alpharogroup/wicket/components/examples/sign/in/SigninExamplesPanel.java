@@ -17,6 +17,7 @@ package de.alpharogroup.wicket.components.examples.sign.in;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
+import org.apache.wicket.Page;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.form.Button;
@@ -25,6 +26,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.odlabs.wiquery.core.javascript.JsUtils;
 
+import de.alpharogroup.auth.models.SignInWithRedirectionModel;
 import de.alpharogroup.wicket.base.BasePanel;
 import de.alpharogroup.wicket.behaviors.BuildableChainableStatement;
 import de.alpharogroup.wicket.behaviors.JqueryStatementsBehavior;
@@ -32,11 +34,10 @@ import de.alpharogroup.wicket.behaviors.wrappers.Wrappers;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.labeled.textfield.LabeledEmailTextFieldPanel;
 import de.alpharogroup.wicket.components.labeled.textfield.LabeledPasswordTextFieldPanel;
-import de.alpharogroup.wicket.components.sign.in.SignInWithRedirectionBean;
 import de.alpharogroup.wicket.components.sign.in.SigninPanel;
 import de.alpharogroup.wicket.components.sign.in.form.SigninFormPanel;
 
-public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
+public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionModel<Page>>
 {
 
 	/**
@@ -47,7 +48,8 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	private final int labelSize = 2;
 	private final int inputSize = 4;
 
-	public SigninExamplesPanel(final String id, final IModel<SignInWithRedirectionBean> model)
+	public SigninExamplesPanel(final String id,
+		final IModel<SignInWithRedirectionModel<Page>> model)
 	{
 		super(id, model);
 		add(newSigninFormPanel("horizontalFormPanel", model));
@@ -60,9 +62,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 	}
 
 	protected Component newSigninFormPanel(final String id,
-		final IModel<SignInWithRedirectionBean> model)
+		final IModel<SignInWithRedirectionModel<Page>> model)
 	{
-		final SigninFormPanel<SignInWithRedirectionBean> signFormPanel = new SigninFormPanel<SignInWithRedirectionBean>(
+		final SigninFormPanel<SignInWithRedirectionModel<Page>> signFormPanel = new SigninFormPanel<SignInWithRedirectionModel<Page>>(
 			id, new CompoundPropertyModel<>(model))
 		{
 
@@ -103,7 +105,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 */
 			@Override
 			protected MarkupContainer newPasswordForgottenLink(final String id,
-				final IModel<SignInWithRedirectionBean> model)
+				final IModel<SignInWithRedirectionModel<Page>> model)
 			{
 				final MarkupContainer passwordForgottenLink = super.newPasswordForgottenLink(id,
 					model);
@@ -116,9 +118,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			 */
 			@Override
 			protected Component newSigninPanel(final String id,
-				final IModel<SignInWithRedirectionBean> model)
+				final IModel<SignInWithRedirectionModel<Page>> model)
 			{
-				final SigninPanel<SignInWithRedirectionBean> signinPanel = new SigninPanel<SignInWithRedirectionBean>(
+				final SigninPanel<SignInWithRedirectionModel<Page>> signinPanel = new SigninPanel<SignInWithRedirectionModel<Page>>(
 					id, model)
 				{
 					/**
@@ -132,9 +134,9 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					@Override
 					@SuppressWarnings("unchecked")
 					protected Component newEmailTextField(final String id,
-						final IModel<SignInWithRedirectionBean> model)
+						final IModel<SignInWithRedirectionModel<Page>> model)
 					{
-						final LabeledEmailTextFieldPanel<String, SignInWithRedirectionBean> emailTextField = (LabeledEmailTextFieldPanel<String, SignInWithRedirectionBean>)super.newEmailTextField(
+						final LabeledEmailTextFieldPanel<String, SignInWithRedirectionModel<Page>> emailTextField = (LabeledEmailTextFieldPanel<String, SignInWithRedirectionModel<Page>>)super.newEmailTextField(
 							id, model);
 						emailTextField.add(new AttributeAppender("class", " form-group"));
 						emailTextField.getEmailTextField().add(new JqueryStatementsBehavior()
@@ -152,10 +154,10 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					 * {@inheritDoc}
 					 */
 					@Override
-					protected LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> newPasswordTextField(
-						final String id, final IModel<SignInWithRedirectionBean> model)
+					protected LabeledPasswordTextFieldPanel<String, SignInWithRedirectionModel<Page>> newPasswordTextField(
+						final String id, final IModel<SignInWithRedirectionModel<Page>> model)
 					{
-						final LabeledPasswordTextFieldPanel<String, SignInWithRedirectionBean> pwTextField = super.newPasswordTextField(
+						final LabeledPasswordTextFieldPanel<String, SignInWithRedirectionModel<Page>> pwTextField = super.newPasswordTextField(
 							id, model);
 						pwTextField.add(new AttributeAppender("class", " form-group"));
 						pwTextField.getPasswordTextField().add(new JqueryStatementsBehavior()
@@ -170,6 +172,12 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 					}
 				};
 				return signinPanel;
+			}
+
+			@Override
+			protected void onError(AjaxRequestTarget target, Form<?> form)
+			{
+				SigninExamplesPanel.this.onError(target, form);
 			}
 
 			/**
@@ -190,15 +198,22 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 				SigninExamplesPanel.this.onSignin(target, form);
 			}
 
-			@Override
-			protected void onError(AjaxRequestTarget target, Form<?> form)
-			{
-				// TODO Auto-generated method stub
-
-			}
-
 		};
 		return signFormPanel;
+	}
+
+	/**
+	 * Application specific callback method that have to be overwritten to provide the action for
+	 * signin errors.
+	 *
+	 * @param target
+	 *            the target
+	 * @param form
+	 *            the form
+	 */
+	protected void onError(final AjaxRequestTarget target, final Form<?> form)
+	{
+		target.add(getFeedback());
 	}
 
 	/**
@@ -217,6 +232,7 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 			+ getModelObject().getPassword());
 	}
 
+
 	/**
 	 * Application specific callback method that have to be overwritten to provide the action for
 	 * signin.
@@ -231,20 +247,5 @@ public class SigninExamplesPanel extends BasePanel<SignInWithRedirectionBean>
 		target.add(getFeedback());
 		info("Email: " + getModelObject().getEmail() + "\nPassword:"
 			+ getModelObject().getPassword());
-	}
-
-
-	/**
-	 * Application specific callback method that have to be overwritten to provide the action for
-	 * signin errors.
-	 *
-	 * @param target
-	 *            the target
-	 * @param form
-	 *            the form
-	 */
-	protected void onError(final AjaxRequestTarget target, final Form<?> form)
-	{
-		target.add(getFeedback());
 	}
 }

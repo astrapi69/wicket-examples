@@ -106,16 +106,16 @@ public class BeanEditorExamplePanel extends BasePanel<Customer>
 	}
 
 
+	protected Component getFeedback()
+	{
+		final PubliclyBasePage<?> basePage = (PubliclyBasePage<?>)getPage();
+		return basePage.getFeedback();
+	}
+
 	protected void onSubmit(final AjaxRequestTarget target, final Form<?> form)
 	{
 
 		target.add(getFeedback());
 		info(getModel());
-	}
-
-	protected Component getFeedback()
-	{
-		final PubliclyBasePage<?> basePage = (PubliclyBasePage<?>)getPage();
-		return basePage.getFeedback();
 	}
 }

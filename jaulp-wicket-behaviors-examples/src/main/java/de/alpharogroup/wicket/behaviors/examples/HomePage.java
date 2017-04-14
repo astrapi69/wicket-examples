@@ -57,9 +57,9 @@ public class HomePage extends WebPage
 			ResourceBundleKey.builder().key("mailtoAddresModel.value").defaultValue("").build(),
 			this);
 
-		final IModel<String> mailtoViewModel = ResourceModelFactory
-			.newResourceModel(ResourceBundleKey.builder().key("mailtoViewModel.value")
-				.defaultValue("").build(), this);
+		final IModel<String> mailtoViewModel = ResourceModelFactory.newResourceModel(
+			ResourceBundleKey.builder().key("mailtoViewModel.value").defaultValue("").build(),
+			this);
 
 		final MailtoModel mailtoModel = new MailtoModel(mailtoAddresModel, mailtoViewModel);
 
@@ -80,7 +80,8 @@ public class HomePage extends WebPage
 			}
 
 		};
-		add(new JavascriptResourceReferenceAppenderBehavior(this.getClass(), "functions.js", "func"));
+		add(new JavascriptResourceReferenceAppenderBehavior(this.getClass(), "functions.js",
+			"func"));
 		add(JavascriptAppenderBehavior.builder().id("xy").javascript("alertnow();").build());
 
 		add(new Link<String>("focusRequestExamplePage")
@@ -131,8 +132,8 @@ public class HomePage extends WebPage
 	public void renderHead(final IHeaderResponse response)
 	{
 		super.renderHead(response);
-		response.render(JavaScriptHeaderItem.forReference(ApplicationExtensions
-			.getJQueryReference()));
+		response
+			.render(JavaScriptHeaderItem.forReference(ApplicationExtensions.getJQueryReference()));
 
 	}
 
