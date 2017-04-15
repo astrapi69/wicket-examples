@@ -20,40 +20,43 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.component.IRequestablePage;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import de.alpharogroup.exception.ExceptionExtensions;
 import de.alpharogroup.wicket.components.examples.area.publicly.PubliclyBasePage;
 import de.alpharogroup.wicket.components.examples.home.HomePage;
+import de.alpharogroup.wicket.components.report.ReportThrowableModelBean;
 import de.alpharogroup.wicket.components.report.ReportThrowablePanel;
 
 @MountPath("public/exception")
-public class ExceptionPage extends PubliclyBasePage<Exception>
+public class ExceptionPage extends PubliclyBasePage<ReportThrowableModelBean>
 {
 	private static final long serialVersionUID = 1L;
-	private final Exception exception;
 
 	public ExceptionPage()
 	{
-		this(new IllegalArgumentException("exception example..."));
+		this(Model.of(ReportThrowableModelBean.builder()
+			.throwable(new IllegalArgumentException("exception example..."))
+			.affectedUsername("test user")
+			.description("test description")
+			.affectedUsername("test username")
+			.originalResponse(RequestCycle.get().getOriginalResponse().toString())
+			.responsePage(ExceptionPage.class)
+			.stackTrace(ExceptionExtensions.getStackTrace(new IllegalArgumentException("exception example...")))
+			.build()));
 	}
 
-	public ExceptionPage(final Exception exception)
+	public ExceptionPage(final IModel<ReportThrowableModelBean> model)
 	{
-		super(Model.of(exception));
-		setModelObject(exception);
-		this.exception = exception;
-	}
-
-	public Exception getException()
-	{
-		return exception;
+		super(model);
 	}
 
 	@Override
-	public Panel newContainerPanel(final String id, final IModel<Exception> model)
+	public Panel newContainerPanel(final String id, final IModel<ReportThrowableModelBean> model)
 	{
 
-		return new ReportThrowablePanel(id, model.getObject())
+		return new ReportThrowablePanel(id, model)
 		{
 			private static final long serialVersionUID = 1L;
 

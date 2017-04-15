@@ -79,7 +79,7 @@
 				<artifactId>authorization-strategy-api</artifactId>
 				<version>${authorization-strategy-api.version}</version>
 			</dependency>
-			<!-- JAULP WICKET DEPENDENCIES -->
+			<!-- JAULP-WICKET DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>jaulp-wicket-annotated-header-contributors</artifactId>
