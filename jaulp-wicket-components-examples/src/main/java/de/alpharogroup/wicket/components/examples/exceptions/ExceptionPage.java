@@ -19,7 +19,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.component.IRequestablePage;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -42,7 +41,7 @@ public class ExceptionPage extends PubliclyBasePage<ReportThrowableModelBean>
 			.description("test description")
 			.affectedUsername("test username")
 			.originalResponse(RequestCycle.get().getOriginalResponse().toString())
-			.responsePage(ExceptionPage.class)
+			.responsePage(HomePage.class)
 			.stackTrace(ExceptionExtensions.getStackTrace(new IllegalArgumentException("exception example...")))
 			.build()));
 	}
@@ -61,34 +60,10 @@ public class ExceptionPage extends PubliclyBasePage<ReportThrowableModelBean>
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected String newAffectedUsername()
-			{
-				return "Guest";
-			}
-
-			@Override
-			protected Class<? extends IRequestablePage> newResponsePageClass()
-			{
-				return HomePage.class;
-			}
-
-			@Override
-			protected String newRootUsername()
-			{
-				return "rootUser";
-			}
-
-			@Override
 			protected void onSubmitError(final AjaxRequestTarget target)
 			{
-				// the description of the user...
-				// Object model = getDefaultModelObject();
-				// the real exception...
-				// Exception exception = PubliclyExcptionPage.this.getModelObject();
-				// send an email with the descripton...
-				setResponsePage(HomePage.class);
+				setResponsePage(model.getObject().getResponsePage());
 			}
-
 		};
 	}
 }

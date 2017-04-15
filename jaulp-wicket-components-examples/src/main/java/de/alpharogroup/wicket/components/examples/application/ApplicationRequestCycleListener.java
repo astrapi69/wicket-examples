@@ -18,10 +18,12 @@ package de.alpharogroup.wicket.components.examples.application;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.component.IRequestablePage;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 import de.alpharogroup.exception.ExceptionExtensions;
 import de.alpharogroup.wicket.base.application.AbstractApplicationRequestCycleListener;
 import de.alpharogroup.wicket.components.examples.exceptions.ExceptionPage;
+import de.alpharogroup.wicket.components.examples.home.HomePage;
 import de.alpharogroup.wicket.components.report.ReportThrowableModelBean;
 
 public class ApplicationRequestCycleListener extends AbstractApplicationRequestCycleListener
@@ -29,7 +31,7 @@ public class ApplicationRequestCycleListener extends AbstractApplicationRequestC
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public IRequestablePage newExceptionPage(final Exception e)
+	public IRequestablePage newExceptionPage(final RequestCycle cycle, final Exception e)
 	{
 		e.printStackTrace();
 
@@ -39,6 +41,8 @@ public class ApplicationRequestCycleListener extends AbstractApplicationRequestC
 			.description("test description") // set the appropriate description
 			.rootUsername("test rootUsername")  // set the appropriate root username
 			.stackTrace(ExceptionExtensions.getStackTrace(e))
+			.responsePage(HomePage.class)
+			.originalResponse(cycle.getOriginalResponse().toString())
 			.build());
 		return new ExceptionPage(model);
 	}
