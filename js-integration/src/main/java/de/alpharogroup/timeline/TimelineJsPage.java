@@ -1,5 +1,6 @@
 package de.alpharogroup.timeline;
 
-public class TimelineJsPage {
+public class TimelineJsPage
+{
 
 }

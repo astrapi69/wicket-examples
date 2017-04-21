@@ -19,9 +19,8 @@ public class ChatPanel extends SimpleChatPanel
 	public ChatPanel(final String id, final IModel<ChatroomModel> model)
 	{
 		super(id, model);
-		getChat().add(
-			new AttributeAppender("style",
-				"border: 1px black solid; width: 500px; height: 300px; overflow-y: auto;"));
+		getChat().add(new AttributeAppender("style",
+			"border: 1px black solid; width: 500px; height: 300px; overflow-y: auto;"));
 	}
 
 	@Override

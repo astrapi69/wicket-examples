@@ -7,30 +7,30 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-wicket-application-parent</artifactId>
-		<version>7.4.0</version>
+		<version>7.3.1</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>wicket-examples</artifactId>
-	<version>7.3.0</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>swap.fragments</module>
 		<module>atmosphere-chat</module>
-		<module>rest-annotations</module>
+		<module>component-authorization-strategy-example</module>
+		<module>jaulp-wicket-annotated-header-contributors-examples</module>
+		<module>jaulp-wicket-base-examples</module>
+		<module>jaulp-wicket-behaviors-examples</module>
+		<module>jaulp-wicket-components-examples</module>
+		<module>jaulp-wicket-data-provider-examples</module>
+		<module>jaulp-wicket-dialogs-examples</module>
+		<module>jaulp-wicket-dropdownchoices-examples</module>
 		<module>js-integration</module>
-		<module>wicket-ssl</module>
-		<module>jaulp.wicket.annotated.header.contributors.examples</module>
-		<module>jaulp.wicket.behaviors.examples</module>
-		<module>jaulp.wicket.components.examples</module>
-		<module>jaulp.wicket.data.provider.examples</module>
-		<module>jaulp.wicket.dialogs.examples</module>
-		<module>jaulp.wicket.base.examples</module>
-		<module>jaulp.wicket.dropdownchoices.examples</module>
-		<module>wicket.xslt.examples</module>
+		<module>rest-annotations</module>
+		<module>swap-fragments</module>
 		<module>wicket-channel-chat-examples</module>
-		<module>component.authorization.strategy.example</module>
+		<module>wicket-i18n</module>
+		<module>wicket-ssl</module>
+		<module>wicket-xslt-examples</module>
 	</modules>
 
 	<properties>
@@ -39,8 +39,11 @@
 		<!-- WICKETSTUFF LIBRARIES versions -->
 		<wicketstuff.version>7.3.0</wicketstuff.version>
 		<!-- JAULP-WICKET version -->
-		<jaulp.wicket.version>7.3.0</jaulp.wicket.version>
-		<authorization.strategy.api.version>7.3.0</authorization.strategy.api.version>
+		<jaulp-wicket.version>7.3.1</jaulp-wicket.version>
+		<wicket-chat-api.version>7.3.1</wicket-chat-api.version>
+		<wicket-bootstrap3.version>7.3.1</wicket-bootstrap3.version>
+		<wicket-component-expressions.version>7.3.1</wicket-component-expressions.version>
+		<authorization-strategy-api.version>7.3.1</authorization-strategy-api.version>
 	</properties>
 
 	<dependencyManagement>
@@ -49,50 +52,74 @@
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>authorization.strategy.api</artifactId>
-				<version>${authorization.strategy.api.version}</version>
-			</dependency>
-			<!-- JAULP WICKET DEPENDENCIES -->
-			<dependency>
-				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.annotated.header.contributors</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>wicket-chat-api</artifactId>
+				<version>${wicket-chat-api.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.base</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>wicket-channel-chat</artifactId>
+				<version>${wicket-chat-api.version}</version>
+			</dependency>
+			<!-- WICKET-BOOTSTRAP3 DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>wicket-bootstrap3</artifactId>
+				<version>${wicket-bootstrap3.version}</version>
+			</dependency>
+			<!-- WICKET-COMPONENT-EXPRESSIONS DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>wicket-component-expressions</artifactId>
+				<version>${wicket-component-expressions.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.components</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>authorization-strategy-api</artifactId>
+				<version>${authorization-strategy-api.version}</version>
+			</dependency>
+			<!-- JAULP-WICKET DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp-wicket-annotated-header-contributors</artifactId>
+				<version>${jaulp-wicket.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.behaviors</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>jaulp-wicket-base</artifactId>
+				<version>${jaulp-wicket.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.data.provider</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>jaulp-wicket-components</artifactId>
+				<version>${jaulp-wicket.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.dialogs</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>jaulp-wicket-behaviors</artifactId>
+				<version>${jaulp-wicket.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>jaulp.wicket.dropdownchoices</artifactId>
-				<version>${jaulp.wicket.version}</version>
+				<artifactId>jaulp-wicket-data-provider</artifactId>
+				<version>${jaulp-wicket.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp-wicket-dialogs</artifactId>
+				<version>${jaulp-wicket.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jaulp-wicket-dropdownchoices</artifactId>
+				<version>${jaulp-wicket.version}</version>
 			</dependency>
 
 		</dependencies>

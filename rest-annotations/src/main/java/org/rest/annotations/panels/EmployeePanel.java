@@ -23,6 +23,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+
 import de.alpharogroup.test.objects.Employee;
 
 public class EmployeePanel extends Panel
@@ -49,7 +50,7 @@ public class EmployeePanel extends Panel
 		// TODO gender as radio...
 		form.add(new TextField<String>("person.gender").setOutputMarkupId(true));
 		form.add(new TextField<String>("person.about").setOutputMarkupId(true));
-		// TODO married		
+		// TODO married
 		form.add(new TextField<String>("person.married").setOutputMarkupId(true));
 		form.add(newSubmitButton("submit", form));
 	}

@@ -28,13 +28,13 @@ public class HttpBasicAuthRoleCheckingStrategy implements IRoleCheckingStrategy
 {
 	final private String username;
 	final private String password;
-	
+
 
 	public HttpBasicAuthRoleCheckingStrategy(String username, String password)
 	{
 		Args.notNull(username, "username");
 		Args.notNull(password, "password");
-		
+
 		this.username = username;
 		this.password = password;
 	}
@@ -45,18 +45,17 @@ public class HttpBasicAuthRoleCheckingStrategy implements IRoleCheckingStrategy
 	{
 		WebRequest currentWebRequest = AbstractRestResource.getCurrentWebRequest();
 		String authorization = currentWebRequest.getHeader("Authorization");
-		
+
 		if (!Strings.isEmpty(authorization) && authorization.startsWith("Basic"))
 		{
 			String base64Credentials = authorization.substring("Basic".length()).trim();
 			String credentials = new String(Base64.decodeBase64(base64Credentials));
-			
-			final String[] values = credentials.split(":",2);
-			
-			return username.equals(values[0]) &&
-				password.equals(values[1]);
+
+			final String[] values = credentials.split(":", 2);
+
+			return username.equals(values[0]) && password.equals(values[1]);
 		}
-		
+
 		return false;
 	}
 

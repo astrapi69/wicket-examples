@@ -8,7 +8,8 @@ import de.alpharogroup.io.annotations.ImportResource;
 import de.alpharogroup.io.annotations.ImportResources;
 import de.alpharogroup.wicket.header.contributors.HeaderResponseExtensions;
 
-@ImportResources(resources = { @ImportResource(resourceName = "notification.css", resourceType = "css", index = 0) })
+@ImportResources(resources = {
+		@ImportResource(resourceName = "notification.css", resourceType = "css", index = 0) })
 public class JqueryNotificationPanel extends Panel
 {
 

@@ -39,26 +39,19 @@ public class HomePage extends WebPage
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form)
+			protected void onError(AjaxRequestTarget target, Form<?> form)
 			{
-				EventBus.get().post(
-					new ChatMessage(receiver.getModelObject(), input.getModelObject()));
 			}
 
 			@Override
-			protected void onError(AjaxRequestTarget target, Form<?> form)
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form)
 			{
+				EventBus.get()
+					.post(new ChatMessage(receiver.getModelObject(), input.getModelObject()));
 			}
 		});
 
 		setVersioned(false);
-	}
-
-	@Subscribe
-	public void updateTime(AjaxRequestTarget target, Date event)
-	{
-		timeLabel.setDefaultModelObject(event.toString());
-		target.add(timeLabel);
 	}
 
 	@Subscribe(contextAwareFilter = ReceiverFilter.class)
@@ -66,6 +59,13 @@ public class HomePage extends WebPage
 	{
 		messageLabel.setDefaultModelObject(message.getMessage());
 		target.add(messageLabel);
+	}
+
+	@Subscribe
+	public void updateTime(AjaxRequestTarget target, Date event)
+	{
+		timeLabel.setDefaultModelObject(event.toString());
+		target.add(timeLabel);
 	}
 }
 

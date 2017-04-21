@@ -13,27 +13,31 @@ import org.apache.wicket.request.resource.UrlResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
 import org.apache.wicket.util.template.TextTemplate;
 
-public class TimelineBehavior extends Behavior {
+public class TimelineBehavior extends Behavior
+{
 
 	/**
 	 * The serialVersionUID.
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final TextTemplate timelineTemplate = new PackageTextTemplate(TimelineBehavior.class, "timeline.js.tmpl");
+	private final TextTemplate timelineTemplate = new PackageTextTemplate(TimelineBehavior.class,
+		"timeline.js.tmpl");
 
 	private Component component;
 
 	@Override
-	public void bind(final Component component) {
+	public void bind(final Component component)
+	{
 		super.bind(component);
 		this.component = component;
 		this.component.setOutputMarkupId(true);
 	}
 
-	protected String generateJS(final TextTemplate textTemplate) {
+	protected String generateJS(final TextTemplate textTemplate)
+	{
 		final Map<String, Object> variables = new HashMap<String, Object>();
-		variables.put("chart_id", "chart_id");	
+		variables.put("chart_id", "chart_id");
 		textTemplate.interpolate(variables);
 		String js = textTemplate.asString();
 		return js;
@@ -45,11 +49,12 @@ public class TimelineBehavior extends Behavior {
 	 * 'timeline-template.js'.
 	 */
 	@Override
-	public void renderHead(Component c, final IHeaderResponse response) {
-//		response.render(JavaScriptHeaderItem.forReference(new TimelineResourceReference()));
-		response.render(JavaScriptHeaderItem.forReference(new UrlResourceReference(Url.parse("https://www.google.com/jsapi"))));	
-		response.render(OnLoadHeaderItem
-				.forScript(generateJS(timelineTemplate)));
+	public void renderHead(Component c, final IHeaderResponse response)
+	{
+		// response.render(JavaScriptHeaderItem.forReference(new TimelineResourceReference()));
+		response.render(JavaScriptHeaderItem
+			.forReference(new UrlResourceReference(Url.parse("https://www.google.com/jsapi"))));
+		response.render(OnLoadHeaderItem.forScript(generateJS(timelineTemplate)));
 	}
 
 }

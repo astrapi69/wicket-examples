@@ -20,35 +20,27 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.PackageResourceReference;
 import org.wicket.ssl.pages.http.NormalHttpPage;
 import org.wicket.ssl.pages.https.NormalSecuredHttpsPage;
 import org.wicket.ssl.pages.mountedHttps.MountedHttpsPage;
 
-import de.alpharogroup.web.css.WebResources;
+import de.alpharogroup.web.css.MainFoobarCssResourceReference;
 
 /**
  * Homepage
  */
-public class HomePage extends WebPage {
-
-	@Override
-	public void renderHead(IHeaderResponse response) {
-		super.renderHead(response);
-		PackageResourceReference cssFile = new PackageResourceReference(WebResources.class, "main-foobar.css");
-		CssHeaderItem cssItem = CssHeaderItem.forReference(cssFile);
-		response.render(cssItem);
-	}
+public class HomePage extends WebPage
+{
 
 	private static final long serialVersionUID = 1L;
 
-	// TODO Add any page properties or variables here
-
-	public HomePage() {
+	public HomePage()
+	{
 		super();
-
 		initLayout();
 	}
+
+	// TODO Add any page properties or variables here
 
 	/**
 	 * Constructor that is invoked when page is invoked without a session.
@@ -56,41 +48,59 @@ public class HomePage extends WebPage {
 	 * @param parameters
 	 *            Page parameters
 	 */
-	public HomePage(final PageParameters parameters) {
+	public HomePage(final PageParameters parameters)
+	{
 		super(parameters);
 
 		initLayout();
 
 	}
 
-	private void initLayout() {
+	private void initLayout()
+	{
 
-		add(new Link<Void>("normalHttpLink") {
+		add(new Link<Void>("normalHttpLink")
+		{
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick() {
+			public void onClick()
+			{
 				setResponsePage(NormalHttpPage.class);
 			}
 		});
 
-		add(new Link<Void>("normalSecureHttpsLink") {
+		add(new Link<Void>("normalSecureHttpsLink")
+		{
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick() {
+			public void onClick()
+			{
 				setResponsePage(NormalSecuredHttpsPage.class);
 			}
 		});
 
-		add(new Link<Void>("mountedPathSecureHttpsLink") {
+		add(new Link<Void>("mountedPathSecureHttpsLink")
+		{
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void onClick() {
+			public void onClick()
+			{
 				setResponsePage(MountedHttpsPage.class);
 			}
 		});
 
+	}
+
+	@Override
+	public void renderHead(final IHeaderResponse response)
+	{
+		super.renderHead(response);
+		// PackageResourceReference cssFile = new PackageResourceReference(WebResources.class,
+		// "main-foobar.css");
+		CssHeaderItem cssItem = CssHeaderItem.forReference(MainFoobarCssResourceReference.get());
+		response.render(cssItem);
 	}
 }
