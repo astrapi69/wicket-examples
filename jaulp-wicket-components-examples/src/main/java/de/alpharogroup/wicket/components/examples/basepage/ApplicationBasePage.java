@@ -248,8 +248,8 @@ public abstract class ApplicationBasePage<T> extends GenericBasePage<T>
 	 */
 	protected Panel newFooterPanel(final String id, final IModel<T> model)
 	{
-		final FooterPanel<List<LinkItem>> footerPanel =
-		 new FooterPanel<List<LinkItem>>(id, newFooterLinkItems())
+		final FooterPanel<List<LinkItem>> footerPanel = new FooterPanel<List<LinkItem>>(id,
+			newFooterLinkItems())
 		{
 			private static final long serialVersionUID = 1L;
 

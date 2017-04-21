@@ -111,15 +111,15 @@ public class ThreeDropDownChoicesPanel extends Panel
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected void onUpdate(final AjaxRequestTarget target)
-			{
-				target.add(carModels);
-			}
-
-			@Override
 			protected void onError(AjaxRequestTarget target, RuntimeException e)
 			{
 				super.onError(target, e);
+			}
+
+			@Override
+			protected void onUpdate(final AjaxRequestTarget target)
+			{
+				target.add(carModels);
 			}
 
 		});

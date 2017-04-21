@@ -100,7 +100,7 @@ public class HomePage extends WebPage
 		super.renderHead(response);
 		// PackageResourceReference cssFile = new PackageResourceReference(WebResources.class,
 		// "main-foobar.css");
-		 CssHeaderItem cssItem = CssHeaderItem.forReference(MainFoobarCssResourceReference.get());
-		 response.render(cssItem);
+		CssHeaderItem cssItem = CssHeaderItem.forReference(MainFoobarCssResourceReference.get());
+		response.render(cssItem);
 	}
 }

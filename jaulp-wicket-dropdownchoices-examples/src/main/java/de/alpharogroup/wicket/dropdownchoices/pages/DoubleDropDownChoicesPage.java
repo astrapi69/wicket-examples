@@ -58,41 +58,8 @@ public class DoubleDropDownChoicesPage extends WebPage
 	public DoubleDropDownChoicesPage(final PageParameters pageParameters)
 	{
 		super(pageParameters);
-		this.twoDropDownChoicesBean = new TwoDropDownChoicesBean<>("trademark.audi", DatabaseManager.initializeModelMap());
-	}
-
-	@Override
-	protected void onInitialize()
-	{
-		super.onInitialize();
-		final IModel<TwoDropDownChoicesBean<String>> boundOptionModel = new PropertyModel<>(this,
-			"twoDropDownChoicesBean");
-
-		final Form<TwoDropDownChoicesBean<String>> selectOptionForm = new Form<>("selectOptionForm",
-			boundOptionModel);
-
-		add(selectOptionForm);
-		Map<String, List<String>> modelsMap = DatabaseManager.initializeModelMap();
-		doubleDropDownPanel = new DoubleDropDownPanelTest<>("doubleDropDownPanel",
-			modelsMap, "trademark.audi",
-			new PropertiesChoiceRenderer(this, this.getClass()),
-			new PropertiesChoiceRenderer(this, this.getClass()));
-
-		selectOptionForm.add(doubleDropDownPanel);
-
-		// Create submit button for the form
-		final Button entryButton = new AjaxButton("entryButton", selectOptionForm)
-		{
-			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form)
-			{
-				String selected = doubleDropDownPanel.getRootChoice().getModelObject();
-				super.onSubmit(target, form);
-				System.out.println(selected);
-			}
-		};
-
-		selectOptionForm.add(entryButton);
+		this.twoDropDownChoicesBean = new TwoDropDownChoicesBean<>("trademark.audi",
+			DatabaseManager.initializeModelMap());
 	}
 
 	@Override
@@ -111,6 +78,39 @@ public class DoubleDropDownChoicesPage extends WebPage
 		doubleDropDownPanel.getChildChoice().add(sam);
 		doubleDropDownPanel.getChildChoice().add(new AttributeModifier("size", "4"));
 		super.onBeforeRender();
+	}
+
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		final IModel<TwoDropDownChoicesBean<String>> boundOptionModel = new PropertyModel<>(this,
+			"twoDropDownChoicesBean");
+
+		final Form<TwoDropDownChoicesBean<String>> selectOptionForm = new Form<>("selectOptionForm",
+			boundOptionModel);
+
+		add(selectOptionForm);
+		Map<String, List<String>> modelsMap = DatabaseManager.initializeModelMap();
+		doubleDropDownPanel = new DoubleDropDownPanelTest<>("doubleDropDownPanel", modelsMap,
+			"trademark.audi", new PropertiesChoiceRenderer(this, this.getClass()),
+			new PropertiesChoiceRenderer(this, this.getClass()));
+
+		selectOptionForm.add(doubleDropDownPanel);
+
+		// Create submit button for the form
+		final Button entryButton = new AjaxButton("entryButton", selectOptionForm)
+		{
+			@Override
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form)
+			{
+				String selected = doubleDropDownPanel.getRootChoice().getModelObject();
+				super.onSubmit(target, form);
+				System.out.println(selected);
+			}
+		};
+
+		selectOptionForm.add(entryButton);
 	}
 
 	/**

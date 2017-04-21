@@ -7,13 +7,13 @@ public class MainFoobarCssResourceReference extends CssResourceReference
 {
 	private static final ResourceReference INSTANCE = new MainFoobarCssResourceReference();
 
-	private MainFoobarCssResourceReference()
-	{
-		super(MainFoobarCssResourceReference.class, "main-foobar.css");
-	}
-
 	public static ResourceReference get()
 	{
 		return INSTANCE;
+	}
+
+	private MainFoobarCssResourceReference()
+	{
+		super(MainFoobarCssResourceReference.class, "main-foobar.css");
 	}
 }

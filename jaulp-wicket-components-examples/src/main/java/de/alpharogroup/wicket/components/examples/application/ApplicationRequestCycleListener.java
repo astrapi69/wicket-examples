@@ -35,15 +35,16 @@ public class ApplicationRequestCycleListener extends AbstractApplicationRequestC
 	{
 		e.printStackTrace();
 
-		final IModel<ReportThrowableModelBean> model = Model.of(ReportThrowableModelBean.builder()
-			.throwable(e)
-			.affectedUsername("test user") // set the appropriate affected username
-			.description("test description") // set the appropriate description
-			.rootUsername("test rootUsername")  // set the appropriate root username
-			.stackTrace(ExceptionExtensions.getStackTrace(e))
-			.responsePage(HomePage.class)
-			.originalResponse(cycle.getOriginalResponse().toString())
-			.build());
+		final IModel<ReportThrowableModelBean> model = Model
+			.of(ReportThrowableModelBean.builder().throwable(e).affectedUsername("test user") // set
+																								// the
+																								// appropriate
+																								// affected
+																								// username
+				.description("test description") // set the appropriate description
+				.rootUsername("test rootUsername") // set the appropriate root username
+				.stackTrace(ExceptionExtensions.getStackTrace(e)).responsePage(HomePage.class)
+				.originalResponse(cycle.getOriginalResponse().toString()).build());
 		return new ExceptionPage(model);
 	}
 }

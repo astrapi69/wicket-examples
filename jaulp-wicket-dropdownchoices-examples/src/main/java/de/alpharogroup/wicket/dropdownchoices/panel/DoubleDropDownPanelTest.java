@@ -72,8 +72,9 @@ public class DoubleDropDownPanelTest<T> extends FormComponentPanel
 	@SuppressWarnings("unused")
 	private List<T> childChoices;
 
-	public DoubleDropDownPanelTest(String id, final Map<T, List<T>> modelsMap, final T selectedRootOption,
-		final IChoiceRenderer<T> rootRenderer, final IChoiceRenderer<T> childRenderer)
+	public DoubleDropDownPanelTest(String id, final Map<T, List<T>> modelsMap,
+		final T selectedRootOption, final IChoiceRenderer<T> rootRenderer,
+		final IChoiceRenderer<T> childRenderer)
 	{
 		super(id);
 		this.modelsMap = Args.notNull(modelsMap, "modelsMap");
@@ -95,7 +96,7 @@ public class DoubleDropDownPanelTest<T> extends FormComponentPanel
 	public List<T> getChildChoices()
 	{
 		final List<T> childChoices = getModelsMap().get(getSelectedRootOption());
-		if(ListExtensions.isEmpty(childChoices))
+		if (ListExtensions.isEmpty(childChoices))
 		{
 			return Collections.emptyList();
 		}
@@ -103,14 +104,44 @@ public class DoubleDropDownPanelTest<T> extends FormComponentPanel
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Factory method for creating the new child {@link DropDownChoice}. This method is invoked in
+	 * the constructor from the derived classes and can be overridden so users can provide their own
+	 * version of a new child {@link DropDownChoice}.
+	 *
+	 * @param id
+	 *            the id
+	 * @param model
+	 *            the model
+	 * @return the new child {@link DropDownChoice}.
 	 */
-	@Override
-	protected void onInitialize()
+	protected DropDownChoice<T> newChildChoice(final String id)
 	{
-		super.onInitialize();
-		add(rootChoice = newRootChoice(ROOT_CHOICE_ID));
-		add(childChoice = newChildChoice(CHILD_CHOICE_ID));
+		final IModel<T> selectedChildOptionModel = new PropertyModel<>(this, "selectedChildOption");
+		final IModel<List<T>> childChoicesModel = PropertyModel.of(this, "childChoices");
+		final DropDownChoice<T> cc = new LocalisedDropDownChoice<>(id, selectedChildOptionModel,
+			childChoicesModel, this.childRenderer);
+		cc.setOutputMarkupId(true);
+		cc.add(new AjaxFormComponentUpdatingBehavior("change")
+		{
+			/** The Constant serialVersionUID. */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onError(AjaxRequestTarget target, RuntimeException e)
+			{
+				DoubleDropDownPanelTest.this.onChildChoiceError(target, e);
+			}
+
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			protected void onUpdate(final AjaxRequestTarget target)
+			{
+				DoubleDropDownPanelTest.this.onChildChoiceUpdate(target);
+			}
+		});
+		return cc;
 	}
 
 	/**
@@ -136,6 +167,12 @@ public class DoubleDropDownPanelTest<T> extends FormComponentPanel
 			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
 
+			@Override
+			protected void onError(AjaxRequestTarget target, RuntimeException e)
+			{
+				DoubleDropDownPanelTest.this.onRootChoiceError(target, e);
+			}
+
 			/**
 			 * {@inheritDoc}
 			 */
@@ -144,56 +181,39 @@ public class DoubleDropDownPanelTest<T> extends FormComponentPanel
 			{
 				DoubleDropDownPanelTest.this.onRootChoiceUpdate(target);
 			}
-
-			@Override
-			protected void onError(AjaxRequestTarget target, RuntimeException e)
-			{
-				DoubleDropDownPanelTest.this.onRootChoiceError(target, e);
-			}
 		});
 		return rc;
 	}
 
-	/**
-	 * Factory method for creating the new child {@link DropDownChoice}. This method is invoked in
-	 * the constructor from the derived classes and can be overridden so users can provide their own
-	 * version of a new child {@link DropDownChoice}.
-	 *
-	 * @param id
-	 *            the id
-	 * @param model
-	 *            the model
-	 * @return the new child {@link DropDownChoice}.
-	 */
-	protected DropDownChoice<T> newChildChoice(final String id)
+	protected void onChildChoiceError(AjaxRequestTarget target, RuntimeException e)
 	{
-		final IModel<T> selectedChildOptionModel = new PropertyModel<>(this,
-			"selectedChildOption");
-		final IModel<List<T>> childChoicesModel = PropertyModel.of(this, "childChoices");
-		final DropDownChoice<T> cc = new LocalisedDropDownChoice<>(id, selectedChildOptionModel,
-			childChoicesModel, this.childRenderer);
-		cc.setOutputMarkupId(true);
-		cc.add(new AjaxFormComponentUpdatingBehavior("change")
-		{
-			/** The Constant serialVersionUID. */
-			private static final long serialVersionUID = 1L;
+		System.err.println("onChildChoiceError:");
+	}
 
-			/**
-			 * {@inheritDoc}
-			 */
-			@Override
-			protected void onUpdate(final AjaxRequestTarget target)
-			{
-				DoubleDropDownPanelTest.this.onChildChoiceUpdate(target);
-			}
+	protected void onChildChoiceUpdate(final AjaxRequestTarget target)
+	{
+		target.add(DoubleDropDownPanelTest.this.childChoice);
+	}
 
-			@Override
-			protected void onError(AjaxRequestTarget target, RuntimeException e)
-			{
-				DoubleDropDownPanelTest.this.onChildChoiceError(target, e);
-			}
-		});
-		return cc;
+	protected void onChildSelectionChanged(Object newSelection)
+	{
+		System.err.println("onChildSelectionChanged:" + newSelection);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		add(rootChoice = newRootChoice(ROOT_CHOICE_ID));
+		add(childChoice = newChildChoice(CHILD_CHOICE_ID));
+	}
+
+	protected void onRootChoiceError(AjaxRequestTarget target, RuntimeException e)
+	{
+		System.err.println("onRootChoiceError:");
 	}
 
 	protected void onRootChoiceUpdate(final AjaxRequestTarget target)
@@ -203,29 +223,9 @@ public class DoubleDropDownPanelTest<T> extends FormComponentPanel
 		DoubleDropDownPanelTest.this.childChoice.modelChanged();
 	}
 
-	protected void onRootChoiceError(AjaxRequestTarget target, RuntimeException e)
-	{
-		System.err.println("onRootChoiceError:");
-	}
-
-	protected void onChildChoiceUpdate(final AjaxRequestTarget target)
-	{
-		target.add(DoubleDropDownPanelTest.this.childChoice);
-	}
-
-	protected void onChildChoiceError(AjaxRequestTarget target, RuntimeException e)
-	{
-		System.err.println("onChildChoiceError:");
-	}
-
 	protected void onRootSelectionChanged(Object newSelection)
 	{
 		T t = rootChoice.getModelObject();
-		System.err.println("onRootSelectionChanged:"+newSelection);
-	}
-
-	protected void onChildSelectionChanged(Object newSelection)
-	{
-		System.err.println("onChildSelectionChanged:"+newSelection);
+		System.err.println("onRootSelectionChanged:" + newSelection);
 	}
 }

@@ -35,15 +35,17 @@ public class ExceptionPage extends PubliclyBasePage<ReportThrowableModelBean>
 
 	public ExceptionPage()
 	{
-		this(Model.of(ReportThrowableModelBean.builder()
-			.throwable(new IllegalArgumentException("exception example..."))
-			.affectedUsername("test user")
-			.description("test description")
-			.affectedUsername("test username")
-			.originalResponse(RequestCycle.get().getOriginalResponse().toString())
-			.responsePage(HomePage.class)
-			.stackTrace(ExceptionExtensions.getStackTrace(new IllegalArgumentException("exception example...")))
-			.build()));
+		this(
+			Model
+				.of(ReportThrowableModelBean.builder()
+					.throwable(new IllegalArgumentException("exception example..."))
+					.affectedUsername("test user").description("test description")
+					.affectedUsername("test username")
+					.originalResponse(RequestCycle.get().getOriginalResponse().toString())
+					.responsePage(HomePage.class)
+					.stackTrace(ExceptionExtensions
+						.getStackTrace(new IllegalArgumentException("exception example...")))
+					.build()));
 	}
 
 	public ExceptionPage(final IModel<ReportThrowableModelBean> model)
