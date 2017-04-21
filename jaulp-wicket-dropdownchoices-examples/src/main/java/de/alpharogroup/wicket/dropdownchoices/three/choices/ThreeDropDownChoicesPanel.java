@@ -56,10 +56,10 @@ public class ThreeDropDownChoicesPanel extends Panel
 		final StringThreeDropDownChoicesModel stringThreeDropDownChoicesModel = new StringThreeDropDownChoicesModel(
 			"trademark.audi", DatabaseManager.initializeModelMap(), new ArrayList<String>());
 
-		final CompoundPropertyModel<StringThreeDropDownChoicesModel> boundOptionModel = new CompoundPropertyModel<StringThreeDropDownChoicesModel>(
+		final CompoundPropertyModel<StringThreeDropDownChoicesModel> boundOptionModel = new CompoundPropertyModel<>(
 			stringThreeDropDownChoicesModel);
 
-		final Form<StringThreeDropDownChoicesModel> selectOptionForm = new Form<StringThreeDropDownChoicesModel>(
+		final Form<StringThreeDropDownChoicesModel> selectOptionForm = new Form<>(
 			"selectOptionForm", boundOptionModel);
 
 		add(selectOptionForm);
@@ -67,9 +67,9 @@ public class ThreeDropDownChoicesPanel extends Panel
 		IModel<String> selectedRootOptionModel = null;
 		// selectedRootOptionModel =
 		// model(from(stringThreeDropDownChoicesModel).getSelectedRootOption());
-		selectedRootOptionModel = new PropertyModel<String>(stringThreeDropDownChoicesModel,
+		selectedRootOptionModel = new PropertyModel<>(stringThreeDropDownChoicesModel,
 			"selectedRootOption");
-		final LocalisedDropDownChoice<String> trademarks = new LocalisedDropDownChoice<String>(
+		final LocalisedDropDownChoice<String> trademarks = new LocalisedDropDownChoice<>(
 			"trademarks", selectedRootOptionModel, stringThreeDropDownChoicesModel.getRootChoices(),
 			new PropertiesChoiceRenderer(this, this.getClass()));
 		trademarks.setDefaultChoice(true);
@@ -78,21 +78,21 @@ public class ThreeDropDownChoicesPanel extends Panel
 		IModel<String> selectedChildOptionModel = null;
 		// selectedChildOptionModel =
 		// model(from(stringThreeDropDownChoicesModel).getSelectedChildOption());
-		selectedChildOptionModel = new PropertyModel<String>(stringThreeDropDownChoicesModel,
+		selectedChildOptionModel = new PropertyModel<>(stringThreeDropDownChoicesModel,
 			"selectedChildOption");
-		final LocalisedDropDownChoice<String> models = new LocalisedDropDownChoice<String>("models",
+		final LocalisedDropDownChoice<String> carModels = new LocalisedDropDownChoice<>("models",
 			selectedChildOptionModel, stringThreeDropDownChoicesModel.getChildChoices(),
 			new PropertiesChoiceRenderer(this, this.getClass()));
-		models.setDefaultChoice(true);
-		models.setOutputMarkupId(true);
+		carModels.setDefaultChoice(true);
+		carModels.setOutputMarkupId(true);
 
 		IModel<String> selectedValueOptionModel = null;
 		// selectedValueOptionModel =
 		// model(from(stringThreeDropDownChoicesModel).getSelectedValueOption());
-		selectedValueOptionModel = new PropertyModel<String>(stringThreeDropDownChoicesModel,
+		selectedValueOptionModel = new PropertyModel<>(stringThreeDropDownChoicesModel,
 			"selectedValueOption");
 
-		final LocalisedDropDownChoice<String> selectedModels = new LocalisedDropDownChoice<String>(
+		final LocalisedDropDownChoice<String> selectedModels = new LocalisedDropDownChoice<>(
 			"selectedModels", selectedValueOptionModel,
 			stringThreeDropDownChoicesModel.getSelectedValuesChoices(),
 			new SelectedValuesChoiceRenderer(this, this.getClass()));
@@ -100,11 +100,11 @@ public class ThreeDropDownChoicesPanel extends Panel
 		selectedModels.setOutputMarkupId(true);
 
 		selectOptionForm.add(trademarks);
-		selectOptionForm.add(models);
+		selectOptionForm.add(carModels);
 
 		selectOptionForm.add(selectedModels);
 
-		trademarks.add(new AjaxFormComponentUpdatingBehavior("onchange")
+		trademarks.add(new AjaxFormComponentUpdatingBehavior("change")
 		{
 
 			/** The Constant serialVersionUID. */
@@ -113,8 +113,15 @@ public class ThreeDropDownChoicesPanel extends Panel
 			@Override
 			protected void onUpdate(final AjaxRequestTarget target)
 			{
-				target.add(models);
+				target.add(carModels);
 			}
+
+			@Override
+			protected void onError(AjaxRequestTarget target, RuntimeException e)
+			{
+				super.onError(target, e);
+			}
+
 		});
 
 		// Create submit button for the form

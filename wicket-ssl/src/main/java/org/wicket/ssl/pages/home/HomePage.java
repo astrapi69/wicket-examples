@@ -15,6 +15,7 @@
  */
 package org.wicket.ssl.pages.home;
 
+import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
@@ -22,6 +23,8 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicket.ssl.pages.http.NormalHttpPage;
 import org.wicket.ssl.pages.https.NormalSecuredHttpsPage;
 import org.wicket.ssl.pages.mountedHttps.MountedHttpsPage;
+
+import de.alpharogroup.web.css.MainFoobarCssResourceReference;
 
 /**
  * Homepage
@@ -97,7 +100,7 @@ public class HomePage extends WebPage
 		super.renderHead(response);
 		// PackageResourceReference cssFile = new PackageResourceReference(WebResources.class,
 		// "main-foobar.css");
-		// CssHeaderItem cssItem = CssHeaderItem.forReference(cssFile);
-		// response.render(cssItem);
+		 CssHeaderItem cssItem = CssHeaderItem.forReference(MainFoobarCssResourceReference.get());
+		 response.render(cssItem);
 	}
 }

@@ -22,6 +22,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.wicket.dropdownchoices.pages.DatabaseManager;
+import de.alpharogroup.wicket.dropdownchoices.pages.DoubleDropDownChoicesPage;
 import de.alpharogroup.wicket.dropdownchoices.pages.TwoDropDownChoicesPage;
 import de.alpharogroup.wicket.model.dropdownchoices.StringTwoDropDownChoicesModel;
 
@@ -67,6 +68,32 @@ public class HomePage extends WebPage
 		final Label twoDropDownChoicesLbl = new Label("twoDropDownChoicesLbl",
 			"Show two DropDownChoices page");
 		link.add(twoDropDownChoicesLbl);
+
+
+		final Link<String> doubleDropDownChoicesLink = new Link<String>("doubleDropDownChoicesLink")
+		{
+
+			/**
+			 * The serialVersionUID.
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick()
+			{
+				final PageParameters pageParameters = new PageParameters();
+				((WicketSession)Session.get()).setUserAttribute("stringTwoDropDownChoicesModel",
+					stringTwoDropDownChoicesModel);
+				final DoubleDropDownChoicesPage doubleDropDownChoicesPage = new DoubleDropDownChoicesPage(
+					pageParameters);
+				setResponsePage(doubleDropDownChoicesPage);
+			}
+		};
+		add(doubleDropDownChoicesLink);
+		final Label doubleDropDownChoicesLbl = new Label("doubleDropDownChoicesLbl",
+			"Show two DoubleDropDownChoices page");
+		doubleDropDownChoicesLink.add(doubleDropDownChoicesLbl);
+
 
 		final Link<String> moreExamplesLink = new Link<String>("moreExamplesLink")
 		{
