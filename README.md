@@ -10,7 +10,25 @@ The source code comes under the liberal MIT License, making wicket-examples grea
 [![Build Status](https://travis-ci.org/astrapi69/wicket-examples.svg?branch=master)](https://travis-ci.org/astrapi69/wicket-examples)
 		 
 ## Open Issues
-[![Open Issues](https://img.shields.io/github/issues/astrapi69/wicket-examples.svg?style=flat)](https://github.com/astrapi69/wicket-examples/issues) 
+[![Open Issues](https://img.shields.io/github/issues/astrapi69/wicket-examples.svg?style=flat)](https://github.com/astrapi69/wicket-examples/issues)
+
+
+## Run Examples 
+
+You can run every example project by doing following steps. For instance if you want to start the examples for the project jaulp-wicket-components you can do this:
+
+First change to the directory and build the project:
+```bash
+cd jaulp-wicket-components-examples
+mvn clean install
+```
+Running the example:
+```bash
+mvn jetty:run
+```
+Call then http://localhost:8080/
+
+Another way is to start the example application programmaticly with jetty. In every example project there exists a start class with a main method that have the prefix Start**** and the suffix ****Examples. 
 
 ## Want to Help and improve it? ###
 
