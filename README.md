@@ -28,7 +28,7 @@ mvn jetty:run
 ```
 Call then http://localhost:8080/
 
-Another way is to start the example application programmaticly with jetty. In every example project there exists a start class with a main method that have the prefix Start**** and the suffix ****Examples. 
+Another way is to start the example application programmaticly with jetty. In every example project there exists a start class with a main method that have the prefix Start**** and the suffix ****Examples, for the above example this would be the java file StartComponentExamples.
 
 ## Want to Help and improve it? ###
 
