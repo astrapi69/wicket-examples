@@ -1,6 +1,8 @@
 # Overview
 
-Parent project that holds example projects for the [jaulp-wicket project](https://github.com/astrapi69/jaulp-wicket).
+Parent project that holds example projects for the [jaulp-wicket project](https://github.com/astrapi69/jaulp-wicket), [wicket.component.authorization.strategy
+](https://github.com/astrapi69/wicket.component.authorization.strategy), [chat-systems
+](https://github.com/lightblueseas/chat-systems) and separated examples for wicket I18N, SSL, XSLT, js integration, swap components and rest annotations.
 
 ## License
 
