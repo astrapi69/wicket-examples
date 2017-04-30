@@ -15,9 +15,6 @@
  */
 package de.alpharogroup.wicket.dropdownchoices.pages;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
@@ -31,10 +28,11 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.alpharogroup.io.annotations.ImportResource;
 import de.alpharogroup.io.annotations.ImportResources;
+import de.alpharogroup.wicket.components.i18n.dropdownchoice.panels.DoubleDropDownPanel;
 import de.alpharogroup.wicket.components.i18n.dropdownchoice.renderers.PropertiesChoiceRenderer;
-import de.alpharogroup.wicket.dropdownchoices.panel.DoubleDropDownPanelTest;
 import de.alpharogroup.wicket.header.contributors.HeaderResponseExtensions;
 import de.alpharogroup.wicket.model.dropdownchoices.TwoDropDownChoicesBean;
+import lombok.Getter;
 
 /**
  * The class {@link DoubleDropDownChoicesPage}.
@@ -51,9 +49,10 @@ public class DoubleDropDownChoicesPage extends WebPage
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Getter
 	private TwoDropDownChoicesBean<String> twoDropDownChoicesBean;
 
-	private DoubleDropDownPanelTest<String> doubleDropDownPanel;
+	private DoubleDropDownPanel<String> doubleDropDownPanel;
 
 	public DoubleDropDownChoicesPage(final PageParameters pageParameters)
 	{
@@ -91,9 +90,8 @@ public class DoubleDropDownChoicesPage extends WebPage
 			boundOptionModel);
 
 		add(selectOptionForm);
-		Map<String, List<String>> modelsMap = DatabaseManager.initializeModelMap();
-		doubleDropDownPanel = new DoubleDropDownPanelTest<>("doubleDropDownPanel", modelsMap,
-			"trademark.audi", new PropertiesChoiceRenderer(this, this.getClass()),
+		doubleDropDownPanel = new DoubleDropDownPanel<>("doubleDropDownPanel", boundOptionModel,
+			new PropertiesChoiceRenderer(this, this.getClass()),
 			new PropertiesChoiceRenderer(this, this.getClass()));
 
 		selectOptionForm.add(doubleDropDownPanel);
