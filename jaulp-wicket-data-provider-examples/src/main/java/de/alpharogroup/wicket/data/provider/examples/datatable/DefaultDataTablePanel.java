@@ -73,7 +73,7 @@ public class DefaultDataTablePanel extends Panel
 
 		final DefaultDataTable<Person, String> dataTable = new DefaultDataTable<>("dataTable",
 			columns, dataProvider, 10);
-		dataTable.addTopToolbar(new FilterToolbar(dataTable, form));
+		dataTable.addTopToolbar(new FilterToolbar(dataTable, form, dataProvider));
 		form.add(dataTable);
 
 		add(form);
