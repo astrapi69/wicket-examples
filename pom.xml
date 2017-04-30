@@ -37,7 +37,7 @@
 		<!-- WICKET version -->
 		<wicket.version>6.25.0</wicket.version>
 		<!-- WICKETSTUFF LIBRARIES versions -->
-		<wicketstuff.version>${wicket.version}</wicketstuff.version>
+		<wicketstuff.version>6.25.0</wicketstuff.version>
 		<!-- JAULP-WICKET version -->
 		<jaulp-wicket.version>6.25.2</jaulp-wicket.version>
 		<wicket-chat-api.version>6.25.2</wicket-chat-api.version>
