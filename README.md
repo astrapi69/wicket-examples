@@ -1,7 +1,7 @@
-wicket-examples
+Overview
 ========================
 
-This project contains example projects for the wicket framework and wicket-bootstrap project.
+The wicket-examples project contains example projects for the wicket framework and wicket-bootstrap project.
 
 ## Run Examples 
 
