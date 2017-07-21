@@ -3,6 +3,27 @@ wicket-examples
 
 This project contains example projects for the wicket framework and wicket-bootstrap project.
 
+## Run Examples 
+
+You can run every example project by doing following steps. For instance if you want to start the examples for the project jaulp-wicket-components you do this:
+
+First change to the directory and build the project:
+```bash
+cd jaulp-wicket-components-examples
+mvn clean install
+```
+Running the example:
+```bash
+mvn jetty:run
+```
+or 
+```bash
+mvn tomcat:run
+```
+Call then http://localhost:8080/
+
+Another way is to start the example application programmaticly with jetty. In every example project there exists a start class with a main method that have the prefix Start**** and the suffix ****Examples. 
+
 ## Note
 
 No animals were harmed in the making of this library.
